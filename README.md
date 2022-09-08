@@ -121,7 +121,7 @@ The purpose of this system is to facilitate the process of pet adoption. It serv
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/er_diagram.png) 
+![ER Diagram](./images/er_diagram2.png) 
 
 ## Teaser (MS3)
 
