@@ -6,10 +6,10 @@ var adopterSchema = new Schema({
     name: { type: String },
     age: { type: Number },
     petPreferences: {
-        species: { type: Number },
-        size: { type: Number },
+        species: { type: String },
+        size: { type: String },
         hours: { type: Number },
-        personality: { type: Number }
+        personality: { type: String }
     }
 })
 

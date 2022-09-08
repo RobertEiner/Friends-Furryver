@@ -6,4 +6,4 @@ var adoptionCenterSchema = new Schema({
     address: { type: String }
 })
 
-var AdoptionCenter = mongoose.model('adopters', adopterSchema);
+module.exports = mongoose.model('adoptionCenters', adoptionCenterSchema);
