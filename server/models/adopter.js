@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var adopterSchema = new Schema({
+    username: { type: String, required: true },
+    password: { type: String, required: true },
     ssn: { type: String, required: true },
     name: { type: String, required: true },
     age: { type: Number },
@@ -13,4 +15,4 @@ var adopterSchema = new Schema({
     }
 })
 
-var Adopter = mongoose.model('adopters', adopterSchema);
+module.exports = mongoose.model('adopters', adopterSchema);
