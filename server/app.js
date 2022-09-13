@@ -6,6 +6,7 @@ var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
 var adoptersController = require('./controllers/adopters.js');
+var adoptionCenterController = require('./controllers/adoptionCenters.js');
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalAdoptionDB';
@@ -37,6 +38,8 @@ app.get('/api', function(req, res) {
 });
 
 app.use(adoptersController);
+app.use(adoptionCenterController);
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
