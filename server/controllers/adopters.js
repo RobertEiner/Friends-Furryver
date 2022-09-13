@@ -26,7 +26,7 @@ router.get('/api/adopters/:id', function (req, res, next) {
     Adopter.findById(id, function (err, adopter) {
         if (err) { return next(err); }
         if (adopter === null) {
-            return res.status(404).json({ 'message': 'Adopter not found!' })
+            return res.status(404).json({ 'message': 'Adopter not found' })
         }
         res.json(adopter);
     });
