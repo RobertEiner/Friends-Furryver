@@ -15,4 +15,4 @@ var animalSchema = new Schema({
   
 });
 
-var animal = mongoose.model("animals", animalSchema);
+module.exports = mongoose.model("animals", animalSchema);

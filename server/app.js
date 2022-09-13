@@ -5,7 +5,10 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
+
 var adoptersController = require('./controllers/adopters.js');
+var animalsController = require('./controllers/animals');
+
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalAdoptionDB';
@@ -36,7 +39,10 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
+
 app.use(adoptersController);
+app.use(animalsController);
+
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
