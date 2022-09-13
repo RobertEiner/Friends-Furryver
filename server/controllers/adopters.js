@@ -35,7 +35,7 @@ router.get('/api/adopters/:id', function (req, res, next) {
 //update adopter
 router.put('/api/adopters/:id', function(req, res, next) {
     var id = req.params.id;
-    Adopter.updateOne({_id: id}, {$set: req.body}, {new: true}, function(err, adopter) {
+    Adopter.findByIdAndUpdate(id, {$set: req.body}, {new: true}, function(err, adopter) {
         if (err) {return next(err);}
         if (adopter === null) {
             res.status(404).json({'message': 'Adopter not found'});
