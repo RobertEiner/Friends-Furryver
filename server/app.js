@@ -7,8 +7,8 @@ var history = require('connect-history-api-fallback');
 
 
 var adoptersController = require('./controllers/adopters.js');
+var adoptionApplicationController = require('./controllers/adoptionApplications.js');
 var animalsController = require('./controllers/animals');
-
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalAdoptionDB';
@@ -41,6 +41,7 @@ app.get('/api', function(req, res) {
 
 
 app.use(adoptersController);
+app.use(adoptionApplicationController);
 app.use(animalsController);
 
 
