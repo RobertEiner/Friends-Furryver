@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var adoptionApplicationSchema = new Schema({
     status: { type: Number },
-    addoptionCenter: { type: Schema.Types.ObjectId, ref: 'adoptionCenter'},
+    adoptionCenter: { type: Schema.Types.ObjectId, ref: 'adoptionCenter'},
     animal: { type: Schema.Types.ObjectId, ref: 'animal'},
     adopter: { type: Schema.Types.ObjectId, ref: 'adopter'}
 })
