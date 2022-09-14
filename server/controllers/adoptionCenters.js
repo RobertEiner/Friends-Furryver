@@ -36,7 +36,7 @@ router.get('/api/adoptionCenters/:id', function (req, res, next) {
 //update an adoption center
 router.put('/api/adoptionCenters/:id', function(req, res, next) {
     var id = req.params.id;
-    adoptionCenter.findById(id, function(err, adoptionCenter) {
+    adoptionCenter.findByIdAndUpdate(id, function(err, adoptionCenter) {
         if (err) { return next(err); }
         if (adoptionCenter == null) {
             return res.status(404).json({"message" : "Adoption center not found"});
