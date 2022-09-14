@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var adoptionCenterSchema = new Schema({
-    name: { type: String },
+    name: { type: String, required: true },
     address: { type: String }
 })
 
