@@ -40,9 +40,19 @@ router.get('/api/adoptionCenters/:id/animals', function(req, res, next) {
     var adoptionCenterId = req.params.id;
     Animal.find({adoptionCenter: adoptionCenterId}, function(err, animals) {
         if(err) { next(err); }
-        res.status(200).json(animals);
+        res.status(200).json({"Animals": animals});
 
     })
+});
+
+router.post('/api/adoptionCenters/:id/animals', function(req, res, next) {
+    var adoptionCenterId = req.params.id;
+    var animalInfo = req.body;
+    var newAnimal = new Animal({...animalInfo, adoptionCenter: adoptionCenterId});
+    newAnimal.save(function(err, newAnimal) {
+        if(err) { return next(err); }
+        res.status(201).json(newAnimal);
+    });
 });
 
 //update an adoption center
