@@ -1,57 +1,80 @@
 var express = require('express');
 var router = express.Router();
-const animal = require('../models/animal');
+const Animal = require('../models/animal');
 
+
+//Create a new animal
 router.post('/animals', function(req, res, next) {
-    var newAnimal = new animal(req.body);
+    var newAnimal = new Animal(req.body);
     newAnimal.save(function(err, newAnimal) {
         if(err) { return next(err); }
         res.status(201).json(newAnimal);
     })
 });
 
-
-//get animal by filter
+//Get animals by filter: species
 router.get('/animals', function(req, res, next) {
     var filter = req.query.species;
-     animal.find(function (err, animal) {
-        if(err) {return next(err); }
-        if(filter) {
+     Animal.find(function (err, animal) {
+        if(err) {return next(err); 
+        } else if(filter === null) {
+            res.status(404).json({'Message': 'animal not found'});
+        } else if(filter) {
             res.json(animal.filter(function (e){
                 return filter === e.species;
-            }))
-        } res.json({'animals': animal});
-     })      
+            }));
+        } else {
+            res.json({'Animals': animal});
+        }
+     });      
+});
+
+//Get the animal by id and populate it with the adoption center it belongs to
+router.get('/animals/:animalId/adoptionCenters', function(req, res, next) {
+    var animalId = req.params.animalId;
+    Animal.findById({_id: animalId})
+    //'adoptionCenter' here is the name of the property (from animal schema) we want to populate the animal with.
+    .populate('adoptionCenter')
+    .exec(function(err, animal) {
+        if(err) {return next(err);} 
+        if(animal === null) {
+            res.status(404).json({'Message': 'animal not found'});
+        }
+        res.json(animal);
+    });
 });
 
 
+//Get animal by ID
 router.get('/animals/:id', function(req, res, next){
     var id = req.params.id;
-    animal.findById(id, function(err, animal) {
+    Animal.findById(id, function(err, animal) {
         if(err) { return next(err); }
-        if(animal == null) {
+        if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
         res.json(animal);
     });
 });
 
+//Get all animals of a certain species
 router.get('/animals/species/:species', function(req, res, next){
     var Species = req.params.species;
-    animal.find({species: Species.toString() }, function(err, animal) {
+    Animal.find({species: Species.toString() }, function(err, animal) {
         if(err) { return next(err); }
-        if(animal == null) {
+        if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
         res.json(animal);
     });
 });
 
+//Get all animals of certain age
 router.get('/animals/age/:age', function(req, res, next){
     var ageOfAnimal = req.params.age;
-    animal.find({age: ageOfAnimal}, function(err, animal) {
+    Animal.find({age: ageOfAnimal}, function(err, animal) {
         if(err) { return next(err); }
-        if(animal == null) {
+        if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
         res.json(animal);
@@ -59,13 +82,12 @@ router.get('/animals/age/:age', function(req, res, next){
 });
 
 
-
-
+//Update the entire animal
 router.put('/animals/:id', function(req, res, next) {
     var id = req.params.id;
-    animal.findById(id, function(err, animal) {
+    Animal.findById(id, function(err, animal) {
         if(err) {return next(err); }
-        if(animal == null) {
+        if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
         animal.size = req.body.size;
@@ -82,11 +104,12 @@ router.put('/animals/:id', function(req, res, next) {
     });
 });
 
+//Update parts of the animal
 router.patch('/animals/:id', function(req, res, next) {
     var id = req.params.id;
-    animal.findById(id, function(err, animal) {
+    Animal.findById(id, function(err, animal) {
         if(err) { return next(err); }
-        if(animal == null) {
+        if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
         animal.size = (req.body.size || animal.size);
@@ -103,11 +126,14 @@ router.patch('/animals/:id', function(req, res, next) {
     });
 });
 
+
+
+//delete an animal
 router.delete('/animals/:id', function(req, res, next){
     var id = req.params.id;
-    animal.findOneAndDelete({_id: id}, function(err, animal) {
+    Animal.findOneAndDelete({_id: id}, function(err, animal) {
         if(err) { return next(err); }
-        if(animal == null) {
+        if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
         res.json(animal);
