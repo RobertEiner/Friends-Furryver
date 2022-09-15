@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var AdoptionCenter = require('../models/AdoptionCenter');
+var AdoptionCenter = require('../models/adoptionCenter');
 
 //create an adoption center
 router.post('/api/AdoptionCenters', function(req, res, next) {
