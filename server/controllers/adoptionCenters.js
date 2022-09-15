@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var adoptionCenter = require('../models/adoptionCenter');
+var Animal = require('../models/animal')
 
 //create an adoption center
 router.post('/api/adoptionCenters', function(req, res, next) {
@@ -24,13 +25,23 @@ router.get('/api/adoptionCenters', function (req, res, next){
 //retrieve one adoption center
 router.get('/api/adoptionCenters/:id', function (req, res, next) {
     var id = req.params.id;
-    adoptionCenter.findById(req.params.id, function(err, AdoptionCenter) {
+    adoptionCenter.findById(id, function(err, AdoptionCenter) {
         if (err) { return next(err); }
         if (adoptionCenter == null) {
             return res.status(404).json({"message": "Adoption center not found"});
         }
         res.json(AdoptionCenter);
     });
+});
+
+//get animals of a specific adoption center
+router.get('/api/adoptionCenters/:id/animals', function(req, res, next) {
+    var adoptionCenterId = req.params.id;
+    Animal.find({adoptionCenter: adoptionCenterId}, function(err, animals) {
+        if(err) { next(err); }
+        res.status(200).json(animals);
+
+    })
 });
 
 //update an adoption center
