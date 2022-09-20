@@ -88,12 +88,15 @@ router.patch('/api/adoptionCenters/:id', function(req, res, next) {
 //delete adoption center by id
 router.delete('/api/AdoptionCenters/:id', function(req, res, next) {
     var id = req.params.id;
-    AdoptionCenter.findOneAndDelete({ _id: id }, function(err, AdoptionCenter) {
+    AdoptionCenter.findOneAndDelete({ _id: id }, function(err, adoptionCenter) {
         if (err) { return next (err) }
-        if (AdoptionCenter === null) {
+        if (adoptionCenter === null) {
             return res.status(404).json({"message" : "Adoption center not found"});
         }
-        res.json(AdoptionCenter);
+        Animal.deleteMany({"adoptionCenter": id}, function(err, animal){
+            if (err) { return next(err) }
+        });
+        res.json(adoptionCenter);
     });
 });
 
