@@ -100,4 +100,30 @@ router.delete('/api/AdoptionCenters/:id', function(req, res, next) {
     });
 });
 
+
+//Delete a specific adoption application from a specific adoption center
+router.delete('/api/adoptionCenters/:adoptionCenterId/adoptionApplications/:applicationId', function(req, res, next) {
+    var adoptionCenterId = req.params.adoptionCenterId;
+    var applicationId = req.params.applicationId;
+    AdoptionCenter.findById(adoptionCenterId, function(err, adoptionCenter) {
+        if (err) { return next (err) }
+        if (adoptionCenter === null) {
+            return res.status(404).json({"Message" : "adoption center not found"});
+        }
+        AdoptionApplication.findByIdAndDelete(applicationId, function(err, adoptionApplication) {
+            if (err) { return next (err) }
+            if (adoptionApplication === null) {
+            return res.status(404).json({"Message" : "application not found"});
+            }
+            res.json(adoptionApplication);
+
+        })
+    })
+
+})
+
+
+
+
+
 module.exports = router;
