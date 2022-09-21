@@ -5,10 +5,16 @@ var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
 
-// Variables
-var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalDevelopmentDB';
-var port = process.env.PORT || 3000;
 
+var adoptersController = require('./controllers/adopters.js');
+var adoptionCenterController = require('./controllers/adoptionCenters.js');
+var adoptionApplicationController = require('./controllers/adoptionApplications.js');
+var animalsController = require('./controllers/animals');
+
+
+// Variables
+var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalAdoptionDB';
+var port = process.env.PORT || 3000;
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true }, function(err) {
     if (err) {
@@ -34,6 +40,12 @@ app.use(cors());
 app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
+
+
+app.use(adoptersController);
+app.use(adoptionCenterController);
+app.use(adoptionApplicationController);
+app.use(animalsController);
 
 // Catch all non-error handler for api (i.e., 404 Not Found)
 app.use('/api/*', function (req, res) {
