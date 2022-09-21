@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Adopter = require('../models/adopter');
+var AdoptionApplication = require('../models/adoptionApplication');
 
 
 //crete an adopter
@@ -41,6 +42,54 @@ router.put('/api/adopters/:id', function(req, res, next) {
             res.status(404).json({'message': 'Adopter not found'});
         }
         res.status(200).json(adopter);
+    });
+});
+
+//get all adoption applications for a specific user
+router.get('/api/adopters/:id/adoption-applications', function(req, res, next) {
+    var adopterId = req.params.id;
+    AdoptionApplication.find({adopter: adopterId}, function(err, adoptionApplications) {
+        if(err) { next(err); }
+        res.status(200).json({"AdoptionApplications": adoptionApplications});
+
+    })
+});
+
+//get specific adoption application for a specific user
+router.get('/api/adopters/:id/adoption-applications/:adoptionApplicationId', function(req, res, next) {
+    var adopterId = req.params.id;
+    var adoptionApplicationId = req.params.adoptionApplicationId;
+    Adopter.findById(adopterId, function (err, adopter) {
+        if (err) { return next(err); }
+        if (adopter === null) {
+            return res.status(404).json({ 'message': 'Adopter not found' })
+        }
+    });
+    AdoptionApplication.findById(adoptionApplicationId, function(err, adoptionApplication) {
+        if(err) { next(err); }
+        if (adoptionApplication === null) {
+            return res.status(404).json({ 'message': 'Adoption application not found' })
+        }
+        res.status(200).json(adoptionApplication);
+    });
+});
+
+//delete specific adoption application of a specific user
+router.delete('/api/adopters/:id/adoption-applications/:adoptionApplicationId', function(req, res, next) {
+    var adopterId = req.params.id;
+    var adoptionApplicationId = req.params.adoptionApplicationId;
+    Adopter.findById(adopterId, function (err, adopter) {
+        if (err) { return next(err); }
+        if (adopter === null) {
+            return res.status(404).json({ 'message': 'Adopter not found' });
+        }
+    });
+    AdoptionApplication.findByIdAndDelete(adoptionApplicationId, function (err, adoptionApplication) {
+        if (err) { return next(err); }
+        if (adoptionApplication === null) {
+            return res.status(404).json({ 'message': 'Adoption application not found' });
+        }
+        res.status(200).json(adoptionApplication);
     });
 });
 
