@@ -1,35 +1,83 @@
 var express = require('express');
 var router = express.Router();
 const Animal = require('../models/animal');
+const multer = require('multer');
 
+const Storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './imageUploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+})
+
+
+//initialize multer and store all files in imageUploads
+const upload = multer({storage: Storage});
 
 //Create a new animal
-router.post('/animals', function(req, res, next) {
-    var newAnimal = new Animal(req.body);
+//calling upload.single() before the handler, the file will be parsed
+router.post('/animals', upload.single('animalImage'), function(req, res, next) {
+    console.log(req.file);
+    var newAnimal = new Animal({
+        size: req.body.size,
+        species: req.body.species,
+        breed: req.body.breed,
+        personality: req.body.personality,
+        healthStatus: req.body.healthStatus,
+        gender: req.body.gender,
+        age: req.body.age,
+        hours: req.body.hours,
+        otherNeeds: req.body.otherNeeds,
+        animalImage: req.file.path,
+        adoptionCenter: req.body.adoptionCenter
+    });
     newAnimal.save(function(err, newAnimal) {
         if(err) { return next(err); }
         res.status(201).json(newAnimal);
     })
 });
 
-//Get animals by filter: species
+//Get animals by filter: species. If no filter is specified, all animals will be returned.
 router.get('/animals', function(req, res, next) {
-    var filter = req.query.species;
-     Animal.find(function (err, animal) {
-        if(err) {return next(err); 
-        } else if(filter === null) {
-            res.status(404).json({'Message': 'animal not found'});
-        } else if(filter) {
-            res.json(animal.filter(function (e){
-                return filter === e.species;
-            }));
-        } else {
-            res.json({'Animals': animal});
-        }
-     });      
+    if(!Object.keys(req.query).length == 0){
+        var speciesFilter = req.query.species;
+        Animal.find({species: speciesFilter}, function (err, animals) {
+           if(err) {return next(err);}
+           else if(speciesFilter === undefined) {
+              return res.status(404).json({'Message': 'animal not found'});
+           } else {
+               res.status(200).json(animals);
+           }
+        });    
+    } else {
+        Animal.find(function(err, animals) {
+            if(err) {return next(err);}
+            res.status(200).json({'Animals': animals})
+        })
+    }
+    
 });
 
-//Get the animal by id and populate it with the adoption center it belongs to
+// router.get('/animals', function(req, res, next) {
+//     var speciesFilter = req.query.species;
+//      Animal.find({species: speciesFilter}, function (err, animal) {
+//         if(err) {return next(err); 
+//         } else if(filter === null) {
+//             res.status(404).json({'Message': 'animal not found'});
+//         } else if(filter) {
+//             res.json(animal.filter(function (e){
+//                 return filter === e.species;
+//             }));
+//         } else {
+//             res.json({'Animals': animal});
+//         }
+//      });      
+// });
+
+
+// //Get the animal by id and populate it with the adoption center it belongs to
 router.get('/animals/:animalId/adoptionCenters', function(req, res, next) {
     var animalId = req.params.animalId;
     Animal.findById({_id: animalId})

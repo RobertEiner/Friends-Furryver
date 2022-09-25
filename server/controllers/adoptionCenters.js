@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Animal = require('../models/animal');
 var AdoptionCenter = require('../models/adoptionCenter');
+var AdoptionApplication = require('../models/adoptionApplication');
 
 //create an adoption center
 router.post('/api/AdoptionCenters', function(req, res, next) {
@@ -40,9 +41,19 @@ router.get('/api/adoptionCenters/:id/animals', function(req, res, next) {
     var adoptionCenterId = req.params.id;
     Animal.find({adoptionCenter: adoptionCenterId}, function(err, animals) {
         if(err) { next(err); }
-        res.status(200).json(animals);
+        res.status(200).json({"Animals": animals});
 
     })
+});
+
+router.post('/api/adoptionCenters/:id/animals', function(req, res, next) {
+    var adoptionCenterId = req.params.id;
+    var animalInfo = req.body;
+    var newAnimal = new Animal({...animalInfo, adoptionCenter: adoptionCenterId});
+    newAnimal.save(function(err, newAnimal) {
+        if(err) { return next(err); }
+        res.status(201).json(newAnimal);
+    });
 });
 
 //update an adoption center
@@ -78,12 +89,15 @@ router.patch('/api/adoptionCenters/:id', function(req, res, next) {
 //delete adoption center by id
 router.delete('/api/AdoptionCenters/:id', function(req, res, next) {
     var id = req.params.id;
-    AdoptionCenter.findOneAndDelete({ _id: id }, function(err, AdoptionCenter) {
+    AdoptionCenter.findOneAndDelete({ _id: id }, function(err, adoptionCenter) {
         if (err) { return next (err) }
-        if (AdoptionCenter === null) {
+        if (adoptionCenter === null) {
             return res.status(404).json({"message" : "Adoption center not found"});
         }
-        res.json(AdoptionCenter);
+        Animal.deleteMany({"adoptionCenter": id}, function(err, animal){
+            if (err) { return next(err) }
+        });
+        res.json(adoptionCenter);
     });
 });
 

@@ -41,7 +41,7 @@ app.get('/api', function(req, res) {
     res.json({'message': 'Welcome to your DIT342 backend ExpressJS project!'});
 });
 
-
+app.use('/imageUploads', express.static('imageUploads'));
 app.use(adoptersController);
 app.use(adoptionCenterController);
 app.use(adoptionApplicationController);
