@@ -1,36 +1,67 @@
 var express = require('express');
 var router = express.Router();
 const Animal = require('../models/animal');
+const multer = require('multer');
 
+const Storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './imageUploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    }
+})
+
+
+//initialize multer and store all files in imageUploads
+const upload = multer({storage: Storage});
 
 //Create a new animal
-router.post('/animals', function(req, res, next) {
-    var newAnimal = new Animal(req.body);
+//calling upload.single() before the handler, the file will be parsed
+router.post('/api/animals', upload.single('animalImage'), function(req, res, next) {
+    console.log(req.file);
+    var newAnimal = new Animal({
+        size: req.body.size,
+        species: req.body.species,
+        breed: req.body.breed,
+        personality: req.body.personality,
+        healthStatus: req.body.healthStatus,
+        gender: req.body.gender,
+        age: req.body.age,
+        hours: req.body.hours,
+        otherNeeds: req.body.otherNeeds,
+        //animalImage: req.file.path,
+        adoptionCenter: req.body.adoptionCenter
+    });
     newAnimal.save(function(err, newAnimal) {
         if(err) { return next(err); }
         res.status(201).json(newAnimal);
     })
 });
 
-//Get animals by filter: species
+//Get animals by filter: species. If no filter is specified, all animals will be returned.
 router.get('/api/animals', function(req, res, next) {
-    var filter = req.query.species;
-     Animal.find(function (err, animal) {
-        if(err) {return next(err); 
-        } else if(filter === null) {
-            res.status(404).json({'Message': 'animal not found'});
-        } else if(filter) {
-            res.json(animal.filter(function (e){
-                return filter === e.species;
-            }));
-        } else {
-            res.json({'Animals': animal});
-        }
-     });      
+    if(!Object.keys(req.query).length == 0){
+        var speciesFilter = req.query.species;
+        Animal.find({species: speciesFilter}, function (err, animals) {
+           if(err) {return next(err);}
+           else if(speciesFilter === undefined) {
+              return res.status(404).json({'Message': 'animal not found'});
+           } else {
+               res.status(200).json(animals);
+           }
+        });    
+    } else {
+        Animal.find(function(err, animals) {
+            if(err) {return next(err);}
+            res.status(200).json({'Animals': animals})
+        })
+    }
+    
 });
 
 //Get the animal by id and populate it with the adoption center it belongs to
-router.get('/animals/:animalId/adoptionCenters', function(req, res, next) {
+router.get('/api/animals/:animalId/adoptionCenters', function(req, res, next) {
     var animalId = req.params.animalId;
     Animal.findById({_id: animalId})
     //'adoptionCenter' here is the name of the property (from animal schema) we want to populate the animal with.
@@ -46,7 +77,7 @@ router.get('/animals/:animalId/adoptionCenters', function(req, res, next) {
 
 
 //Get animal by ID
-router.get('/animals/:id', function(req, res, next){
+router.get('/api/animals/:id', function(req, res, next){
     var id = req.params.id;
     Animal.findById(id, function(err, animal) {
         if(err) { return next(err); }
@@ -58,7 +89,7 @@ router.get('/animals/:id', function(req, res, next){
 });
 
 //Get all animals of a certain species
-router.get('/animals/species/:species', function(req, res, next){
+router.get('/api/animals/species/:species', function(req, res, next){
     var Species = req.params.species;
     Animal.find({species: Species.toString() }, function(err, animal) {
         if(err) { return next(err); }
@@ -70,7 +101,7 @@ router.get('/animals/species/:species', function(req, res, next){
 });
 
 //Get all animals of certain age
-router.get('/animals/age/:age', function(req, res, next){
+router.get('/api/animals/age/:age', function(req, res, next){
     var ageOfAnimal = req.params.age;
     Animal.find({age: ageOfAnimal}, function(err, animal) {
         if(err) { return next(err); }
@@ -83,7 +114,7 @@ router.get('/animals/age/:age', function(req, res, next){
 
 
 //Update the entire animal
-router.put('/animals/:id', function(req, res, next) {
+router.put('/api/animals/:id', function(req, res, next) {
     var id = req.params.id;
     Animal.findById(id, function(err, animal) {
         if(err) {return next(err); }
@@ -105,7 +136,7 @@ router.put('/animals/:id', function(req, res, next) {
 });
 
 //Update parts of the animal
-router.patch('/animals/:id', function(req, res, next) {
+router.patch('/api/animals/:id', function(req, res, next) {
     var id = req.params.id;
     Animal.findById(id, function(err, animal) {
         if(err) { return next(err); }
@@ -129,7 +160,7 @@ router.patch('/animals/:id', function(req, res, next) {
 
 
 //delete an animal
-router.delete('/animals/:id', function(req, res, next){
+router.delete('/api/animals/:id', function(req, res, next){
     var id = req.params.id;
     Animal.findOneAndDelete({_id: id}, function(err, animal) {
         if(err) { return next(err); }
