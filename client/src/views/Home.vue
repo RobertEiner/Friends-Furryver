@@ -1,19 +1,19 @@
 <template>
   <div>
-    <b-jumbotron header="DIT342 Frontend" lead="Welcome to your DIT342 Frontend Vue.js App">
-      <b-button class="btn_message" variant="primary" v-on:click="getMessage()" >Get Message from Server</b-button>
-      <p>Message from the server:<br/>
-      {{ message }}</p>
-    </b-jumbotron>
+      <navbar></navbar>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import { Api } from '@/Api'
+import Navbar from '@/components/Navbar.vue'
 
 export default {
   name: 'home',
+  components: {
+    Navbar
+  },
   data() {
     return {
       message: 'none'
