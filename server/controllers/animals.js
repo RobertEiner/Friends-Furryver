@@ -13,7 +13,7 @@ router.post('/animals', function(req, res, next) {
 });
 
 //Get animals by filter: species
-router.get('/animals', function(req, res, next) {
+router.get('/api/animals', function(req, res, next) {
     var filter = req.query.species;
      Animal.find(function (err, animal) {
         if(err) {return next(err); 
