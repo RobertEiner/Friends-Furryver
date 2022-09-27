@@ -30,7 +30,7 @@ router.post('/api/animals', upload.single('animalImage'), function(req, res, nex
         age: req.body.age,
         hours: req.body.hours,
         otherNeeds: req.body.otherNeeds,
-        animalImage: req.file.path,
+        //animalImage: req.file.path,
         adoptionCenter: req.body.adoptionCenter
     });
     newAnimal.save(function(err, newAnimal) {
