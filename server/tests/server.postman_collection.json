@@ -149,11 +149,6 @@
 									"type": "text"
 								},
 								{
-									"key": "animalImage",
-									"type": "file",
-									"src": "/C:/Users/rober/Desktop/Animal pics/pexels-valeria-boltneva-1805164.jpg"
-								},
-								{
 									"key": "adoptionCenter",
 									"value": "{{animalsAdoptionCenter_ID}}",
 									"type": "text"
