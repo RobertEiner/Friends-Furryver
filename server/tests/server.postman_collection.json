@@ -3,7 +3,7 @@
 		"_postman_id": "4441c063-1b66-459b-a139-c004d195d2bd",
 		"name": "server",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23240394"
+		"_exporter_id": "23092572"
 	},
 	"item": [
 		{
@@ -63,7 +63,7 @@
 					"response": []
 				},
 				{
-					"name": "Create an animal",
+					"name": "Create animal with image",
 					"event": [
 						{
 							"listen": "test",
@@ -88,34 +88,85 @@
 					],
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
-							"content-type": true
+							"accept": true
 						}
 					},
 					"request": {
 						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
+						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"dog personality\",\r\n    \"healthStatus\": \"really healthy\",\r\n    \"gender\": \"female\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID}}\"\r\n    \r\n} "
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "size",
+									"value": "big",
+									"type": "text"
+								},
+								{
+									"key": "species",
+									"value": "dog",
+									"type": "text"
+								},
+								{
+									"key": "breed",
+									"value": "labradoodle",
+									"type": "text"
+								},
+								{
+									"key": "personality",
+									"value": "fun",
+									"type": "text"
+								},
+								{
+									"key": "healthStatus",
+									"value": "great",
+									"type": "text"
+								},
+								{
+									"key": "gender",
+									"value": "male",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "hours",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "otherNeeds",
+									"value": "none",
+									"type": "text"
+								},
+								{
+									"key": "animalImage",
+									"type": "file",
+									"src": "/C:/Users/rober/Desktop/Animal pics/pexels-valeria-boltneva-1805164.jpg"
+								},
+								{
+									"key": "adoptionCenter",
+									"value": "{{animalsAdoptionCenter_ID}}",
+									"type": "text"
+								}
+							]
 						},
 						"url": {
-							"raw": "{{host}}/animals",
+							"raw": "{{host}}/api/animals",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals"
 							]
 						}
@@ -142,11 +193,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}/adoptionCenters",
+							"raw": "{{host}}/api/animals/{{animal_id}}/adoptionCenters",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals",
 								"{{animal_id}}",
 								"adoptionCenters"
@@ -175,14 +227,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}/adoptionCenters",
+							"raw": "{{host}}/api/animals",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
-								"animals",
-								"{{animal_id}}",
-								"adoptionCenters"
+								"api",
+								"animals"
 							]
 						}
 					},
@@ -226,11 +277,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals",
 								"{{animal_id}}"
 							]
@@ -286,11 +338,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals",
 								"{{animal_id}}"
 							]
@@ -338,7 +391,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"size\": \"medium\",\r\n    \"species\": \"rabbit\",\r\n    \"breed\": \"american fuzzy lop\",\r\n    \"age\": \"3\",\r\n    \"hours\": 7,\r\n    \"otherNeeds\": \"lots of carrots\"\r\n}",
+							"raw": "{\r\n    \"size\": \"medium\",\r\n    \"species\": \"rabbit\",\r\n    \"breed\": \"american fuzzy lop\",\r\n    \"age\": \"5\",\r\n    \"hours\": 2,\r\n    \"otherNeeds\": \"lots of carrots\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -346,11 +399,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals",
 								"{{animal_id}}"
 							]
@@ -396,11 +450,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/animals?species=rabbit",
+							"raw": "{{host}}/api/animals?species=rabbit",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals"
 							],
 							"query": [
@@ -447,11 +502,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals",
 								"{{animal_id}}"
 							]
@@ -497,11 +553,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_id}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
+								"api",
 								"animals",
 								"{{animal_id}}"
 							]
@@ -2182,7 +2239,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"adopter\": \"{{adopterId}}\",\r\n    \"adoptionCenter\": \"{{adoptionCenterID}}\",\r\n    \"status\": 0\r\n}",
+							"raw": "{\r\n    \"adopter\": \"{{adopterId}}\",\r\n    \"status\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
