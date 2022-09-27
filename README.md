@@ -61,17 +61,68 @@ Open the `server` and `client` in separate VSCode workspaces or open the combine
 
 ### Purpose
 
-2-5 sentences describing what the system does
+The purpose of this system is to facilitate the process of pet adoption. It serves as a platform that gets together people that are interested in becoming pet owners as well as several adoption centers. By asking questions about their lifestyle, the app can determine which pets that are up for adoption can be suitable for them and thus increase the chances of successful adoptions. Because it gathers several adoption centers in one place, it also makes the process of adoption more accessible, and users are no longer required to browse through websites of several organizations and make different profiles or applications for each. 
 
 ### Pages
 
-* Home: 1-3 sentences describing what the page displays and what a user can do
-* Shopping cart: ...
+* **Register Page:** 
+  
+  A new potential adopter registers on this page to create an account. He/she fills in necessary profile information such as 
+  - social security number (SSN)
+  - name
+  - age
+  - gender
+  - personality
+  - pet preferences
+
+* **Log In Page:**
+
+   Registered potential adopter uses this page to log in. He/she fills in the username and password.
+
+* **Adopter Home Page:**
+
+   The first screen that the user sees when going to the site or logging in. From here you can navigate to show matches page, account page and more.   
+
+* **Show Matches Page:**
+
+   Shows a scroll-view with results of the matching animals for the potential adopter. Information about the animal is also displayed.  
+
+* **Manage Account Page:**
+
+   Change profile information such as password, username, pet preferences etc.
+
+* **Adoption Center Register Page:**
+
+   A new potential adoption center registers on this page to create an account. They fill in their username and password as well as additional information.
+
+* **Adoption Center Home Page:**
+
+   Display options such as manage application, register pet, manage pets, active applications.
+
+* **Adoption Center Contracts Page:**
+
+   Display signed and yet to be signed contracts.
+
+* **Adoption Center Register Pet Page:**
+
+   Display a form which will register the pet’s information
+
+* **Adoption Center Manage Pets Page:**
+
+   Display all pets registered by this adoption center and enable editing their information.
+
+
+
+
+
+  
+
+
 
 ### Entity-Relationship (ER) Diagram
 
-![ER Diagram](./images/er_diagram.png)
+![ER Diagram](./images/er_diagram2.png) 
 
 ## Teaser (MS3)
 
-![Teaser](./images/teaser.png)
+**...**
