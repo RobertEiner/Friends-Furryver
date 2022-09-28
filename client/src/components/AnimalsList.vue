@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row align-h="center">
         <b-colum sm :key="animal._id" v-for="animal in animals">
-          <animal-card :animal="animal"> </animal-card>
+          <animal-card :animal="animal" :adopterId="adopter"> </animal-card>
         </b-colum>
       </b-row>
     </b-container>
@@ -30,8 +30,10 @@ export default {
   },
   data() {
     return {
-      animals: []
+      animals: [],
+      adopter: this.adopterId
     }
-  }
+  },
+  props: ['adopterId']
 }
 </script>

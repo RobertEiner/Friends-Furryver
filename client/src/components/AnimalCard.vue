@@ -31,14 +31,16 @@ import { Api } from '@/Api'
 
 export default {
   name: 'animal-card',
-  props: ['animal'],
+  props: ['animal', 'adopterId'],
   methods: {
     applyToAnimal() {
       console.log('applied')
+      console.log(this.adopterId)
       Api.post('/adoption-applications', {
         status: 0,
         adoptionCenter: this.animal.adoptionCenter,
-        animal: this.animal._id
+        animal: this.animal._id,
+        adopter: this.adopterId
       })
     }
   }

@@ -3,7 +3,7 @@
     <div class="inner-div">
       <b-tabs content-class="mt-3">
         <b-tab :title="tabThree">
-          <animals-list />
+          <animals-list :adopterId="adopter"/>
         </b-tab>
         <b-tab :title="tabTwo">{{ secondTab }}</b-tab>
         <b-tab :title="tabThree">{{ thirdTab }}</b-tab>
@@ -17,7 +17,7 @@ import AnimalsList from '@/components/AnimalsList.vue'
 
 export default {
   name: 'navbar-adopter',
-  props: ['firstTab', 'secondTab', 'thirdTab'],
+  props: ['adopterId', 'firstTab', 'secondTab', 'thirdTab'],
   components: {
     'animals-list': AnimalsList
   },
@@ -25,7 +25,8 @@ export default {
     return {
       tabOne: this.firstTab,
       tabTwo: this.secondTab,
-      tabThree: this.thirdTab
+      tabThree: this.thirdTab,
+      adopter: this.adopterId
     }
   }
 }
