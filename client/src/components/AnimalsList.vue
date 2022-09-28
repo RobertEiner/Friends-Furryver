@@ -30,8 +30,7 @@ export default {
   },
   data() {
     return {
-      animals: [],
-      adopter: this.adopterId
+      animals: []
     }
   }
 }
