@@ -48,10 +48,9 @@ router.put('/api/adopters/:id', function(req, res, next) {
 //get all adoption applications for a specific user
 router.get('/api/adopters/:id/adoption-applications', function(req, res, next) {
     var adopterId = req.params.id;
-    AdoptionApplication.find({adopter: adopterId}, function(err, adoptionApplications) {
-        if(err) { next(err); }
-        res.status(200).json({"AdoptionApplications": adoptionApplications});
-
+    AdoptionApplication.find({adopter: adopterId}).populate('animal').exec(function(err, adoptionApplications) {
+        if (err) { return next(err); }
+        res.status(200).json({"AdoptionApplications": adoptionApplications})
     })
 });
 
