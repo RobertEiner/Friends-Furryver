@@ -5,7 +5,7 @@
         <b-tab :title="tabThree">
           <animals-list />
         </b-tab>
-        <b-tab :title="tabTwo">{{ secondTab }}</b-tab>
+        <b-tab :title="tabTwo"> <adoption-application-list /> </b-tab>
         <b-tab :title="tabThree">{{ thirdTab }}</b-tab>
       </b-tabs>
     </div>
@@ -14,12 +14,14 @@
 
 <script>
 import AnimalsList from '@/components/AnimalsList.vue'
+import AdoptionApplicationList from '@/components/AdoptionApplicationList.vue'
 
 export default {
   name: 'navbar-adopter',
   props: ['firstTab', 'secondTab', 'thirdTab'],
   components: {
-    'animals-list': AnimalsList
+    'animals-list': AnimalsList,
+    'adoption-application-list': AdoptionApplicationList
   },
   data() {
     return {
