@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import { Api } from '@/Api'
 import NavbarAdopter from '@/components/NavbarAdopter.vue'
 
 export default {
@@ -17,13 +16,6 @@ export default {
   components: {
     'navbar-adopter': NavbarAdopter
   },
-
-  mounted() {
-    Api.get('/animals').then((response) => {
-      this.animals = response.data.Animals
-    })
-  },
-
   data() {
     return {
       animals: []
