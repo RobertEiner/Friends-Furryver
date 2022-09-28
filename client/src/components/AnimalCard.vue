@@ -19,7 +19,7 @@
         <b-list-group-item>Age: {{ animal.age }}</b-list-group-item>
         <b-list-group-item>Hours needed: {{ animal.hours }}</b-list-group-item>
       </b-list>
-      <b-button @click="applyToAnimal" variant="success" class="applyButton"
+      <b-button @click="apply" variant="success" class="applyButton"
         >Apply</b-button
       >
     </b-card>
@@ -33,7 +33,7 @@ export default {
   name: 'animal-card',
   props: ['animal', 'adopterId'],
   methods: {
-    applyToAnimal() {
+    apply() {
       console.log('applied')
       console.log(this.adopterId)
       Api.post('/adoption-applications', {
