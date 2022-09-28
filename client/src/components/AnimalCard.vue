@@ -31,16 +31,16 @@ import { Api } from '@/Api'
 
 export default {
   name: 'animal-card',
-  props: ['animal', 'adopterId'],
+  props: ['animal'],
   methods: {
     apply() {
       console.log('applied')
-      console.log(this.adopterId)
+      console.log(this.$route.params.id)
       Api.post('/adoption-applications', {
         status: 0,
         adoptionCenter: this.animal.adoptionCenter,
         animal: this.animal._id,
-        adopter: this.adopterId
+        adopter: this.$route.params.id
       })
     }
   }

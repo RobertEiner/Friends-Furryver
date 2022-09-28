@@ -4,7 +4,6 @@
       firstTab="Animals"
       secondTab="Applications"
       thirdTab="Profile"
-      :adopterId="adopter"
     />
   </div>
 </template>
@@ -19,10 +18,8 @@ export default {
   },
   data() {
     return {
-      animals: [],
-      adopter: this.$route.params.id
+      animals: []
     }
-  },
-  props: ['adopterId']
+  }
 }
 </script>
