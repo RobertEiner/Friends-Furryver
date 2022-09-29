@@ -42,7 +42,7 @@ export default {
         animal: this.animal._id,
         adopter: this.$route.params.id
       })
-      window.location.reload()
+      this.$emit('apply', this.animal._id)
     }
   }
 }

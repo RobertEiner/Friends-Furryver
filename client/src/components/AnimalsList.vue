@@ -3,7 +3,8 @@
     <b-container fluid>
       <b-row align-h="center">
         <b-colum sm :key="animal._id" v-for="animal in animals">
-          <animal-card :animal="animal"> </animal-card>
+          <animal-card :animal="animal" @apply="removeAnimalCard">
+          </animal-card>
         </b-colum>
       </b-row>
     </b-container>
@@ -31,6 +32,14 @@ export default {
   data() {
     return {
       animals: []
+    }
+  },
+  methods: {
+    removeAnimalCard(removedId) {
+      const index = this.animals.findIndex(
+        (animal) => animal._id === removedId
+      )
+      this.animals.splice(index, 1)
     }
   }
 }
