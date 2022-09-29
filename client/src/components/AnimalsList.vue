@@ -20,7 +20,7 @@ export default {
     'animal-card': AnimalCard
   },
   mounted() {
-    Api.get('/animals')
+    Api.get(`/adopters/${this.$route.params.id}/animals`)
       .then((response) => {
         this.animals = response.data.Animals
       })
