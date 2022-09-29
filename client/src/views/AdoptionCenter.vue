@@ -45,7 +45,6 @@ export default {
   data() {
     return {
       animals: []
-      // adoptionCenterId: this.$route.params.id
     }
   },
   methods: {

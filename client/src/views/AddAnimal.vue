@@ -6,13 +6,13 @@
 </template>
 
 <script>
-import AddAnimalForm from '@/components/AddAnimalForm.vue'
+import AnimalForm from '@/components/AnimalForm.vue'
 import Navbar from '@/components/Navbar.vue'
 
 export default {
   name: 'add-animal',
   components: {
-    'animal-form': AddAnimalForm,
+    'animal-form': AnimalForm,
     Navbar
   }
 }
