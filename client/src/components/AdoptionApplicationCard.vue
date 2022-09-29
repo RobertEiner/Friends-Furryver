@@ -51,7 +51,6 @@ export default {
     deleteApplication() {
       this.$emit('deleteApplication', this.adoptionApplication._id)
       Api.delete(`/adoption-applications/${this.adoptionApplication._id}`)
-      console.log('deleted')
     }
   }
 }

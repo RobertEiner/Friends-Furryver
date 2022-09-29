@@ -26,7 +26,6 @@ export default {
   components: { 'adoption-application-card': AdoptionApplicationCard },
   methods: {
     removeApplication(removeId) {
-      console.log('----------------')
       const index = this.adoptionApplications.findIndex(
         (adoptionApplication) =>
           adoptionApplication._id === removeId
