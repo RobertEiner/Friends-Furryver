@@ -1,13 +1,15 @@
 <template>
   <div>
     <div class="background-div">
-      <h1>Fill in the information for the animal</h1>
+      <h1>{{ header }}</h1>
       <b-container class="b-con">
         <b-row class="b-row-class">
           <b-column @submit="onSubmit">
             <b-form>
               <b-form-group label="Species">
                 <b-form-input
+                  required="true"
+                  size="sm"
                   placeholder="Enter species"
                   v-model="form.species"
                 >
@@ -15,17 +17,27 @@
               </b-form-group>
 
               <b-form-group label="Size">
-                <b-form-input placeholder="Enter size" v-model="form.size">
+                <b-form-input
+                  required="true"
+                  size="sm"
+                  placeholder="Enter size"
+                  v-model="form.size"
+                >
                 </b-form-input>
               </b-form-group>
 
               <b-form-group label="Breed">
-                <b-form-input placeholder="Enter breed" v-model="form.breed">
+                <b-form-input
+                  size="sm"
+                  placeholder="Enter breed"
+                  v-model="form.breed"
+                >
                 </b-form-input>
               </b-form-group>
 
               <b-form-group label="Health status">
                 <b-form-input
+                  size="sm"
                   placeholder="Enter health status"
                   v-model="form.healthStatus"
                 >
@@ -34,6 +46,7 @@
 
               <b-form-group label="Personality">
                 <b-form-input
+                  size="sm"
                   placeholder="Enter personality"
                   v-model="form.personality"
                 >
@@ -41,17 +54,33 @@
               </b-form-group>
 
               <b-form-group label="Gender">
-                <b-form-input placeholder="Enter gender" v-model="form.gender">
-                </b-form-input>
+                <b-form-select
+                  v-model="form.gender"
+                  :options="options"
+                  size="sm"
+                  placeholder="Select an option"
+                >
+                </b-form-select>
               </b-form-group>
 
+              <!-- <b-form-group label="Gender">
+                <b-form-input placeholder="Enter gender" v-model="form.gender">
+                </b-form-input>
+              </b-form-group> -->
+
               <b-form-group label="Age">
-                <b-form-input placeholder="Enter age" v-model="form.age">
+                <b-form-input
+                  size="sm"
+                  placeholder="Enter age"
+                  v-model="form.age"
+                >
                 </b-form-input>
               </b-form-group>
 
               <b-form-group label="Hours">
                 <b-form-input
+                  required="true"
+                  size="sm"
                   placeholder="Physical activity needed"
                   v-model="form.hours"
                 >
@@ -100,6 +129,12 @@ export default {
 
   data() {
     return {
+      // selected: null,
+      options: [
+        { value: 'Female', text: 'Female' },
+        { value: 'Male', text: 'Male' }
+      ],
+      header: 'Fill in the information for the animal',
       form: {
         species: '',
         size: '',
@@ -127,10 +162,7 @@ export default {
             console.log(error)
           })
       } else if (this.formType === 'update-animal') {
-        Api.patch(
-          `/animals/${this.$route.params.animalId}`,
-          animalFormData
-        )
+        Api.patch(`/animals/${this.$route.params.animalId}`, animalFormData)
           .then(response => {
             console.log(response.data)
           })
