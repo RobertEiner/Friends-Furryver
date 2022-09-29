@@ -43,9 +43,17 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
 export default {
   name: 'adoption-application-card',
-  props: ['adoptionApplication']
+  props: ['adoptionApplication'],
+  methods: {
+    deleteApplication() {
+      this.$emit('deleteApplication', this.adoptionApplication._id)
+      Api.delete(`/adoption-applications/${this.adoptionApplication._id}`)
+      console.log('deleted')
+    }
+  }
 }
 </script>
 
