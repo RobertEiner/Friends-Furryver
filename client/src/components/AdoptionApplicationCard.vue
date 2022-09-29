@@ -21,9 +21,16 @@
         <b-list-group-item>
           Personality: {{ adoptionApplication.animal.personality }}
         </b-list-group-item>
-        <b-list-group-item>Gender: {{ adoptionApplication.animal.gender }}</b-list-group-item>
-        <b-list-group-item>Age: {{ adoptionApplication.animal.age }}</b-list-group-item>
-        <b-list-group-item>Hours needed: {{ adoptionApplication.animal.hours }}</b-list-group-item>
+        <b-list-group-item
+          >Gender: {{ adoptionApplication.animal.gender }}</b-list-group-item
+        >
+        <b-list-group-item
+          >Age: {{ adoptionApplication.animal.age }}</b-list-group-item
+        >
+        <b-list-group-item
+          >Hours needed:
+          {{ adoptionApplication.animal.hours }}</b-list-group-item
+        >
       </b-list>
       <b-button> Status: {{ adoptionApplication.status }} </b-button>
     </b-card>
