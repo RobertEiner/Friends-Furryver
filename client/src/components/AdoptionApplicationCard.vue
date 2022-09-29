@@ -32,7 +32,12 @@
           {{ adoptionApplication.animal.hours }}</b-list-group-item
         >
       </b-list>
-      <b-button> Status: {{ adoptionApplication.status }} </b-button>
+      <div>
+        <b-badge pill variant="warning"
+          >Status: {{ adoptionApplication.status }}</b-badge
+        >
+      </div>
+      <b-button @click="deleteApplication" variant="danger">Delete</b-button>
     </b-card>
   </div>
 </template>
