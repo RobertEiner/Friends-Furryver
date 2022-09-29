@@ -9,6 +9,7 @@
         >
           <adoption-application-card
             :adoptionApplication="adoptionApplication"
+            @deleteApplication="removeApplication"
           />
         </b-colum>
       </b-row>
@@ -23,6 +24,16 @@ import AdoptionApplicationCard from '@/components/AdoptionApplicationCard.vue'
 export default {
   name: 'adoption-application-list',
   components: { 'adoption-application-card': AdoptionApplicationCard },
+  methods: {
+    removeApplication(removeId) {
+      console.log('----------------')
+      const index = this.adoptionApplications.findIndex(
+        (adoptionApplication) =>
+          adoptionApplication._id === removeId
+      )
+      this.adoptionApplications.splice(index, 1)
+    }
+  },
   mounted() {
     Api.get(`/adopters/${this.$route.params.id}/adoption-applications`)
       .then((response) => {
