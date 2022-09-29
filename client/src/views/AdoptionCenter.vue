@@ -7,10 +7,10 @@
           <div>
             <b-card-group deck>
               <div v-for="animal in animals" v-bind:key="animal._id">
-                <pets-tab v-bind:animal="animal" />
+                <pets-tab v-bind:animal="animal" v-on:del-animal="deleteAnimal"/>
               </div>
             </b-card-group>
-            <b-button class="update-animal-button" v-on:click="sayHi()" size="lg" variant="primary">Add new animal</b-button>
+            <b-button class="add-animal-button" v-on:click="goToAddAnimal()" size="lg" variant="primary">Add new animal</b-button>
           </div>
         </b-tab>
 
@@ -33,7 +33,7 @@ export default {
     Navbar
   },
   mounted() {
-    Api.get('/animals')
+    Api.get(`/adoptionCenters/${this.$route.params.id}/animals`)
       .then(response => {
         console.log(response.data)
         this.animals = response.data.Animals
@@ -45,11 +45,18 @@ export default {
   data() {
     return {
       animals: []
+      // adoptionCenterId: this.$route.params.id
     }
   },
   methods: {
-    sayHi() {
-      this.$router.push('/adoptionCenter/addAnimal')
+    goToAddAnimal() {
+      this.$router.push(`/adoptionCenters/${this.$route.params.id}/addAnimal`)
+    },
+    deleteAnimal(id) {
+      Api.delete(`/animals/${id}`).then(response => {
+        const index = this.animals.findIndex(animal => animal._id === id)
+        this.animals.splice(index, 1)
+      })
     }
   }
 }
@@ -63,5 +70,9 @@ export default {
 
 .inner-div {
     background-color: aliceblue;
+}
+
+.add-animal-button {
+  margin: 2%;
 }
 </style>
