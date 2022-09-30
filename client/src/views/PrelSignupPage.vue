@@ -10,32 +10,23 @@
                         <div class="row justify-content-center px-3 mb-3">
                             <img id="logo" src='../Assets/pet-house.png'>
                         </div>
-                        <h3 class="mb-5 text-center heading">Welcome to Friends Furryver</h3>
+                        <h3 class="mb-5 text-center heading">Sign up</h3>
 
-                        <h6 class="msg-info">Please login to your account</h6>
+                        <h6 class="msg-info">Please create an account</h6>
 
-                        <div class="form-group">
-                            <label class="form-control-label text-muted">E-mail address</label>
-                            <input type="text" id="email" name="email" placeholder="E-mail address" class="form-control">
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-control-label text-muted">Password</label>
-                            <input type="password" id="psw" name="psw" placeholder="Password" class="form-control">
+                        <div class="row justify-content-center my-3 px-3">
+                            <button @click="goToAdoptionCenterSignup" class="btn-block btn-color">Register as Adoption Center</button>
                         </div>
 
                         <div class="row justify-content-center my-3 px-3">
-                            <button class="btn-block btn-color">Login to Friends Furryver</button>
+                            <button @click="goToAdopterSignup" class="btn-block btn-color">Register as Adopter</button>
                         </div>
 
-                        <div class="row justify-content-center my-2">
-                            <a href="#"><small class="text-muted">Forgot Password?</small></a>
-                        </div>
                     </div>
                 </div>
                 <div class="bottom text-center mb-5">
-                    <p href="#" class="sm-text mx-auto mb-3">Don't have an account?
-                        <button class="btn btn-white ml-2" @click="goToPrelSignup">Create new</button>
+                    <p href="#" class="sm-text mx-auto mb-3">Already have an account?
+                    <button class="btn btn-white ml-2" @click="goToHome">Login</button>
                 </p>
                 </div>
             </div>
@@ -48,11 +39,6 @@
                   <small class="text-black">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </small>
                 </div>
-                <!-- <div class="my-auto mx-md-10 px-md-10 right">
-                    <h3 class="text-white">We are more than just a company</h3>
-                    <small class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </small>
-                </div> -->
             </div>
         </div>
     </div>
@@ -66,12 +52,18 @@
 // import { Api } from '@/Api'
 
 export default {
-  name: 'home',
+  name: 'prel-signup-page',
   components: {
   },
   methods: {
-    goToPrelSignup() {
-      this.$router.push('/PrelSignupPage')
+    goToAdopterSignup() {
+      this.$router.push('/AdopterSignup')
+    },
+    goToAdoptionCenterSignup() {
+      this.$router.push('/AdoptionCenterSignup')
+    },
+    goToHome() {
+      this.$router.push('/')
     }
   }
 }

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Adopter = require('../models/adopter');
 var AdoptionApplication = require('../models/adoptionApplication');
+var Animal = require('../models/animal')
 
 
 //crete an adopter
@@ -48,11 +49,26 @@ router.put('/api/adopters/:id', function(req, res, next) {
 //get all adoption applications for a specific user
 router.get('/api/adopters/:id/adoption-applications', function(req, res, next) {
     var adopterId = req.params.id;
-    AdoptionApplication.find({adopter: adopterId}, function(err, adoptionApplications) {
-        if(err) { next(err); }
-        res.status(200).json({"AdoptionApplications": adoptionApplications});
-
+    AdoptionApplication.find({adopter: adopterId}).populate('animal').exec(function(err, adoptionApplications) {
+        if (err) { return next(err); }
+        res.status(200).json({"AdoptionApplications": adoptionApplications})
     })
+});
+
+//get all animals that the user hasn't made an application yet
+router.get('/api/adopters/:id/animals', function(req, res, next) {
+    var adopterId = req.params.id;
+    var adopterApplications;
+    var alreadyAppliedAnimalsId;
+    AdoptionApplication.find({adopter: adopterId}, (err, adoptionApplications) => {
+        if (err) {return next(err)}
+        adopterApplications = adoptionApplications
+        alreadyAppliedAnimalsId = adopterApplications.map((application) => application.animal )
+        Animal.find({_id: {$nin: alreadyAppliedAnimalsId}}, (err, animals) => {
+            res.json({"Animals": animals})
+        })
+    })
+
 });
 
 //get specific adoption application for a specific user
