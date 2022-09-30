@@ -1,7 +1,7 @@
 <template>
   <b-navbar type="dark">
     <b-navbar-brand class="navbar" >
-        Adoption Center
+        Friends Furrever
     </b-navbar-brand>
   </b-navbar>
 </template>

@@ -4,7 +4,7 @@
       <b-row>
         <b-col>
           <navbar></navbar>
-          <animal-form formType="add-animal"></animal-form>
+          <animal-form formType="update-animal"></animal-form>
         </b-col>
       </b-row>
     </b-container>
@@ -13,10 +13,10 @@
 
 <script>
 import AnimalForm from '@/components/AnimalForm.vue'
-import Navbar from '@/components/Navbar.vue'
+import Navbar from '../components/Navbar.vue'
 
 export default {
-  name: 'add-animal',
+  name: 'update-animal',
   components: {
     'animal-form': AnimalForm,
     Navbar
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style>
-.outermost-div {
-  background-color: rgb(119, 200, 246);
-}
+  .outermost-div {
+    background-color: rgb(119, 200, 246);
+  }
 </style>

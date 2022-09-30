@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import AdoptionCenter from './views/AdoptionCenter.vue'
 import AddAnimal from './views/AddAnimal.vue'
 import AdopterAnimals from './views/AdopterAnimals.vue'
+import UpdateAnimal from './views/UpdateAnimal.vue'
 
 Vue.use(Router)
 
@@ -17,19 +18,25 @@ export default new Router({
       component: Home
     },
     {
-      path: '/adoptionCenter',
+      path: '/adoptionCenters/:id',
       name: 'adoption-center',
       component: AdoptionCenter
     },
     {
-      path: '/adoptionCenter/addAnimal',
+      path: '/adoptionCenters/:id/addAnimal',
       name: 'add-animal',
       component: AddAnimal
     },
     {
+
       path: '/adopters/:id',
       name: 'adopter',
       component: AdopterAnimals
+    },
+    {
+      path: '/adoptionCenters/:id/updateAnimal/:animalId',
+      name: 'update-animal',
+      component: UpdateAnimal
     }
   ]
 })
