@@ -4,6 +4,7 @@
         Friends Furrever
     </b-navbar-brand>
   </b-navbar>
+</div>
 </template>
 
 <script>
@@ -14,6 +15,7 @@ export default {
 
 <style scoped>
     .navbar {
-        background-color: royalblue;
+        background-color: rgb(160, 80, 167);
+        margin: 100px;
     }
 </style>
