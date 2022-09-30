@@ -147,7 +147,7 @@ router.patch('/api/animals/:id', function(req, res, next) {
         animal.species = (req.body.species || animal.species);
         animal.breed = (req.body.breed || animal.breed);
         animal.personality = (req.body.personality || animal.personality);
-        animal.healtStatus = (req.body.healthStatus || animal.healtStatus) ;
+        animal.healthStatus = (req.body.healthStatus || animal.healthStatus) ;
         animal.gender = (req.body.gender || animal.gender);
         animal.age = (req.body.age || animal.age);
         animal.hours = (req.body.hours || animal.hours);

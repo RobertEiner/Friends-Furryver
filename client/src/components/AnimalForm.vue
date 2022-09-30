@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="background-div">
-      <h1>{{ header }}</h1>
       <b-container class="b-con">
-        <b-row class="b-row-class">
-          <b-column @submit="onSubmit">
-            <b-form>
-              <b-form-group label="Species">
+        <b-row class="b-row">
+          <b-col @submit="onSubmit">
+            <h1>{{ header }}</h1>
+            <b-form class="b-form">
+              <b-form-group  v-if="this.formType === 'add-animal'" label="Species">
                 <b-form-input
-                  required="true"
+                  required
                   size="sm"
                   placeholder="Enter species"
                   v-model="form.species"
@@ -16,9 +16,27 @@
                 </b-form-input>
               </b-form-group>
 
-              <b-form-group label="Size">
+               <b-form-group v-else label="Species">
                 <b-form-input
-                  required="true"
+                  size="sm"
+                  placeholder="Enter species"
+                  v-model="form.species"
+                >
+                </b-form-input>
+              </b-form-group>
+
+              <b-form-group v-if="this.formType === 'add-animal'" label="Size">
+                <b-form-input
+                  required
+                  size="sm"
+                  placeholder="Enter size"
+                  v-model="form.size"
+                >
+                </b-form-input>
+              </b-form-group>
+
+              <b-form-group v-else label="Size">
+                <b-form-input
                   size="sm"
                   placeholder="Enter size"
                   v-model="form.size"
@@ -56,7 +74,7 @@
               <b-form-group label="Gender">
                 <b-form-select
                   v-model="form.gender"
-                  :options="options"
+                  :options="alternatives"
                   size="sm"
                   placeholder="Select an option"
                 >
@@ -77,9 +95,18 @@
                 </b-form-input>
               </b-form-group>
 
-              <b-form-group label="Hours">
+              <b-form-group v-if="this.formType === 'add-animal'" label="Hours">
                 <b-form-input
-                  required="true"
+                  required
+                  size="sm"
+                  placeholder="Physical activity needed"
+                  v-model="form.hours"
+                >
+                </b-form-input>
+              </b-form-group>
+
+               <b-form-group v-else label="Hours">
+                <b-form-input
                   size="sm"
                   placeholder="Physical activity needed"
                   v-model="form.hours"
@@ -113,7 +140,7 @@
                 >
               </div>
             </b-form>
-          </b-column>
+          </b-col>
         </b-row>
       </b-container>
     </div>
@@ -129,12 +156,11 @@ export default {
 
   data() {
     return {
-      // selected: null,
-      options: [
+      alternatives: [
         { value: 'Female', text: 'Female' },
         { value: 'Male', text: 'Male' }
       ],
-      header: 'Fill in the information for the animal',
+      header: 'Animal information',
       form: {
         species: '',
         size: '',
@@ -179,8 +205,8 @@ export default {
 h1 {
   display: block;
 }
-.b-row-class {
-  text-align: left;
+.b-row {
+ text-align: left;
 }
 
 .b-con {
@@ -195,6 +221,10 @@ h1 {
 
 .background-div {
   background-color: rgb(119, 200, 246);
+}
+
+.b-form {
+  display: inline-block;
 }
 </style>
 

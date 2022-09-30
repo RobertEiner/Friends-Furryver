@@ -1,14 +1,14 @@
 <template>
-  <b-container class="container-fluid">
-    <b-row>
-      <b-column>
-        <div>
+  <div class="outermost-div">
+    <b-container fluid>
+      <b-row>
+        <b-col>
           <navbar></navbar>
           <animal-form formType="update-animal"></animal-form>
-        </div>
-      </b-column>
-    </b-row>
-  </b-container>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -24,4 +24,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+  .outermost-div {
+    background-color: rgb(119, 200, 246);
+  }
+</style>

@@ -1,8 +1,14 @@
 <template>
-<div>
-  <navbar></navbar>
-  <animal-form formType="add-animal"></animal-form>
-</div>
+  <div class="outermost-div">
+    <b-container fluid>
+      <b-row>
+        <b-col>
+          <navbar></navbar>
+          <animal-form formType="add-animal"></animal-form>
+        </b-col>
+      </b-row>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -19,4 +25,7 @@ export default {
 </script>
 
 <style>
+.outermost-div {
+  background-color: rgb(119, 200, 246);
+}
 </style>
