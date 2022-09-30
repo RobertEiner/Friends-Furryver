@@ -12,11 +12,11 @@
                         </div>
                         <h3 class="mb-5 text-center heading">Welcome to Friends Furryver</h3>
 
-                        <h6 class="msg-info">Please login to your account</h6>
+                        <h6 class="msg-info">Adopter Sign up</h6>
 
                         <div class="form-group">
                             <label class="form-control-label text-muted">E-mail address</label>
-                            <input type="text" id="email" name="email" placeholder="E-mail address" class="form-control">
+                            <input type="text" id="email" name="email" placeholder="Please enter your e-mail address" class="form-control">
                         </div>
 
                         <div class="form-group">
@@ -24,18 +24,30 @@
                             <input type="password" id="psw" name="psw" placeholder="Password" class="form-control">
                         </div>
 
-                        <div class="row justify-content-center my-3 px-3">
-                            <button class="btn-block btn-color">Login to Friends Furryver</button>
+                        <div class="form-group">
+                            <label class="form-control-label text-muted">SSN</label>
+                            <input type="text" id="SSN" name="SSN" placeholder="Social security number" class="form-control">
                         </div>
 
-                        <div class="row justify-content-center my-2">
-                            <a href="#"><small class="text-muted">Forgot Password?</small></a>
+                        <div class="form-group">
+                            <label class="form-control-label text-muted">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Full name" class="form-control">
                         </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label text-muted">Age</label>
+                            <input type="number" id="age" name="age" placeholder="Age" class="form-control">
+                        </div>
+
+                        <div class="row justify-content-center my-3 px-3">
+                            <button class="btn-block btn-color">Create account</button>
+                        </div>
+
                     </div>
                 </div>
                 <div class="bottom text-center mb-5">
-                    <p href="#" class="sm-text mx-auto mb-3">Don't have an account?
-                        <button class="btn btn-white ml-2" @click="goToPrelSignup">Create new</button>
+                    <p href="#" class="sm-text mx-auto mb-3">Already have an account?
+                        <button class="btn btn-white ml-2" @click="goToHome">Login</button>
                 </p>
                 </div>
             </div>
@@ -70,8 +82,8 @@ export default {
   components: {
   },
   methods: {
-    goToPrelSignup() {
-      this.$router.push('/PrelSignupPage')
+    goToHome() {
+      this.$router.push('/')
     }
   }
 }
