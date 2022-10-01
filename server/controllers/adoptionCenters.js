@@ -36,9 +36,7 @@ router.get('/api/AdoptionCenters/:id', function (req, res, next) {
     });
 });
 
-
-
-
+// Get all applications of a specific adoption center
 router.get('/api/AdoptionCenters/:id/adoptionApplications', function (req, res, next) {
     var id = req.params.id;
     AdoptionCenter.findById(id, function(err, adoptionCenter) {
@@ -52,9 +50,6 @@ router.get('/api/AdoptionCenters/:id/adoptionApplications', function (req, res, 
         })
     });
 });
-
-
-
 
 
 //get animals of a specific adoption center
