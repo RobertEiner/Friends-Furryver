@@ -36,6 +36,27 @@ router.get('/api/AdoptionCenters/:id', function (req, res, next) {
     });
 });
 
+
+
+
+router.get('/api/AdoptionCenters/:id/adoptionApplications', function (req, res, next) {
+    var id = req.params.id;
+    AdoptionCenter.findById(id, function(err, adoptionCenter) {
+        if (err) { return next(err); }
+        if (adoptionCenter === null) {
+            return res.status(404).json({"message": "Adoption center not found"});
+        }
+        AdoptionApplication.find({adoptionCenter: id}, function(err, applications) {
+            if(err) { next(err); }
+            res.status(200).json({'Applications': applications})
+        })
+    });
+});
+
+
+
+
+
 //get animals of a specific adoption center
 router.get('/api/adoptionCenters/:id/animals', function(req, res, next) {
     var adoptionCenterId = req.params.id;
