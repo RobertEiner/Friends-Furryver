@@ -1,5 +1,8 @@
 <template>
   <div>
+<b-container>
+  <b-row>
+    <b-col>
     <b-card
       title="Animal"
       img-src="https://picsum.photos/600/300/?image=25"
@@ -24,19 +27,23 @@
 
       <b-button
         class="update-animal-button"
-        size="lg"
+        size="sm"
         v-on:click="goToUpdateAnimal"
         variant="primary"
         >Update animal</b-button
       >
       <b-button
         class="delete-animal-button"
-        size="lg"
+        size="sm"
         v-on:click="$emit('del-animal', animal._id)"
         variant="primary"
         >Delete animal</b-button
       >
     </b-card>
+
+    </b-col>
+  </b-row>
+</b-container>
   </div>
 </template>
 
@@ -61,15 +68,17 @@ export default {
 }
 
 .delete-animal-button {
-  margin-top: 2%;
+  margin: auto;
   font-size: 1em;
+  display: block;
   background-color: red;
 }
 
 .update-animal-button {
-  margin-top: 2%;
+  margin:  2% auto;
   font-size: 1em;
   display: block;
-  margin: 2% 0 0 25%;
+
 }
+
 </style>
