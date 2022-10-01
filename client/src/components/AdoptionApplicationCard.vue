@@ -49,8 +49,8 @@ export default {
   props: ['adoptionApplication'],
   methods: {
     deleteApplication() {
-      this.$emit('deleteApplication', this.adoptionApplication._id)
       Api.delete(`/adoption-applications/${this.adoptionApplication._id}`)
+      this.$emit('deleteApplication', this.adoptionApplication._id)
     }
   }
 }

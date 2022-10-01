@@ -21,13 +21,7 @@ export default {
     'animal-card': AnimalCard
   },
   mounted() {
-    Api.get(`/adopters/${this.$route.params.id}/animals`)
-      .then((response) => {
-        this.animals = response.data.Animals
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.updateList()
   },
   data() {
     return {
@@ -35,11 +29,19 @@ export default {
     }
   },
   methods: {
+    updateList() {
+      Api.get(`/adopters/${this.$route.params.id}/animals`)
+        .then((response) => {
+          this.animals = response.data.Animals
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     removeAnimalCard(removedId) {
-      const index = this.animals.findIndex(
-        (animal) => animal._id === removedId
-      )
+      const index = this.animals.findIndex((animal) => animal._id === removedId)
       this.animals.splice(index, 1)
+      this.$emit('newAdoptionApplication')
     }
   }
 }

@@ -25,23 +25,26 @@ export default {
   name: 'adoption-application-list',
   components: { 'adoption-application-card': AdoptionApplicationCard },
   methods: {
+    updateList() {
+      Api.get(`/adopters/${this.$route.params.id}/adoption-applications`)
+        .then((response) => {
+          this.adoptionApplications = response.data.AdoptionApplications
+          console.log(this.adoptionApplications[0].animal)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     removeApplication(removeId) {
       const index = this.adoptionApplications.findIndex(
-        (adoptionApplication) =>
-          adoptionApplication._id === removeId
+        (adoptionApplication) => adoptionApplication._id === removeId
       )
       this.adoptionApplications.splice(index, 1)
+      this.$emit('removedAdoptionApplication')
     }
   },
   mounted() {
-    Api.get(`/adopters/${this.$route.params.id}/adoption-applications`)
-      .then((response) => {
-        this.adoptionApplications = response.data.AdoptionApplications
-        console.log(this.adoptionApplications[0].animal)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.updateList()
   },
   data() {
     return {

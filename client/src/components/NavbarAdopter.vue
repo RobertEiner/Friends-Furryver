@@ -3,9 +3,17 @@
     <div class="inner-div">
       <b-tabs content-class="mt-3">
         <b-tab :title="tabThree">
-          <animals-list />
+          <animals-list
+            ref="animalList"
+            @newAdoptionApplication="updateAdoptionApplicationList"
+          />
         </b-tab>
-        <b-tab :title="tabTwo"> <adoption-application-list /> </b-tab>
+        <b-tab :title="tabTwo">
+          <adoption-application-list
+            ref="adoptionApplicationList"
+            @removedAdoptionApplication="updateAnimalList"
+          />
+        </b-tab>
         <b-tab :title="tabThree">{{ thirdTab }}</b-tab>
       </b-tabs>
     </div>
@@ -22,6 +30,14 @@ export default {
   components: {
     'animals-list': AnimalsList,
     'adoption-application-list': AdoptionApplicationList
+  },
+  methods: {
+    updateAdoptionApplicationList() {
+      this.$refs.adoptionApplicationList.updateList()
+    },
+    updateAnimalList() {
+      this.$refs.animalList.updateList()
+    }
   },
   data() {
     return {
