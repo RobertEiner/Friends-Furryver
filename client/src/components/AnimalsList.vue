@@ -2,10 +2,10 @@
   <div>
     <b-container fluid>
       <b-row align-h="center">
-        <b-colum sm :key="animal._id" v-for="animal in animals">
+        <b-col :key="animal._id" v-for="animal in animals">
           <animal-card :animal="animal" @apply="removeAnimalCard">
           </animal-card>
-        </b-colum>
+        </b-col>
       </b-row>
     </b-container>
   </div>
