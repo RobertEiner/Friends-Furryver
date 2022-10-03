@@ -2,7 +2,7 @@
   <div class="outer-div">
     <div class="inner-div">
       <b-tabs content-class="mt-3">
-        <b-tab :title="tabThree">
+        <b-tab :title="tabOne">
           <animals-list
             ref="animalList"
             @newAdoptionApplication="updateAdoptionApplicationList"
