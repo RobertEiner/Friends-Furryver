@@ -1,6 +1,19 @@
 <template>
   <div class="outer-div">
     <div class="inner-div">
+      <div>
+        <b-button v-b-toggle.collapse-1 variant="primary">Filter</b-button>
+        <b-collapse id="collapse-1" class="mt-2">
+          <b-form-group label="species:">
+            <b-form-checkbox-group
+              id="species-filter"
+              v-model="filters"
+              :options="species"
+              @change="updateAnimalList"
+            ></b-form-checkbox-group>
+          </b-form-group>
+        </b-collapse>
+      </div>
       <b-tabs content-class="mt-3">
         <b-tab :title="tabOne">
           <animals-list
@@ -35,8 +48,9 @@ export default {
     updateAdoptionApplicationList() {
       this.$refs.adoptionApplicationList.updateList()
     },
-    updateAnimalList() {
-      this.$refs.animalList.updateList()
+    updateAnimalList(filters) {
+      console.log(filters)
+      this.$refs.animalList.updateList(filters)
     }
   },
   data() {
@@ -44,7 +58,12 @@ export default {
       tabOne: this.firstTab,
       tabTwo: this.secondTab,
       tabThree: this.thirdTab,
-      adopter: this.adopterId
+      adopter: this.adopterId,
+      species: [
+        { text: 'Dog', value: 'dog' },
+        { text: 'Cat', value: 'cat' }
+      ],
+      filters: []
     }
   }
 }

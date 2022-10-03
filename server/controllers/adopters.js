@@ -60,13 +60,21 @@ router.get('/api/adopters/:id/animals', function(req, res, next) {
     var adopterId = req.params.id;
     var adopterApplications;
     var alreadyAppliedAnimalsId;
+    console.log(req.query)
     AdoptionApplication.find({adopter: adopterId}, (err, adoptionApplications) => {
         if (err) {return next(err)}
         adopterApplications = adoptionApplications
         alreadyAppliedAnimalsId = adopterApplications.map((application) => application.animal )
-        Animal.find({_id: {$nin: alreadyAppliedAnimalsId}}, (err, animals) => {
-            res.json({"Animals": animals})
-        })
+
+        if (Object.keys(req.query).length === 0) {
+            Animal.find({_id: {$nin: alreadyAppliedAnimalsId}}, (err, animals) => {
+                res.json({"Animals": animals})
+            })
+        } else {
+            Animal.find({_id: {$nin: alreadyAppliedAnimalsId}, species:{$in: req.query.species}}, (err, animals) => {
+                res.json({"Animals": animals})
+            })
+        }
     })
 
 });

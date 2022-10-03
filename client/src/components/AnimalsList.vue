@@ -21,7 +21,7 @@ export default {
     'animal-card': AnimalCard
   },
   mounted() {
-    this.updateList()
+    this.updateList([])
   },
   data() {
     return {
@@ -29,14 +29,30 @@ export default {
     }
   },
   methods: {
-    updateList() {
-      Api.get(`/adopters/${this.$route.params.id}/animals`)
-        .then((response) => {
-          this.animals = response.data.Animals
+    updateList(species) {
+      if (species.length) {
+        console.log('----------')
+        console.log(species)
+        Api.get(`/adopters/${this.$route.params.id}/animals`, {
+          params: {
+            species: species
+          }
         })
-        .catch((error) => {
-          console.log(error)
-        })
+          .then((response) => {
+            this.animals = response.data.Animals
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        Api.get(`/adopters/${this.$route.params.id}/animals`)
+          .then((response) => {
+            this.animals = response.data.Animals
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
     },
     removeAnimalCard(removedId) {
       const index = this.animals.findIndex((animal) => animal._id === removedId)
