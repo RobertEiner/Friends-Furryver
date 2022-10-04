@@ -48,9 +48,9 @@ export default {
     updateAdoptionApplicationList() {
       this.$refs.adoptionApplicationList.updateList()
     },
-    updateAnimalList(filters) {
-      console.log(filters)
-      this.$refs.animalList.updateList(filters)
+    updateAnimalList() {
+      console.log(this.filters)
+      this.$refs.animalList.updateList(this.filters)
     }
   },
   data() {
