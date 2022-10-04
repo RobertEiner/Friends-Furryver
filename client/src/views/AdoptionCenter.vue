@@ -35,14 +35,14 @@
                     <applications-tab
                       :application="application"
                       v-on:del-application="declineApplication"
+                      v-on:accept-application="acceptApplication"
                     ></applications-tab>
                   </div>
                 </b-card-group>
               </div>
             </b-tab>
 
-            <b-tab title="Profile">
-              <profile-tab></profile-tab> </b-tab>
+            <b-tab title="Profile"> <profile-tab></profile-tab> </b-tab>
           </b-tabs>
         </div>
       </b-col>
@@ -83,6 +83,15 @@ export default {
       Api.delete(`/animals/${id}`).then(response => {
         const index = this.animals.findIndex(animal => animal._id === id)
         this.animals.splice(index, 1)
+      }).catch(error => {
+        console.log(error)
+      })
+    },
+    acceptApplication(applicationId) {
+      Api.put(`/adoption-applications/${applicationId}`, { status: 1 }).then(response => {
+        console.log(response.data)
+      }).catch(error => {
+        console.log(error)
       })
     },
     declineApplication(applicationId) {
@@ -91,6 +100,8 @@ export default {
           application => application._id === applicationId
         )
         this.applications.splice(index, 1)
+      }).catch(error => {
+        console.log(error)
       })
     },
     getAllAnimals() {

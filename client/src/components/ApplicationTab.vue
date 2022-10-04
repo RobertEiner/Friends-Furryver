@@ -20,7 +20,7 @@
           <b-list-group-item>
             Animal ID: {{ application.animal }}
           </b-list-group-item>
-           <b-list-group-item>
+          <b-list-group-item>
             Application status: {{ application.status }}
           </b-list-group-item>
 
@@ -28,6 +28,7 @@
             id="accept-application-button"
             size="sm"
             variant="primary"
+            @click="$emit('accept-application', application._id)"
             >Accept application</b-button
           >
 
@@ -35,7 +36,7 @@
             id="decline-application-button"
             size="sm"
             variant="primary"
-            v-on:click="$emit('del-application', application._id)"
+            @click="$emit('del-application', application._id)"
             >Decline application</b-button
           >
         </b-card>
