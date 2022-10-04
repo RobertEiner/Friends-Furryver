@@ -2,7 +2,7 @@
   <div>
     <b-container fluid>
       <b-row align-h="center">
-        <b-col :key="animal._id" v-for="animal in animals">
+        <b-col sm=12 md=6 lg=4 :key="animal._id" v-for="animal in animals">
           <animal-card :animal="animal" @apply="removeAnimalCard">
           </animal-card>
         </b-col>
