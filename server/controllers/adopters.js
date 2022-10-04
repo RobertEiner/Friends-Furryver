@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var Adopter = require('../models/adopter');
 var AdoptionApplication = require('../models/adoptionApplication');
+const animal = require('../models/animal');
 var Animal = require('../models/animal')
 
 
@@ -71,8 +72,14 @@ router.get('/api/adopters/:id/animals', function(req, res, next) {
                 res.json({"Animals": animals})
             })
         } else {
-            Animal.find({_id: {$nin: alreadyAppliedAnimalsId}, species:{$in: req.query.species}}, (err, animals) => {
+            var animals = Animal.find({_id: {$nin: alreadyAppliedAnimalsId}})
+            const filters = Object.getOwnPropertyNames(req.query)
+            filters.map((field) => {
+                animals = animals.where(field).in(req.query[field])
+            })
+            animals.exec((err, animals) => {
                 res.json({"Animals": animals})
+                if (err) { return next(err) }
             })
         }
     })
