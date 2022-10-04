@@ -2,8 +2,7 @@
   <div>
     <b-container fluid>
       <b-row align-h="center">
-        <b-colum
-          sm
+        <b-col
           :key="adoptionApplication._id"
           v-for="adoptionApplication in adoptionApplications"
         >
@@ -11,7 +10,7 @@
             :adoptionApplication="adoptionApplication"
             @deleteApplication="removeApplication"
           />
-        </b-colum>
+        </b-col>
       </b-row>
     </b-container>
   </div>
