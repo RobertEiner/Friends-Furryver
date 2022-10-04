@@ -27,7 +27,7 @@ export default {
     'animal-card': AnimalCard
   },
   mounted() {
-    this.updateList([])
+    this.updateList({})
   },
   data() {
     return {
@@ -35,13 +35,13 @@ export default {
     }
   },
   methods: {
-    updateList(species) {
-      if (species.length) {
+    updateList(filters) {
+      if (filters.selectedSpecies || filters.selectedSpecies) {
         console.log('----------')
-        console.log(species)
         Api.get(`/adopters/${this.$route.params.id}/animals`, {
           params: {
-            species: species
+            species: filters.selectedSpecies,
+            gender: filters.selectedSex
           }
         })
           .then((response) => {

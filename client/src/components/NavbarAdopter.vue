@@ -9,8 +9,16 @@
               <b-form-group label="species:">
                 <b-form-checkbox-group
                   id="species-filter"
-                  v-model="filters"
-                  :options="species"
+                  v-model="filters.selectedSpecies"
+                  :options="speciesOptions"
+                  @change="updateAnimalList"
+                ></b-form-checkbox-group>
+              </b-form-group>
+              <b-form-group label="sex:">
+                <b-form-checkbox-group
+                  id="sex-filter"
+                  v-model="filters.selectedSex"
+                  :options="sexOptions"
                   @change="updateAnimalList"
                 ></b-form-checkbox-group>
               </b-form-group>
@@ -49,7 +57,8 @@ export default {
       this.$refs.adoptionApplicationList.updateList()
     },
     updateAnimalList() {
-      console.log(this.filters)
+      console.log(this.filters.selectedSpecies)
+      console.log(this.filters.selectedSex)
       this.$refs.animalList.updateList(this.filters)
     }
   },
@@ -59,11 +68,18 @@ export default {
       tabTwo: this.secondTab,
       tabThree: this.thirdTab,
       adopter: this.adopterId,
-      species: [
+      speciesOptions: [
         { text: 'Dog', value: 'dog' },
         { text: 'Cat', value: 'cat' }
       ],
-      filters: []
+      sexOptions: [
+        { text: 'Male', value: 'male' },
+        { text: 'Female', value: 'female' }
+      ],
+      filters: {
+        selectedSpecies: [],
+        selectedSex: []
+      }
     }
   }
 }
