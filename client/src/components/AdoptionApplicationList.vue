@@ -3,6 +3,9 @@
     <b-container fluid>
       <b-row align-h="center">
         <b-col
+          sm="12"
+          md="6"
+          lg="4"
           :key="adoptionApplication._id"
           v-for="adoptionApplication in adoptionApplications"
         >
