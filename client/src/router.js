@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import AdopterLogin from './views/AdopterLogin.vue'
+import AdoptionCenterLogin from './views/AdoptionCenterLogin'
 import PrelSignupPage from './views/PrelSignupPage.vue'
 import AdopterSignup from './views/AdopterSignup.vue'
 import AdoptionCenterSignup from './views/AdoptionCenterSignup.vue'
@@ -44,6 +46,16 @@ export default new Router({
       path: '/AdoptionCenterSignup',
       name: 'adoption-center-signup',
       component: AdoptionCenterSignup
+    },
+    {
+      path: '/AdopterLogin',
+      name: '/adopter-login',
+      component: AdopterLogin
+    },
+    {
+      path: '/AdoptionCenterLogin',
+      name: '/adoption-center-login',
+      component: AdoptionCenterLogin
     },
     {
       path: '/adopters/:id',
