@@ -3,7 +3,17 @@
     <div class="inner-div">
       <b-tabs content-class="mt-3">
         <b-tab :title="tabOne">
-          <div>
+          <div class="automaticFilters">
+            <b-form-checkbox
+              v-model="automaticFilterChecked"
+              @change="autoFilter"
+              name="check-button"
+              switch
+            >
+              Automatic Filter
+            </b-form-checkbox>
+          </div>
+          <div class="regularFilters">
             <b-button v-b-toggle.collapse-1 variant="primary">Filter</b-button>
             <b-collapse id="collapse-1" class="mt-2">
               <b-form-group label="species:">
@@ -50,6 +60,8 @@
 </template>
 
 <script>
+import { Api } from '@/Api'
+
 import AnimalsList from '@/components/AnimalsList.vue'
 import AdoptionApplicationList from '@/components/AdoptionApplicationList.vue'
 
@@ -68,14 +80,41 @@ export default {
       console.log(this.filters.selectedSpecies)
       console.log(this.filters.selectedSex)
       this.$refs.animalList.updateList(this.filters)
+    },
+    getAdopter() {
+      Api.get(`/adopters/${this.$route.params.id}`)
+        .then((response) => {
+          this.adopter = response.data
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    autoFilter() {
+      if (this.automaticFilterChecked) {
+        this.filters.selectedSpecies = [this.adopter.petPreferences.species]
+        this.filters.selectedSize = [this.adopter.petPreferences.size]
+        this.filters.selectedSex = []
+        this.updateAnimalList(this.filters)
+      } else {
+        this.filters = {
+          selectedSpecies: [],
+          selectedSex: [],
+          selectedSize: []
+        }
+        this.updateAnimalList(this.filters)
+      }
     }
+  },
+  mounted() {
+    this.getAdopter()
   },
   data() {
     return {
       tabOne: this.firstTab,
       tabTwo: this.secondTab,
       tabThree: this.thirdTab,
-      adopter: this.adopterId,
+      adopter: this.adopter,
       speciesOptions: [
         { text: 'Dog', value: 'dog' },
         { text: 'Cat', value: 'cat' },
@@ -95,7 +134,8 @@ export default {
         selectedSpecies: [],
         selectedSex: [],
         selectedSize: []
-      }
+      },
+      automaticFilterChecked: false
     }
   }
 }
