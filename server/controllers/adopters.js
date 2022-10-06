@@ -132,6 +132,9 @@ router.delete('/api/adopters/:id', function (req, res, next) {
         if (adopter === null) {
             return res.status(404).json({ 'message': 'Adopter not found' })
         }
+        AdoptionApplication.deleteMany({"adopter": id}, function(err){
+            if (err) { return next(err) }
+        });
         res.json(adopter);
     });
 });
