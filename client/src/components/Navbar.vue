@@ -14,6 +14,6 @@ export default {
 
 <style scoped>
     .navbar {
-        background-color: rgb(160, 80, 167);
+        background-color: rgb(51, 130, 247);
     }
 </style>
