@@ -36,12 +36,12 @@ export default {
   },
   methods: {
     updateList(filters) {
-      if (filters.selectedSpecies || filters.selectedSpecies) {
-        console.log('----------')
+      if (filters.selectedSpecies || filters.selectedSex || filters.selectedSize) {
         Api.get(`/adopters/${this.$route.params.id}/animals`, {
           params: {
             species: filters.selectedSpecies,
-            gender: filters.selectedSex
+            gender: filters.selectedSex,
+            size: filters.selectedSize
           }
         })
           .then((response) => {

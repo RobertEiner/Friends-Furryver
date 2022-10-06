@@ -22,6 +22,14 @@
                   @change="updateAnimalList"
                 ></b-form-checkbox-group>
               </b-form-group>
+              <b-form-group label="size:">
+                <b-form-checkbox-group
+                  id="size-filter"
+                  v-model="filters.selectedSize"
+                  :options="sizeOptions"
+                  @change="updateAnimalList"
+                ></b-form-checkbox-group>
+              </b-form-group>
             </b-collapse>
           </div>
           <animals-list
@@ -78,9 +86,15 @@ export default {
         { text: 'Male', value: 'male' },
         { text: 'Female', value: 'female' }
       ],
+      sizeOptions: [
+        { text: 'Small', value: 'small' },
+        { text: 'Medium', value: 'medium' },
+        { text: 'Big', value: 'big' }
+      ],
       filters: {
         selectedSpecies: [],
-        selectedSex: []
+        selectedSex: [],
+        selectedSize: []
       }
     }
   }
