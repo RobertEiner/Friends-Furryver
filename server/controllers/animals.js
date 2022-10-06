@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Animal = require('../models/animal');
 const multer = require('multer');
+const AdoptionApplication = require('../models/adoptionApplication');
 
 const Storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -167,6 +168,9 @@ router.delete('/api/animals/:id', function(req, res, next){
         if(animal === null) {
             return res.status(404).json({'Message': 'animal not found'});
         }
+        AdoptionApplication.deleteMany({"animal": id}, function(error) {
+            if(err) {return next(err)}
+        });
         res.json(animal);
     })
 })
