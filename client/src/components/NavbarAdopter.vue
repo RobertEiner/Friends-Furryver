@@ -70,7 +70,9 @@ export default {
       adopter: this.adopterId,
       speciesOptions: [
         { text: 'Dog', value: 'dog' },
-        { text: 'Cat', value: 'cat' }
+        { text: 'Cat', value: 'cat' },
+        { text: 'Rabbit', value: 'rabbit' },
+        { text: 'Bird', value: 'bird' }
       ],
       sexOptions: [
         { text: 'Male', value: 'male' },
