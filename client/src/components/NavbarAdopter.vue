@@ -53,7 +53,9 @@
             @removedAdoptionApplication="updateAnimalList"
           />
         </b-tab>
-        <b-tab :title="tabThree">{{ thirdTab }}</b-tab>
+        <b-tab :title="tabThree">
+          <adopter-profile :adopter="adopter" />
+        </b-tab>
       </b-tabs>
     </div>
   </div>
@@ -64,13 +66,15 @@ import { Api } from '@/Api'
 
 import AnimalsList from '@/components/AnimalsList.vue'
 import AdoptionApplicationList from '@/components/AdoptionApplicationList.vue'
+import AdopterProfile from '@/components/AdopterProfile.vue'
 
 export default {
   name: 'navbar-adopter',
   props: ['firstTab', 'secondTab', 'thirdTab'],
   components: {
     'animals-list': AnimalsList,
-    'adoption-application-list': AdoptionApplicationList
+    'adoption-application-list': AdoptionApplicationList,
+    'adopter-profile': AdopterProfile
   },
   methods: {
     updateAdoptionApplicationList() {
