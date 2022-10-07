@@ -2,15 +2,15 @@
 <div>
     <b-container class="b-con">
         <b-row class="b-row">
-            <b-col @submit="onSubmit">
-                <b-form class="b-form">
-                <h6 class="msg-info">Please login to your account</h6>
+            <b-col>
+              <h6 class="msg-info">Please login to your account</h6>
+                <b-form class="b-form" @submit="loginAdopter">
                     <b-form-group label ="E-mail address">
                         <b-form-input
                          required
                          class="form-control-label text-muted"
                          placeholder="Please enter your e-mail address"
-                         v-model="form.emailAddress"
+                         v-model="login.email"
                         >
                         </b-form-input>
                        </b-form-group>
@@ -20,13 +20,14 @@
                          required
                          class="form-control-label text-muted"
                          placeholder="Please enter your password"
-                         v-model="form.password"
+                         v-model="login.password"
                         >
                         </b-form-input>
                        </b-form-group>
                 <div class="row justify-content-center my-3 px-3">
                     <b-button
                                 class="btn-block btn-color"
+                                type="submit"
                                 >Login to Friends Furryver
                     </b-button>
                 </div>
@@ -59,15 +60,15 @@
 </template>
 
 <script>
-// import { Api } from '@Api'
 
+import swal from 'sweetalert'
 export default {
-  name: 'login-form',
+  name: 'login-form-adopter',
   data() {
     return {
       header: 'Login Information',
-      form: {
-        emailAddress: '',
+      login: {
+        email: '',
         password: ''
       }
     }
@@ -75,6 +76,20 @@ export default {
   methods: {
     goToPrelSignup() {
       this.$router.push('/PrelSignupPage')
+    },
+    async loginAdopter() {
+      try {
+        const response = await this.$http.post('/api/adopters/login', this.login)
+        const token = response.data.token
+        localStorage.setItem('jwt', token)
+        if (token) {
+          swal('Success', 'Login Successful', 'success')
+          this.$router.push('/test')
+        }
+      } catch (err) {
+        swal('Error', 'Something Went Wrong', 'error')
+        console.log(err.response)
+      }
     }
   }
 }

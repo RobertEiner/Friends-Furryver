@@ -1,7 +1,7 @@
 <template>
-    <div>
+   <div>
+    <home-login-signup-style></home-login-signup-style>
         <body>
-          <home-login-signup-style></home-login-signup-style>
           <div class="container px-4 py-5 mx-auto">
       <div class="card card0">
           <div class="d-flex flex-lg-row flex-column-reverse">
@@ -18,7 +18,7 @@
                           <div class="row justify-content-center my-3 px-3">
                           <b-button
                                       class="btn-block btn-color"
-                                      @click="goToAdopterLogin"
+                                      @click="goToAdoptionCenterLogin"
                                       >Login as Adoption Center
                           </b-button>
                           </div>
@@ -26,7 +26,7 @@
                           <div class="row justify-content-center my-3 px-3">
                           <b-button
                                       class="btn-block btn-color"
-                                      @click="goToAdoptionCenterLogin"
+                                      @click="goToAdopterLogin"
                                       >Login as Adopter
                           </b-button>
                           </div>

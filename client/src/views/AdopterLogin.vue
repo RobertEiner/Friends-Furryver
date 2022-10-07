@@ -13,7 +13,7 @@
                                       </div>
                                   <h3 class="mb-3 text-center heading">Welcome to Friends Furryver</h3>
                               </div>
-                      <login-form></login-form>
+                      <login-form-adopter></login-form-adopter>
                   </div>
               </div>
               <div class="card card2">
@@ -39,13 +39,13 @@
 <script>
 // @ is an alias to /src
 // import { Api } from '@/Api'
-import LoginForm from '@/components/LoginForm.vue'
+import LoginFormAdopter from '@/components/LoginFormAdopter.vue'
 import HomeLoginSignupStyle from '@/components/HomeLoginSignupStyle.vue'
 
 export default {
   name: 'AdopterLogin',
   components: {
-    'login-form': LoginForm,
+    'login-form-adopter': LoginFormAdopter,
     'home-login-signup-style': HomeLoginSignupStyle
   },
   methods: {

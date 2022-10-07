@@ -41,7 +41,7 @@
                                 <b-button
                                             class="btn btn-white ml-2"
                                             @click="goToHome"
-                                            >Create new account
+                                            >Login
                                 </b-button>
                             </p>
                         </div>

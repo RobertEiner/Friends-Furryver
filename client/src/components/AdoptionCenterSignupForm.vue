@@ -4,7 +4,7 @@
             <b-row class="b-row">
                 <b-col @submit="onSubmit">
                     <b-form class="b-form">
-                    <h6 class="msg-info">Adopter Sign up</h6>
+                    <h6 class="msg-info">Adoption center Sign up</h6>
                         <b-form-group label ="E-mail address">
                             <b-form-input
                              required
