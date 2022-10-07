@@ -1,3 +1,7 @@
+<template>
+  <div></div>
+</template>
+
 <style>
 .btn_message {
   margin-bottom: 1em;
