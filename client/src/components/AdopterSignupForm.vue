@@ -112,7 +112,8 @@
 </template>
 
 <script>
-import swal from 'sweetalert'
+import { Api } from '@/Api'
+// import swal from 'sweetalert'
 
 export default {
   name: 'adopter-signup-form',
@@ -136,30 +137,33 @@ export default {
     goToHome() {
       this.$router.push('/')
     },
-    async registerUser() {
-      try {
-        const response = await this.$http.post(
-          '/api/adopters/register',
-          this.register
-        )
-        console.log(response)
-        const token = response.data.token
-        if (token) {
-          localStorage.setItem('jwt', token)
-          this.$router.push('/AdopterLogin')
-          swal('Success', 'Registration Was successful', 'success')
-        } else {
-          swal('Error', 'Something Went Wrong', 'error')
-        }
-      } catch (err) {
-        const error = err.response
-        if (error.status === 409) {
-          swal('Error', error.data.message, 'error')
-        } else {
-          swal('Error', error.data.err.message, 'error')
-        }
-      }
+    registerUser() {
+      Api.post('/adopters/register', this.register)
     }
+    // async registerUser() {
+    //   try {
+    //     const response = await this.$http.post(
+    //       '/api/adopters/register',
+    //       this.register
+    //     )
+    //     console.log(response)
+    //     const token = response.data.token
+    //     if (token) {
+    //       localStorage.setItem('jwt', token)
+    //       this.$router.push('/AdopterLogin')
+    //       swal('Success', 'Registration Was successful', 'success')
+    //     } else {
+    //       swal('Error', 'Something Went Wrong', 'error')
+    //     }
+    //   } catch (err) {
+    //     if (err) {
+    //       console.log(err)
+    //       swal('Error', err.data.message, 'error')
+    //     } else {
+    //       swal('Error', err.data.err.message, 'error')
+    //     }
+    //   }
+    // }
   }
 }
 </script>
