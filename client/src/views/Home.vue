@@ -77,7 +77,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .btn_message {
   margin-bottom: 1em;
 }

@@ -31,6 +31,11 @@ export default new Router({
       component: AddAnimal
     },
     {
+      path: '/adoptionCenters/:id/adoptionApplications',
+      name: 'adoptionCenter-applications',
+      component: AdoptionCenter
+    },
+    {
       path: '/PrelSignupPage',
       name: '/prel-signup-page',
       component: PrelSignupPage
