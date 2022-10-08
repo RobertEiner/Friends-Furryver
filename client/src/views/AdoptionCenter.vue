@@ -2,7 +2,7 @@
   <b-container class="outer-container" fluid>
     <b-row>
       <b-col>
-        <div class="inner-div">
+        <div class="inner-div" fluid>
           <navbar />
           <b-tabs content-class="mt-3" class="tabs">
             <b-tab title="Pets" active>
@@ -38,8 +38,9 @@
               </div>
             </b-tab>
             <div>
-              <b-tab title="Profile">
+              <b-tab class="profile-tab" title="Profile">
                 <profile-tab
+
                   :adoptionCenter="adoptionCenter"
                 ></profile-tab>
               </b-tab>
@@ -66,11 +67,20 @@ export default {
     'applications-tab': ApplicationTab,
     ProfileTab
   },
-
+  provide() {
+    return {
+      adoptionCenter: this.adoptionCenter,
+      hey: 'goooo'
+    }
+  },
   mounted() {
     this.getAllAnimals()
     this.getAllApplications()
     this.getAdoptionCenter()
+    if (this.adoptionCenter) {
+      console.log(this.adoptionCenter)
+    }
+    console.log('yaoyao')
   },
   data() {
     return {
@@ -88,7 +98,7 @@ export default {
     deleteAnimal(id) {
       Api.delete(`/animals/${id}`)
         .then(response => {
-          console.log(id)
+          console.log(response.data)
           const index = this.animals.findIndex(animal => animal._id === id)
           this.animals.splice(index, 1)
         })
@@ -159,7 +169,9 @@ export default {
       Api.get(`/AdoptionCenters/${this.$route.params.id}`)
         .then(response => {
           this.adoptionCenter = response.data
+
           console.log(response.data)
+          console.log(this.adoptionCenter)
         })
         .catch(error => {
           console.log(error)
@@ -185,5 +197,9 @@ export default {
 
 .animals-span {
   display: inline-block;
+}
+
+.profile-tab {
+  padding-bottom: 14%;
 }
 </style>

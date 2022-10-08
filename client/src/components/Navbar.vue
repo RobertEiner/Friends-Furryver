@@ -1,6 +1,8 @@
 <template>
   <b-navbar type="dark">
+
     <b-navbar-brand class="navbar" >
+
         Friends Furryver
     </b-navbar-brand>
   </b-navbar>

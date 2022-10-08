@@ -12,7 +12,7 @@
             tag="article"
             style="max-width: 20rem;"
           >
-            <b-list-group-item> Animal ID: {{ animal._id }} </b-list-group-item>
+
             <b-list-group-item>
               Species: {{ animal.species }}
             </b-list-group-item>

@@ -28,7 +28,7 @@
             <b-list-group-item>
               Application status: {{ activeApplication.status }}
             </b-list-group-item>
-            <application-accept></application-accept>
+
             <b-button
               id="accept-application-button"
               size="sm"

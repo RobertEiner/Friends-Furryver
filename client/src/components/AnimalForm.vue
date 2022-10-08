@@ -2,7 +2,7 @@
   <b-container class="b-con">
     <b-row class="b-row">
       <b-col>
-        <img src="../Assets/pet-house.png" alt="" />
+        <b-img :src="require('../Assets/pexels-amal-santhosh-662417.jpg')" fluid></b-img>
       </b-col>
       <b-col @submit="onSubmit">
         <h1>{{ header }}</h1>

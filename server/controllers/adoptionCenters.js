@@ -32,7 +32,7 @@ router.get('/api/AdoptionCenters/:id', function (req, res, next) {
         if (AdoptionCenter === null) {
             return res.status(404).json({"message": "Adoption center not found"});
         }
-        res.json({"AdoptionCenter": AdoptionCenter});
+        res.json(AdoptionCenter);
     });
 });
 
