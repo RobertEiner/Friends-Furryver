@@ -2,7 +2,7 @@
   <div class="outer-div">
     <b-container>
       <b-row>
-        <b-col>
+        <b-col sm="12" md="6" lg="4">
           <b-img
             class="dog-img"
             :src="require('../Assets/dog-close-up.jpg')"
@@ -11,17 +11,24 @@
           ></b-img>
         </b-col>
 
-        <b-col v-if="pageState === form">
+        <b-col v-if="pageState === form" sm="12" md="6" lg="4">
           <b-card class="form-card">
             <h3>Fill in the form below</h3>
-            <p v-if="error != ''" class="invalid-input"> Please fill in atleast one field</p>
+            <p v-if="error != ''" class="invalid-input">
+              Please fill in atleast one field
+            </p>
             <b-form class="adoptionCenter-form">
               <label for="">Name:</label>
-              <b-form-input placeholder="Enter name" class="name-input" v-model="form.name">
+              <b-form-input
+                placeholder="Enter name"
+                class="name-input"
+                v-model="form.name"
+              >
               </b-form-input>
 
               <label class="adress-label" for="">Address:</label>
-              <b-form-input placeholder="Enter address" v-model="form.address"> </b-form-input>
+              <b-form-input placeholder="Enter address" v-model="form.address">
+              </b-form-input>
 
               <b-button
                 class="submit-button"
@@ -52,7 +59,6 @@
 </template>
 
 <script>
-
 import { Api } from '@/Api'
 
 export default {
@@ -100,7 +106,6 @@ export default {
         })
     }
   }
-
 }
 </script>
 
