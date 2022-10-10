@@ -1,16 +1,19 @@
 <template>
   <b-container class="outer-container" fluid>
     <b-row>
-      <b-col>
-        <div class="inner-div" fluid>
+      <b-col sm=12
+
+      >
+        <div class="inner-div" >
           <navbar />
           <b-tabs content-class="mt-3" class="tabs">
             <b-tab title="Pets" active>
               <div>
                 <div>
-                  <span class="animals-span" v-for="animal in animals" v-bind:key="animal._id">
+                  <span class="animals-span" >
                     <pets-tab
-                      v-bind:animal="animal"
+                    v-bind:animals="animals"
+
                       v-on:del-animal="deleteAnimal"
                     />
                   </span>
@@ -67,20 +70,11 @@ export default {
     'applications-tab': ApplicationTab,
     ProfileTab
   },
-  provide() {
-    return {
-      adoptionCenter: this.adoptionCenter,
-      hey: 'goooo'
-    }
-  },
+
   mounted() {
     this.getAllAnimals()
     this.getAllApplications()
     this.getAdoptionCenter()
-    if (this.adoptionCenter) {
-      console.log(this.adoptionCenter)
-    }
-    console.log('yaoyao')
   },
   data() {
     return {
@@ -93,6 +87,7 @@ export default {
   methods: {
     goToAddAnimal() {
       this.$router.push(`/adoptionCenters/${this.$route.params.id}/addAnimal`)
+      console.log(this.animals.length)
     },
     // Delete an animal from the adoption center
     deleteAnimal(id) {
@@ -158,6 +153,7 @@ export default {
       Api.get(`/AdoptionCenters/${this.$route.params.id}/adoptionApplications`)
         .then(response => {
           console.log(response.data)
+
           this.applications = response.data.Applications
         })
         .catch(error => {

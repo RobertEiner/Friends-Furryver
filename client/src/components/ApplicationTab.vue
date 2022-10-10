@@ -3,8 +3,8 @@
     <b-tab title="Active applications">
       <div v-if="activeApplications.length > 0">
         <span
-          v-for="activeApplication in activeApplications"
-          :key="activeApplication._id"
+          v-for="handledApplication in activeApplications"
+          :key="handledApplication._id"
         >
           <b-card
             class="active-card"
@@ -16,24 +16,32 @@
             style="max-width: 20rem;"
           >
             <b-list-group-item>
-              Application ID: {{ activeApplication._id }}
+              Adopter: {{ handledApplication.adopter.name }}<br />
+              User name: {{ handledApplication.adopter.username }}
             </b-list-group-item>
 
             <b-list-group-item>
-              Adopter ID: {{ activeApplication.adopter }}
+              Species: {{ handledApplication.animal.species }}
             </b-list-group-item>
             <b-list-group-item>
-              Animal ID: {{ activeApplication.animal }}
+              breed: {{ handledApplication.animal.breed }}
             </b-list-group-item>
             <b-list-group-item>
-              Application status: {{ activeApplication.status }}
+              size: {{ handledApplication.animal.size }}
             </b-list-group-item>
+            <b-list-group-item>
+              health status: {{ handledApplication.animal.healthStatus }}
+            </b-list-group-item>
+
+            <b-badge pill variant="warning"
+              >Status: pending </b-badge
+            >
 
             <b-button
               id="accept-application-button"
               size="sm"
               variant="primary"
-              @click="$emit('accept-application', activeApplication._id)"
+              @click="$emit('accept-application', handledApplication._id)"
               >Accept application</b-button
             >
 
@@ -41,7 +49,7 @@
               id="decline-application-button"
               size="sm"
               variant="primary"
-              @click="$emit('del-application', activeApplication._id)"
+              @click="$emit('del-application', handledApplication._id)"
               >Decline application</b-button
             >
           </b-card>
@@ -55,8 +63,8 @@
     <b-tab title="Processed applications">
       <div v-if="handledApplications.length > 0">
         <span
-          v-for="handledApplicationsTwo in handledApplications"
-          :key="handledApplicationsTwo._id"
+          v-for="handledApplication in handledApplications"
+          :key="handledApplication._id"
         >
           <b-card
             class="handled-card"
@@ -68,23 +76,34 @@
             style="max-width: 20rem;"
           >
             <b-list-group-item>
-              Application ID: {{ handledApplicationsTwo._id }}
+              Adopter: {{ handledApplication.adopter.name }}<br />
+              User name: {{ handledApplication.adopter.username }}
             </b-list-group-item>
 
             <b-list-group-item>
-              Adopter ID: {{ handledApplicationsTwo.adopter }}
+              Species: {{ handledApplication.animal.species }}
             </b-list-group-item>
             <b-list-group-item>
-              Animal ID: {{ handledApplicationsTwo.animal }}
+              breed: {{ handledApplication.animal.breed }}
             </b-list-group-item>
             <b-list-group-item>
-              Application status: {{ handledApplicationsTwo.status }}
+              size: {{ handledApplication.animal.size }}
             </b-list-group-item>
+            <b-list-group-item>
+              health status: {{ handledApplication.animal.healthStatus }}
+            </b-list-group-item>
+
+            <b-badge v-if="handledApplication.status === 1" pill variant="success" class="badge"
+              >Status: approved </b-badge
+            >
+             <b-badge v-else pill variant="danger" class="badge"
+              >Status: declined</b-badge
+            >
             <b-button
               class="remove-application-button"
               size="sm"
               variant="primary"
-              @click="$emit('remove-application', handledApplicationsTwo._id)"
+              @click="$emit('remove-application', handledApplication._id)"
               >Remove application</b-button
             >
           </b-card>
@@ -110,7 +129,8 @@ export default {
   data() {
     return {
       activeApplications: [],
-      handledApplications: []
+      handledApplications: [],
+      status: ''
     }
   },
   created() {
@@ -126,7 +146,6 @@ export default {
         }
       }
     }
-
   }
 }
 </script>
@@ -135,6 +154,7 @@ export default {
 .remove-application-button {
   margin: 2% auto;
   background-color: red;
+  display: block;
 }
 
 #accept-application-button {
@@ -150,6 +170,11 @@ export default {
 .active-card {
   display: inline-block;
   margin: 2%;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 5%;
 }
 
 .handled-card {
