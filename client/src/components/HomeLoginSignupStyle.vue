@@ -12,6 +12,7 @@ body {
   height: 100%;
   background-image: linear-gradient(to right, #d500f9, #ffd54f);
   background-repeat: no-repeat;
+  min-height: 100vh;
 }
 
 input,

@@ -18,6 +18,7 @@
             <b-form-group label="Password">
               <b-form-input
                 required
+                type='password'
                 class="form-control-label text-muted"
                 placeholder="Please enter your password"
                 v-model="register.password"
@@ -113,7 +114,7 @@
 
 <script>
 import { Api } from '@/Api'
-// import swal from 'sweetalert'
+import swal from 'sweetalert'
 
 export default {
   name: 'adopter-signup-form',
@@ -137,33 +138,27 @@ export default {
     goToHome() {
       this.$router.push('/')
     },
-    registerUser() {
-      Api.post('/adopters/register', this.register)
+    async registerUser() {
+      try {
+        const response = await Api.post('/adopters/register', this.register)
+        console.log(response)
+        const token = response.data.token
+        if (token) {
+          localStorage.setItem('jwt', token)
+          this.$router.push('/AdopterLogin')
+          swal('Success', 'Registration Was successful', 'success')
+        } else {
+          swal('Error', 'Something Went Wrong', 'error')
+        }
+      } catch (err) {
+        if (err) {
+          console.log(err)
+          swal('Error', err.data.message, 'error')
+        } else {
+          swal('Error', err.data.err.message, 'error')
+        }
+      }
     }
-    // async registerUser() {
-    //   try {
-    //     const response = await this.$http.post(
-    //       '/api/adopters/register',
-    //       this.register
-    //     )
-    //     console.log(response)
-    //     const token = response.data.token
-    //     if (token) {
-    //       localStorage.setItem('jwt', token)
-    //       this.$router.push('/AdopterLogin')
-    //       swal('Success', 'Registration Was successful', 'success')
-    //     } else {
-    //       swal('Error', 'Something Went Wrong', 'error')
-    //     }
-    //   } catch (err) {
-    //     if (err) {
-    //       console.log(err)
-    //       swal('Error', err.data.message, 'error')
-    //     } else {
-    //       swal('Error', err.data.err.message, 'error')
-    //     }
-    //   }
-    // }
   }
 }
 </script>

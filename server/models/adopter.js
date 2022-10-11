@@ -36,7 +36,16 @@ adopterSchema.pre("save", async function(next) {
   //this method generates an auth token for the user
   adopterSchema.methods.generateAuthToken = async function() {
     const adopter = this;
-    const token = jwt.sign({ _id: adopter._id, email: adopter.email },
+    const token = jwt.sign({ 
+    _id: adopter._id, 
+    email: adopter.email, 
+    ssn: adopter.ssn, 
+    name: adopter.name, 
+    age: adopter.age, 
+    species: adopter.species, 
+    size: adopter.size, 
+    hours: adopter.hours, 
+    personality: adopter.hours },
     "secret");
     adopter.tokens = adopter.tokens.concat({ token });
     await adopter.save();
@@ -47,7 +56,7 @@ adopterSchema.pre("save", async function(next) {
   adopterSchema.statics.findByCredentials = async (email, password) => {
     const adopter = await Adopter.findOne({ email });
     if (!adopter) {
-      new Error({ error: "Invalid login details" });
+      throw new Error({ error: "Invalid login details" });
     }
     const isPasswordMatch = await bcrypt.compare(password, adopter.password);
     if (!isPasswordMatch) {

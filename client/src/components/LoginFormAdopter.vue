@@ -4,7 +4,7 @@
         <b-row class="b-row">
             <b-col>
               <h6 class="msg-info">Please login to your account</h6>
-                <b-form class="b-form" @submit="loginAdopter">
+                <b-form class="b-form" @submit.prevent="loginAdopter">
                     <b-form-group label ="E-mail address">
                         <b-form-input
                          required
@@ -18,6 +18,7 @@
                        <b-form-group label ="Password">
                         <b-form-input
                          required
+                         type='password'
                          class="form-control-label text-muted"
                          placeholder="Please enter your password"
                          v-model="login.password"
@@ -60,7 +61,7 @@
 </template>
 
 <script>
-
+import { Api } from '@/Api'
 import swal from 'sweetalert'
 export default {
   name: 'login-form-adopter',
@@ -79,16 +80,16 @@ export default {
     },
     async loginAdopter() {
       try {
-        const response = await this.$http.post('/api/adopters/login', this.login)
+        const response = await Api.post('/adopters/login', this.login)
         const token = response.data.token
         localStorage.setItem('jwt', token)
         if (token) {
           swal('Success', 'Login Successful', 'success')
-          this.$router.push('/test')
+          this.$router.push(`/adopters/${response.data._id}`)
         }
       } catch (err) {
-        swal('Error', 'Something Went Wrong', 'error')
-        console.log(err.response)
+        swal('Login unsuccessful', 'Invalid login details', 'error')
+        console.log(err.error)
       }
     }
   }

@@ -32,9 +32,6 @@
                   laboris nisi ut aliquip ex ea commodo consequat.
                 </small>
               </div>
-              <!-- <div class="row mx-auto">
-                      <img src="../Assets/pets_big.png" class="img-fluid" />
-                  </div> -->
             </div>
           </div>
         </div>

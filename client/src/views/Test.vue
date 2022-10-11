@@ -20,7 +20,7 @@
           >
             <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" @click="logUserOut"> Logout</a>
+                <b-button><a class="nav-link" @click="logUserOut"> Logout</a></b-button>
               </li>
             </ul>
           </div>
@@ -31,7 +31,9 @@
           <div class="row">
             <div class="col-md-12">
               <ul class="list-group">
-                <li class="list-group-item">Email : {{ user.email }}</li>
+                <li class="list-group-item">Name : {{ adopter.name }}</li>
+                <li class="list-group-item">Email : {{ adopter.email }}</li>
+                <li class="list-group-item">SSN : {{ adopter.ssn }}</li>
               </ul>
             </div>
           </div>
@@ -44,14 +46,14 @@ import VueJwtDecode from 'vue-jwt-decode'
 export default {
   data() {
     return {
-      user: {}
+      adopter: {}
     }
   },
   methods: {
     getUserDetails() {
       const token = localStorage.getItem('jwt')
       const decoded = VueJwtDecode.decode(token)
-      this.user = decoded
+      this.adopter = decoded
     },
     logUserOut() {
       localStorage.removeItem('jwt')
