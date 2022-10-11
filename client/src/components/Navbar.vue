@@ -18,4 +18,4 @@ export default {
     .navbar {
         background-color: rgb(51, 130, 247);
     }
-</style>
+</style> -->
