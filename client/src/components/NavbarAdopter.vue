@@ -54,7 +54,10 @@
           />
         </b-tab>
         <b-tab :title="tabThree">
-          <adopter-profile :adopter="adopter" />
+          <adopter-profile
+            :adopter="adopter"
+            @adopterProfileUpdated="getAdopter"
+          />
         </b-tab>
       </b-tabs>
     </div>
