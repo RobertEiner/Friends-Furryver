@@ -1,9 +1,11 @@
-<!-- <template>
-  <div>
-    <b-navbar type="dark">
-      <b-navbar-brand class="navbar" >Friends Furrever
-    </b-navbar>
-  </div>
+<template>
+  <b-navbar type="dark">
+
+    <b-navbar-brand class="navbar" >
+
+        Friends Furryver
+    </b-navbar-brand>
+  </b-navbar>
 </template>
 
 <script>
@@ -14,7 +16,6 @@ export default {
 
 <style scoped>
     .navbar {
-        background-color: rgb(160, 80, 167);
-        margin: 100px;
+        background-color: rgb(51, 130, 247);
     }
 </style> -->

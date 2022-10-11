@@ -2,8 +2,10 @@
   <div>
     <b-container fluid>
       <b-row align-h="center">
-        <b-colum
-          sm
+        <b-col
+          sm="12"
+          md="6"
+          lg="4"
           :key="adoptionApplication._id"
           v-for="adoptionApplication in adoptionApplications"
         >
@@ -11,7 +13,7 @@
             :adoptionApplication="adoptionApplication"
             @deleteApplication="removeApplication"
           />
-        </b-colum>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -25,23 +27,26 @@ export default {
   name: 'adoption-application-list',
   components: { 'adoption-application-card': AdoptionApplicationCard },
   methods: {
+    updateList() {
+      Api.get(`/adopters/${this.$route.params.id}/adoption-applications`)
+        .then((response) => {
+          this.adoptionApplications = response.data.AdoptionApplications
+          console.log(this.adoptionApplications[0].animal)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
     removeApplication(removeId) {
       const index = this.adoptionApplications.findIndex(
-        (adoptionApplication) =>
-          adoptionApplication._id === removeId
+        (adoptionApplication) => adoptionApplication._id === removeId
       )
       this.adoptionApplications.splice(index, 1)
+      this.$emit('removedAdoptionApplication')
     }
   },
   mounted() {
-    Api.get(`/adopters/${this.$route.params.id}/adoption-applications`)
-      .then((response) => {
-        this.adoptionApplications = response.data.AdoptionApplications
-        console.log(this.adoptionApplications[0].animal)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.updateList()
   },
   data() {
     return {

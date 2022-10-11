@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var AdoptionApplication = require('../models/adoptionApplication');
+const animal = require('../models/animal');
 var Animal = require('../models/animal')
 var Adopter = require('../models/adopter');
 var auth = require('../config/auth');
@@ -104,13 +105,27 @@ router.get('/api/adopters/:id/animals', function(req, res, next) {
     var adopterId = req.params.id;
     var adopterApplications;
     var alreadyAppliedAnimalsId;
+    console.log(req.query)
     AdoptionApplication.find({adopter: adopterId}, (err, adoptionApplications) => {
         if (err) {return next(err)}
         adopterApplications = adoptionApplications
         alreadyAppliedAnimalsId = adopterApplications.map((application) => application.animal )
-        Animal.find({_id: {$nin: alreadyAppliedAnimalsId}}, (err, animals) => {
-            res.json({"Animals": animals})
-        })
+
+        if (Object.keys(req.query).length === 0) {
+            Animal.find({_id: {$nin: alreadyAppliedAnimalsId}}, (err, animals) => {
+                res.json({"Animals": animals})
+            })
+        } else {
+            var animals = Animal.find({_id: {$nin: alreadyAppliedAnimalsId}})
+            const filters = Object.getOwnPropertyNames(req.query)
+            filters.map((field) => {
+                animals = animals.where(field).in(req.query[field])
+            })
+            animals.exec((err, animals) => {
+                res.json({"Animals": animals})
+                if (err) { return next(err) }
+            })
+        }
     })
 
 });
@@ -161,6 +176,9 @@ router.delete('/api/adopters/:id', function (req, res, next) {
         if (adopter === null) {
             return res.status(404).json({ 'message': 'Adopter not found' })
         }
+        AdoptionApplication.deleteMany({"adopter": id}, function(err){
+            if (err) { return next(err) }
+        });
         res.json(adopter);
     });
 });

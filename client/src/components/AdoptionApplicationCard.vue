@@ -8,7 +8,7 @@
       tag="article"
       style="max-width: 20rem"
     >
-      <b-list>
+      <b-list-group>
         <b-list-group-item>
           Size: {{ adoptionApplication.animal.size }}
         </b-list-group-item>
@@ -31,7 +31,7 @@
           >Hours needed:
           {{ adoptionApplication.animal.hours }}</b-list-group-item
         >
-      </b-list>
+      </b-list-group>
       <div>
         <b-badge pill variant="warning"
           >Status: {{ adoptionApplication.status }}</b-badge
@@ -49,8 +49,8 @@ export default {
   props: ['adoptionApplication'],
   methods: {
     deleteApplication() {
-      this.$emit('deleteApplication', this.adoptionApplication._id)
       Api.delete(`/adoption-applications/${this.adoptionApplication._id}`)
+      this.$emit('deleteApplication', this.adoptionApplication._id)
     }
   }
 }
