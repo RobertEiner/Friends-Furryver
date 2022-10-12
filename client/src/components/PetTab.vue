@@ -1,58 +1,59 @@
 <template>
   <b-container>
     <b-row>
-      <b-col  v-if="animals.length > 0">
-        <span v-for="animal in animals" :key="animal._id">
-          <b-card
-            class="animal-card"
-            title="Animal"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-          >
-            <b-list-group-item>
-              Species: {{ animal.species }}
-            </b-list-group-item>
-
-            <b-list-group-item> Size: {{ animal.size }} </b-list-group-item>
-
-            <b-list-group-item>
-              Health status: {{ animal.healthStatus }}
-            </b-list-group-item>
-            <b-list-group-item>
-              Personality: {{ animal.personality }}
-            </b-list-group-item>
-            <b-list-group-item>Gender: {{ animal.gender }}</b-list-group-item>
-            <b-list-group-item>Age: {{ animal.age }}</b-list-group-item>
-            <b-list-group-item
-              >Hours needed: {{ animal.hours }}</b-list-group-item
+      <b-col v-if="animals.length > 0">
+        <b-card-group>
+          <span v-for="animal in animals" :key="animal._id">
+            <b-card
+              class="animal-card"
+              title="Animal 🐕‍🦺 "
+              tag="article"
+              bg-variant="info"
+              text-variant="white"
             >
+              <hr />
+              <p>Species: {{ animal.species }}</p>
+              <hr />
 
-            <b-button
-              class="update-animal-button"
-              size="sm"
-              @click="goToUpdateAnimal(animal._id)"
-              variant="primary"
-              >Update animal</b-button
-            >
-            <b-button
-              class="delete-animal-button"
-              size="sm"
-              @click="$emit('del-animal', animal._id)"
-              variant="primary"
-              >Delete animal</b-button
-            >
-          </b-card>
-        </span>
+              <p>Size: {{ animal.size }}</p>
+              <hr />
+              <p>Health status: {{ animal.healthStatus }}</p>
+              <hr />
+              <p>Personality: {{ animal.personality }}</p>
+              <hr />
+              <p>Gender: {{ animal.gender }}</p>
+              <hr />
+              <p>Age: {{ animal.age }}</p>
+              <hr />
+              <p>Hours needed: {{ animal.hours }}</p>
+              <hr />
+
+              <b-button
+                class="update-animal-button"
+                size="sm"
+                @click="goToUpdateAnimal(animal._id)"
+                >Update animal</b-button
+              >
+              <b-button
+                class="delete-animal-button"
+                size="sm"
+                @click="$emit('del-animal', animal._id)"
+                >Delete animal</b-button
+              >
+            </b-card>
+          </span>
+        </b-card-group>
       </b-col>
       <b-col v-else sm="12">
         <div>
           <h5 class="no-animals-title">
             Currently, there are no animals in your adoption center
           </h5>
-          <b-img class="no-animals-img" :src="require('../Assets/pet-house.png')" fluid></b-img>
+          <b-img
+            class="no-animals-img"
+            :src="require('../Assets/pet-house.png')"
+            fluid
+          ></b-img>
         </div>
       </b-col>
     </b-row>
@@ -63,6 +64,16 @@
 export default {
   name: 'pets-tab',
   props: ['animals'],
+  data() {
+    return {
+      animalEmojis: {
+        dog: false,
+        cat: false,
+        bird: false,
+        rabbit: false
+      }
+    }
+  },
 
   methods: {
     goToUpdateAnimal(animalId) {
@@ -76,21 +87,23 @@ export default {
 
 <style scoped>
 .animal-card {
-  margin: 0.5%;
+  margin: 2%;
   display: inline-block;
+  background-color: aquamarine;
 }
 
 .delete-animal-button {
   margin: auto;
   font-size: 1em;
   display: block;
-  background-color: red;
+  background-color: rgb(158, 56, 56);
 }
 
 .update-animal-button {
   margin: 2% auto;
   font-size: 1em;
   display: block;
+  background-color: rgb(46, 112, 179);
 }
 
 .no-animals-title {
