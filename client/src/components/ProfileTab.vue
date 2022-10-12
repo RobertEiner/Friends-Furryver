@@ -2,7 +2,7 @@
   <div class="outer-div">
     <b-container>
       <b-row>
-        <b-col sm="12" md="6" lg="4">
+        <b-col sm="12" md="6" >
           <b-img
             class="dog-img"
             :src="require('../Assets/dog-close-up.jpg')"
@@ -11,7 +11,7 @@
           ></b-img>
         </b-col>
 
-        <b-col v-if="pageState === form" sm="12" md="6" lg="4">
+        <b-col v-if="pageState === form" sm="12" md="6" >
           <b-card class="form-card">
             <h3>Fill in the form below</h3>
             <p v-if="error != ''" class="invalid-input">
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { Api } from '@/Api'
+// import { Api } from '@/Api'
 
 export default {
   name: 'profile-tab',
@@ -67,13 +67,13 @@ export default {
 
   data() {
     return {
-      adoptionCenterPassedDown: this.adoptionCenter,
       pageState: '',
       form: {
         name: '',
         address: ''
       },
       error: ''
+
     }
   },
 
@@ -97,13 +97,7 @@ export default {
     },
     updateAdoptionCenter() {
       const formData = this.form
-      Api.patch(`/adoptionCenters/${this.$route.params.id}`, formData)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.$emit('update-adoptionCenter', formData)
     }
   }
 }
