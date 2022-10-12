@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "4441c063-1b66-459b-a139-c004d195d2bd",
-		"name": "server",
+		"_postman_id": "9ecd3460-c040-4a7e-9bb8-8f7a849ef215",
+		"name": "server with authentification",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23092572"
+		"_exporter_id": "23240394"
 	},
 	"item": [
 		{
@@ -17,8 +17,8 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var animalsAdoptionCenterID = jsonData._id;\r",
-									"pm.environment.set(\"animalsAdoptionCenter_ID\", animalsAdoptionCenterID);\r",
+									"var animalsAdoptionCenterID1 = jsonData.data._id;\r",
+									"pm.environment.set(\"animalsAdoptionCenter_ID1\", animalsAdoptionCenterID1);\r",
 									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -46,17 +46,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Adoption center 1\",\r\n    \"address\": \"Streetvägen 9, Goteborg\"\r\n}\r\n"
+							"raw": "{\r\n    \"email\": \"adoptionCenter1@adoptionCenter4.com\",\r\n    \"password\": \"adoptionCenter1\",\r\n    \"name\": \"Adoption center 1\",\r\n    \"address\": \"Streetvägen 9, Goteborg\"\r\n}\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters/",
+							"raw": "{{host}}/api/adoptionCenters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoptionCenters",
-								""
+								"register"
 							]
 						}
 					},
@@ -71,7 +71,7 @@
 								"exec": [
 									"var jsonData = pm.response.json();\r",
 									"var animalId = jsonData._id;\r",
-									"pm.environment.set(\"animal_id\", animalId);\r",
+									"pm.environment.set(\"animal_ID\", animalId);\r",
 									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
@@ -95,65 +95,13 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "",
-									"value": "",
-									"type": "text",
-									"disabled": true
-								},
-								{
-									"key": "size",
-									"value": "big",
-									"type": "text"
-								},
-								{
-									"key": "species",
-									"value": "dog",
-									"type": "text"
-								},
-								{
-									"key": "breed",
-									"value": "labradoodle",
-									"type": "text"
-								},
-								{
-									"key": "personality",
-									"value": "fun",
-									"type": "text"
-								},
-								{
-									"key": "healthStatus",
-									"value": "great",
-									"type": "text"
-								},
-								{
-									"key": "gender",
-									"value": "male",
-									"type": "text"
-								},
-								{
-									"key": "age",
-									"value": "5",
-									"type": "text"
-								},
-								{
-									"key": "hours",
-									"value": "3",
-									"type": "text"
-								},
-								{
-									"key": "otherNeeds",
-									"value": "none",
-									"type": "text"
-								},
-								{
-									"key": "adoptionCenter",
-									"value": "{{animalsAdoptionCenter_ID}}",
-									"type": "text"
+							"mode": "raw",
+							"raw": "{\r\n   \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"fun\",\r\n    \"healthStatus\": \"healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID1}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
 								}
-							]
+							}
 						},
 						"url": {
 							"raw": "{{host}}/api/animals",
@@ -184,18 +132,25 @@
 							}
 						}
 					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
-							"raw": "{{host}}/api/animals/{{animal_id}}/adoptionCenters",
+							"raw": "{{host}}/api/animals/{{animal_ID}}/adoptionCenters",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"animals",
-								"{{animal_id}}",
+								"{{animal_ID}}",
 								"adoptionCenters"
 							]
 						}
@@ -272,14 +227,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"animals",
-								"{{animal_id}}"
+								"{{animal_ID}}"
 							]
 						}
 					},
@@ -333,14 +288,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"animals",
-								"{{animal_id}}"
+								"{{animal_ID}}"
 							]
 						}
 					},
@@ -394,14 +349,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"animals",
-								"{{animal_id}}"
+								"{{animal_ID}}"
 							]
 						}
 					},
@@ -497,14 +452,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"animals",
-								"{{animal_id}}"
+								"{{animal_ID}}"
 							]
 						}
 					},
@@ -548,14 +503,46 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/animals/{{animal_id}}",
+							"raw": "{{host}}/api/animals/{{animal_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"animals",
-								"{{animal_id}}"
+								"{{animal_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Adoption Center",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"correct status code\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/AdoptionCenters/{{animalsAdoptionCenter_ID1}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"AdoptionCenters",
+								"{{animalsAdoptionCenter_ID1}}"
 							]
 						}
 					},
@@ -574,9 +561,9 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var adopterId = jsonData._id;\r",
+									"var adopterId = jsonData.data._id;\r",
 									"\r",
-									"pm.environment.set(\"adopterId\", adopterId);\r",
+									"pm.environment.set(\"adopter_ID\", adopterId);\r",
 									"\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
@@ -584,8 +571,8 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Correct adopter response\", function() {\r",
-									"    pm.expect(jsonData.username).to.eql(\"Kevin\");\r",
-									"    pm.expect(jsonData.password).to.eql(\"Kevin123\");\r",
+									"    pm.expect(jsonData.data.age).to.eql(33);\r",
+									"    pm.expect(jsonData.data.email).to.eql(\"kevin@gmail.com\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -597,7 +584,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Kevin\",\r\n    \"password\": \"Kevin123\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Kevin Kevinson\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"email\": \"kevin@gmail.com\",\r\n    \"password\": \"Kevin123\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Kevin Kevinson\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -605,13 +592,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adopters",
+							"raw": "{{host}}/api/adopters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"adopters"
+								"adopters",
+								"register"
 							]
 						}
 					},
@@ -639,9 +627,11 @@
 									"\r",
 									"pm.test(\"Correct data\", function() {\r",
 									"    var adopter = pm.response.json();\r",
-									"    pm.expect(adopter.username).to.eql(\"Kevin\");\r",
-									"    pm.expect(adopter.password).to.eql(\"Kevin123\");\r",
-									"});"
+									"    pm.expect(adopter.age).to.eql(33);\r",
+									"    pm.expect(adopter.email).to.eql(\"kevin@gmail.com\");\r",
+									"});\r",
+									"\r",
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -657,14 +647,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}"
+								"{{adopter_ID}}"
 							]
 						}
 					},
@@ -679,6 +669,12 @@
 								"exec": [
 									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct data\", function() {\r",
+									"    var adopter = pm.response.json();\r",
+									"    pm.expect(adopter.age).to.eql(65);\r",
+									"    pm.expect(adopter.name).to.eql(\"Carl Carlsson\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -690,7 +686,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"age\": 65\r\n}",
+							"raw": "{\r\n    \"age\": 65,\r\n    \"name\": \"Carl Carlsson\"\r\n\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -698,14 +694,45 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}"
+								"{{adopter_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get adopters",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Correct status\", function(){\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/adopters",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adopters"
 							]
 						}
 					},
@@ -745,14 +772,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}"
+								"{{adopter_ID}}"
 							]
 						}
 					},
@@ -797,45 +824,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get adopters",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Correct status\", function(){\r",
-									"    pm.response.to.have.status(200);\r",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{host}}/api/adopters",
-							"host": [
-								"{{host}}"
-							],
-							"path": [
-								"api",
-								"adopters"
+								"{{adopter_ID}}"
 							]
 						}
 					},
@@ -854,7 +850,7 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var adoptionCenterID = jsonData._id;\r",
+									"var adoptionCenterID = jsonData.data._id;\r",
 									"\r",
 									"pm.environment.set(\"adoptionCenterID\",adoptionCenterID);\r",
 									"\r",
@@ -863,8 +859,9 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Correct adoption center response\", function() {\r",
-									"    pm.expect(jsonData.name).to.eql(\"Big dogs forever\");\r",
-									"    pm.expect(jsonData.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
+									"    pm.expect(jsonData.data.email).to.eql(\"bigdogs@forever.com\");\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Big dogs forever\");\r",
+									"    pm.expect(jsonData.data.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -876,7 +873,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Big dogs forever\",\r\n    \"address\": \"Kalle Anka vägen 23, Trollhättan\"\r\n}\r\n",
+							"raw": "{\r\n    \"email\":\"bigdogs@forever.com\",\r\n    \"password\": \"password\",\r\n    \"name\": \"Big dogs forever\",\r\n    \"address\": \"Kalle Anka vägen 23, Trollhättan\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -884,13 +881,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters",
+							"raw": "{{host}}/api/adoptionCenters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"adoptionCenters"
+								"adoptionCenters",
+								"register"
 							]
 						}
 					},
@@ -937,12 +935,14 @@
 								"exec": [
 									"var jsonData = pm.response.json();\r",
 									"\r",
+									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
 									"\r",
 									"pm.test(\"Correct animal response\", function() {\r",
+									"    pm.expect(jsonData.email).to.eql(\"bigdogs@forever.com\");\r",
 									"    pm.expect(jsonData.name).to.eql(\"Big dogs forever\");\r",
 									"    pm.expect(jsonData.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
 									"});"
@@ -955,13 +955,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters/{{adoptionCenterID}}",
+							"raw": "{{host}}/api/AdoptionCenters/{{adoptionCenterID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"adoptionCenters",
+								"AdoptionCenters",
 								"{{adoptionCenterID}}"
 							]
 						}
@@ -982,8 +982,10 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Correct response data\", function() {\r",
+									"    pm.expect(jsonData.email).to.eql(\"bigdogs@forever.com\");\r",
 									"    pm.expect(jsonData.name).to.eql(\"BEST ANIMALS YES YOU CAN TRUST US\");\r",
 									"    pm.expect(jsonData.address).to.eql(\"Moon street 9, Moondal\");\r",
+									"    \r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -995,7 +997,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"BEST ANIMALS YES YOU CAN TRUST US\",\r\n    \"address\": \"Moon street 9, Moondal\"\r\n}",
+							"raw": "{\r\n    \"email\": \"bigdogs@forever.com\",\r\n    \"name\": \"BEST ANIMALS YES YOU CAN TRUST US\",\r\n    \"address\": \"Moon street 9, Moondal\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1112,9 +1114,9 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var adopterId = jsonData._id;\r",
+									"var adopterId = jsonData.data._id;\r",
 									"\r",
-									"pm.environment.set(\"adopterId\", adopterId);\r",
+									"pm.environment.set(\"adopter_ID\", adopterId);\r",
 									"\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
@@ -1122,8 +1124,8 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Correct adopter response\", function() {\r",
-									"    pm.expect(jsonData.username).to.eql(\"Kevin\");\r",
-									"    pm.expect(jsonData.password).to.eql(\"Kevin123\");\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Kevin Kevinson\");\r",
+									"    pm.expect(jsonData.data.age).to.eql(33);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1135,7 +1137,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Kevin\",\r\n    \"password\": \"Kevin123\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Kevin Kevinson\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"password\": \"Kevin123\",\r\n    \"email\": \"kevin@kevin.com\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Kevin Kevinson\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1143,13 +1145,115 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adopters",
+							"raw": "{{host}}/api/adopters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"adopters"
+								"adopters",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create adoption center",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var adoptionCenterID = jsonData.data._id;\r",
+									"\r",
+									"pm.environment.set(\"adoptionCenterID\",adoptionCenterID);\r",
+									"\r",
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct adoption center response\", function() {\r",
+									"    pm.expect(jsonData.data.email).to.eql(\"bigdogs@forever.com\");\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Big dogs forever\");\r",
+									"    pm.expect(jsonData.data.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\":\"bigdogs@forever.com\",\r\n    \"password\": \"password\",\r\n    \"name\": \"Big dogs forever\",\r\n    \"address\": \"Kalle Anka vägen 23, Trollhättan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/adoptionCenters/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adoptionCenters",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create animal",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animalId = jsonData._id;\r",
+									"pm.environment.set(\"animal_ID\", animalId);\r",
+									"\r",
+									"pm.test(\"Correct status code\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct animal response\", function() {\r",
+									"    pm.expect(jsonData.size).to.eql(\"big\");\r",
+									"    pm.expect(jsonData.age).to.eql(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"size\": \"big\",\r\n    \"species\": \"dog\",  \r\n    \"personality\": \"energetic\",\r\n    \"healthStatus\": \"healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{adoptionCenterID}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/animals",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"animals"
 							]
 						}
 					},
@@ -1165,13 +1269,13 @@
 									"var jsonData = pm.response.json();\r",
 									"var adoptionApplicationID = jsonData._id;\r",
 									"\r",
-									"pm.environment.set(\"adoptionApplicationID\", adoptionApplicationID);\r",
+									"pm.environment.set(\"adoptionApplication_ID\", adoptionApplicationID);\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"var adopter = pm.environment.get(\"adopterId\");\r",
+									"var adopter = pm.environment.get(\"adopter_ID\");\r",
 									"pm.test(\"Correct apllication response\", function() {\r",
 									"    pm.expect(jsonData.status).to.eql(0);\r",
 									"    pm.expect(jsonData.adopter).to.eql(adopter);\r",
@@ -1187,7 +1291,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"adopter\": \"{{adopterId}}\",\r\n    \"status\": 0\r\n}",
+							"raw": "{\r\n    \"adopter\": \"{{adopter_ID}}\",\r\n    \"adoptionCenter\": \"{{adoptionCenterID}}\",\r\n    \"animal\": \"{{animal_ID}}\",\r\n    \"status\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1249,7 +1353,7 @@
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
 									"\r",
-									"var adopter = pm.environment.get(\"adopterId\");\r",
+									"var adopter = pm.environment.get(\"adopter_ID\");\r",
 									"pm.test(\"Correct response\", function() {\r",
 									"    var jsonBody = pm.response.json();\r",
 									"    pm.expect(jsonBody.adopter).to.eql(adopter);\r",
@@ -1271,14 +1375,14 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/adoption-applications/{{adoptionApplicationID}}",
+							"raw": "{{host}}/api/adoption-applications/{{adoptionApplication_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoption-applications",
-								"{{adoptionApplicationID}}"
+								"{{adoptionApplication_ID}}"
 							]
 						}
 					},
@@ -1317,14 +1421,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adoption-applications/{{adoptionApplicationID}}",
+							"raw": "{{host}}/api/adoption-applications/{{adoptionApplication_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoption-applications",
-								"{{adoptionApplicationID}}"
+								"{{adoptionApplication_ID}}"
 							]
 						}
 					},
@@ -1364,14 +1468,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/adoption-applications/{{adoptionApplicationID}}",
+							"raw": "{{host}}/api/adoption-applications/{{adoptionApplication_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoption-applications",
-								"{{adoptionApplicationID}}"
+								"{{adoptionApplication_ID}}"
 							]
 						}
 					},
@@ -1411,14 +1515,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}"
+								"{{adopter_ID}}"
 							]
 						}
 					},
@@ -1463,14 +1567,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/adoption-applications/{{adoptionApplicationID}}",
+							"raw": "{{host}}/api/adoption-applications/{{adoptionApplication_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoption-applications",
-								"{{adoptionApplicationID}}"
+								"{{adoptionApplication_ID}}"
 							]
 						}
 					},
@@ -1489,13 +1593,19 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var animalsAdoptionCenterID = jsonData._id;\r",
+									"var animalsAdoptionCenterID = jsonData.data._id;\r",
+									"\r",
 									"pm.environment.set(\"animalsAdoptionCenter_ID\", animalsAdoptionCenterID);\r",
 									"\r",
-									"pm.test(\"Correct status code\", function() {\r",
+									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
+									"pm.test(\"Correct adoption center response\", function() {\r",
+									"    pm.expect(jsonData.data.email).to.eql(\"bigdogs123@forever.com\");\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Big dogs forever\");\r",
+									"    pm.expect(jsonData.data.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
+									"});\r",
 									""
 								],
 								"type": "text/javascript"
@@ -1518,17 +1628,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Adoption center 2\",\r\n    \"address\": \"Streetvägen 9, Goteborg\"\r\n}\r\n"
+							"raw": "{\r\n    \"email\":\"bigdogs123@forever.com\",\r\n    \"password\": \"password\",\r\n    \"name\": \"Big dogs forever\",\r\n    \"address\": \"Kalle Anka vägen 23, Trollhättan\"\r\n}"
 						},
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters/",
+							"raw": "{{host}}/api/adoptionCenters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoptionCenters",
-								""
+								"register"
 							]
 						}
 					},
@@ -1541,6 +1651,8 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animalsAdoptionCenterID = jsonData._id;\r",
 									"var animal = pm.response.json()\r",
 									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
@@ -1561,7 +1673,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"dog personality\",\r\n    \"healthStatus\": \"really healthy\",\r\n    \"gender\": \"female\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\"\r\n} ",
+							"raw": "{\r\n    \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"dog personality\",\r\n    \"healthStatus\": \"really healthy\",\r\n    \"gender\": \"female\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID}}\"\r\n} ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1591,13 +1703,12 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var animalsAdoptionCenterID2 = jsonData._id;\r",
+									"var animalsAdoptionCenterID2 = jsonData.data._id;\r",
 									"pm.environment.set(\"animalsAdoptionCenter_ID2\", animalsAdoptionCenterID2);\r",
 									"\r",
-									"pm.test(\"Correct status code\", function() {\r",
+									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
-									"\r",
 									""
 								],
 								"type": "text/javascript"
@@ -1620,17 +1731,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Adoption center 1\",\r\n    \"address\": \"Streetvägen 9, Goteborg\"\r\n}\r\n"
+							"raw": "{   \r\n    \"email\": \"adoptioncenter123456@adoption.se\",\r\n    \"password\": \"adoptioncenter\",\r\n    \"name\": \"Adoption center 1\",\r\n    \"address\": \"Streetvägen 9, Goteborg\"\r\n    \r\n}\r\n"
 						},
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters/",
+							"raw": "{{host}}/api/adoptionCenters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoptionCenters",
-								""
+								"register"
 							]
 						}
 					},
@@ -1643,13 +1754,15 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animal = pm.response.json()\r",
+									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
 									"var animalsAdoptionCenterID = pm.environment.get(\"animalsAdoptionCenter_ID2\");\r",
 									"pm.test(\"Correct adoption center id\", function() {\r",
-									"    var animal = pm.response.json();\r",
 									"    pm.expect(animal.adoptionCenter).to.eql(animalsAdoptionCenterID);\r",
 									"})"
 								],
@@ -1662,7 +1775,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"size\": \"small\",\r\n    \"species\": \"cat\",\r\n    \"breed\": \"maine coon\",\r\n    \"personality\": \"cat personality\",\r\n    \"healthStatus\": \"very bad\",\r\n    \"gender\": \"male\",\r\n    \"age\": 8,\r\n    \"hours\": 1,\r\n    \"otherNeeds\": \"stroke me\"\r\n}",
+							"raw": "{\r\n    \"size\": \"small\",\r\n    \"species\": \"cat\",\r\n    \"personality\": \"cat personality\",\r\n    \"healthStatus\": \"very bad\",\r\n    \"gender\": \"male\",\r\n    \"age\": 8,\r\n    \"hours\": 1,\r\n    \"otherNeeds\": \"stroke me\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID2}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1691,13 +1804,16 @@
 							"listen": "test",
 							"script": {
 								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animal = pm.response.json()\r",
+									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"var adoptionCenterID = pm.environment.get(\"animalsAdoptionCenter_ID2\")\r",
+									"var animalsAdoptionCenterID = pm.environment.get(\"animalsAdoptionCenter_ID2\");\r",
 									"pm.test(\"Correct adoption center id\", function() {\r",
-									"    pm.expect(pm.response.json().adoptionCenter).to.eql(adoptionCenterID);\r",
+									"    pm.expect(animal.adoptionCenter).to.eql(animalsAdoptionCenterID);\r",
 									"})"
 								],
 								"type": "text/javascript"
@@ -1709,7 +1825,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"size\": \"small\",\r\n    \"species\": \"rabbit\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"rabbit personality\",\r\n    \"healthStatus\": \"really healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 2,\r\n    \"hours\": 1,\r\n    \"otherNeeds\": \"none\"\r\n} ",
+							"raw": "{\r\n    \"size\": \"small\",\r\n    \"species\": \"rabbit\",\r\n    \"personality\": \"rabbit personality\",\r\n    \"healthStatus\": \"really healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 2,\r\n    \"hours\": 1,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID2}}\"\r\n} ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1801,6 +1917,38 @@
 					"response": []
 				},
 				{
+					"name": "Delete adoption center ID2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/adoptionCenters/{{animalsAdoptionCenter_ID2}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adoptionCenters",
+								"{{animalsAdoptionCenter_ID2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Confirm cascade on delete",
 					"event": [
 						{
@@ -1843,6 +1991,221 @@
 			"name": "Relation - Adopters and adoption application",
 			"item": [
 				{
+					"name": "Create an adoption center Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animalsAdoptionCenterID1 = jsonData.data._id;\r",
+									"pm.environment.set(\"animalsAdoptionCenter_ID1\", animalsAdoptionCenterID1);\r",
+									"\r",
+									"pm.test(\"Correct status code\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"adoptionCenter1@adoptionCenter4.com\",\r\n    \"password\": \"adoptionCenter1\",\r\n    \"name\": \"Adoption center 1\",\r\n    \"address\": \"Streetvägen 9, Goteborg\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/adoptionCenters/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adoptionCenters",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create animal with image Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animalId = jsonData._id;\r",
+									"pm.environment.set(\"animal_ID\", animalId);\r",
+									"\r",
+									"pm.test(\"Correct status code\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct animal response\", function() {\r",
+									"    pm.expect(jsonData.size).to.eql(\"big\");\r",
+									"    pm.expect(jsonData.age).to.eql(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"fun\",\r\n    \"healthStatus\": \"healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID1}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/animals",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create animal with image Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animalId = jsonData._id;\r",
+									"pm.environment.set(\"animal_ID2\", animalId);\r",
+									"\r",
+									"pm.test(\"Correct status code\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct animal response\", function() {\r",
+									"    pm.expect(jsonData.size).to.eql(\"big\");\r",
+									"    pm.expect(jsonData.age).to.eql(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"fun\",\r\n    \"healthStatus\": \"healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID1}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/animals",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create animal with image Copy 3",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var animalId = jsonData._id;\r",
+									"pm.environment.set(\"animal_ID3\", animalId);\r",
+									"\r",
+									"pm.test(\"Correct status code\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct animal response\", function() {\r",
+									"    pm.expect(jsonData.size).to.eql(\"big\");\r",
+									"    pm.expect(jsonData.age).to.eql(5);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"size\": \"big\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"labradoodle\",\r\n    \"personality\": \"fun\",\r\n    \"healthStatus\": \"healthy\",\r\n    \"gender\": \"male\",\r\n    \"age\": 5,\r\n    \"hours\": 3,\r\n    \"otherNeeds\": \"none\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID1}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/animals",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"animals"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create adopter Copy 2",
 					"event": [
 						{
@@ -1850,9 +2213,9 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var adopterId = jsonData._id;\r",
+									"var adopterId = jsonData.data._id;\r",
 									"\r",
-									"pm.environment.set(\"adopterId\", adopterId);\r",
+									"pm.environment.set(\"adopter_ID\", adopterId);\r",
 									"\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
@@ -1860,8 +2223,8 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Correct adopter response\", function() {\r",
-									"    pm.expect(jsonData.username).to.eql(\"Kevin\");\r",
-									"    pm.expect(jsonData.password).to.eql(\"Kevin123\");\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Kevin Kevinson\");\r",
+									"    pm.expect(jsonData.data.age).to.eql(33);\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -1873,7 +2236,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Kevin\",\r\n    \"password\": \"Kevin123\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Kevin Kevinson\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"username\": \"Kevin\",\r\n    \"password\": \"Kevin123\",\r\n    \"email\": \"kevin@kevin.com\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Kevin Kevinson\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1881,20 +2244,21 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adopters",
+							"raw": "{{host}}/api/adopters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"adopters"
+								"adopters",
+								"register"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Create adoption application Copy",
+					"name": "Create adoption application 2",
 					"event": [
 						{
 							"listen": "test",
@@ -1903,13 +2267,13 @@
 									"var jsonData = pm.response.json();\r",
 									"var adoptionApplicationID = jsonData._id;\r",
 									"\r",
-									"pm.environment.set(\"adoptionApplicationID2\", adoptionApplicationID);\r",
+									"pm.environment.set(\"adoptionApplication_ID2\", adoptionApplicationID);\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"var adopter = pm.environment.get(\"adopterId\");\r",
+									"var adopter = pm.environment.get(\"adopter_ID\");\r",
 									"pm.test(\"Correct apllication response\", function() {\r",
 									"    pm.expect(jsonData.status).to.eql(0);\r",
 									"    pm.expect(jsonData.adopter).to.eql(adopter);\r",
@@ -1925,7 +2289,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"adopter\": \"{{adopterId}}\",\r\n    \"status\": 0\r\n}",
+							"raw": "{\r\n    \"adopter\": \"{{adopter_ID}}\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID1}}\",\r\n    \"animal\": \"{{animal_ID}}\",\r\n    \"status\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1946,7 +2310,7 @@
 					"response": []
 				},
 				{
-					"name": "Create adoption application Copy 2",
+					"name": "Create adoption application 3",
 					"event": [
 						{
 							"listen": "test",
@@ -1955,13 +2319,13 @@
 									"var jsonData = pm.response.json();\r",
 									"var adoptionApplicationID = jsonData._id;\r",
 									"\r",
-									"pm.environment.set(\"adoptionApplicationID3\", adoptionApplicationID);\r",
+									"pm.environment.set(\"adoptionApplication_ID3\", adoptionApplicationID);\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"var adopter = pm.environment.get(\"adopterId\");\r",
+									"var adopter = pm.environment.get(\"adopter_ID\");\r",
 									"pm.test(\"Correct apllication response\", function() {\r",
 									"    pm.expect(jsonData.status).to.eql(0);\r",
 									"    pm.expect(jsonData.adopter).to.eql(adopter);\r",
@@ -1977,7 +2341,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"adopter\": \"{{adopterId}}\",\r\n    \"status\": 0\r\n}",
+							"raw": "{\r\n    \"adopter\": \"{{adopter_ID}}\",\r\n    \"adoptionCenter\": \"{{animalsAdoptionCenter_ID1}}\",\r\n    \"animal\": \"{{animal_ID3}}\",\r\n    \"status\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2020,14 +2384,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}/adoption-applications",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}/adoption-applications",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}",
+								"{{adopter_ID}}",
 								"adoption-applications"
 							]
 						}
@@ -2046,7 +2410,7 @@
 									"});\r",
 									"\r",
 									"pm.test(\"Correct data\", function() {\r",
-									"    var adopterId = pm.environment.get(\"adopterId\")\r",
+									"    var adopterId = pm.environment.get(\"adopter_ID\")\r",
 									"    var application = pm.response.json();\r",
 									"    pm.expect(application.adopter).to.eql(adopterId);\r",
 									"});"
@@ -2059,16 +2423,50 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}/adoption-applications/{{adoptionApplicationID2}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}/adoption-applications/{{adoptionApplication_ID2}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}",
+								"{{adopter_ID}}",
 								"adoption-applications",
-								"{{adoptionApplicationID2}}"
+								"{{adoptionApplication_ID2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all animals that the user hasnt applied for",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}/animals",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adopters",
+								"{{adopter_ID}}",
+								"animals"
 							]
 						}
 					},
@@ -2093,16 +2491,16 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}/adoption-applications/{{adoptionApplicationID2}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}/adoption-applications/{{adoptionApplication_ID2}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}",
+								"{{adopter_ID}}",
 								"adoption-applications",
-								"{{adoptionApplicationID2}}"
+								"{{adoptionApplication_ID2}}"
 							]
 						}
 					},
@@ -2132,16 +2530,95 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/api/adopters/{{adopterId}}/adoption-applications/{{adoptionApplicationID2}}",
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}/adoption-applications/{{adoptionApplication_ID2}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adopters",
-								"{{adopterId}}",
+								"{{adopter_ID}}",
 								"adoption-applications",
-								"{{adoptionApplicationID2}}"
+								"{{adoptionApplication_ID2}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the new adopter Copy 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adopters",
+								"{{adopter_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Adoption Center Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"correct status code\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/AdoptionCenters/{{animalsAdoptionCenter_ID1}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"AdoptionCenters",
+								"{{animalsAdoptionCenter_ID1}}"
 							]
 						}
 					},
@@ -2160,17 +2637,17 @@
 							"script": {
 								"exec": [
 									"var jsonData = pm.response.json();\r",
-									"var adoptionCenterID = jsonData._id;\r",
+									"var adoptionCenterID = jsonData.data._id;\r",
 									"\r",
-									"pm.environment.set(\"adoptionCenterID\",adoptionCenterID);\r",
+									"pm.environment.set(\"adoptionCenter_ID\",adoptionCenterID);\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
 									"pm.test(\"Correct adoption center response\", function() {\r",
-									"    pm.expect(jsonData.name).to.eql(\"Big dogs forever\");\r",
-									"    pm.expect(jsonData.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Big dogs forever\");\r",
+									"    pm.expect(jsonData.data.address).to.eql(\"Kalle Anka vägen 23, Trollhättan\");\r",
 									"});"
 								],
 								"type": "text/javascript"
@@ -2182,7 +2659,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Big dogs forever\",\r\n    \"address\": \"Kalle Anka vägen 23, Trollhättan\"\r\n}\r\n",
+							"raw": "{\r\n    \"name\": \"Big dogs forever\",\r\n    \"email\": \"big@big.com\",\r\n    \"password\": \"big123dogs123\",\r\n    \"address\": \"Kalle Anka vägen 23, Trollhättan\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2190,13 +2667,66 @@
 							}
 						},
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters",
+							"raw": "{{host}}/api/adoptionCenters/register",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
-								"adoptionCenters"
+								"adoptionCenters",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create adopter Copy 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var adopterId = jsonData.data._id;\r",
+									"\r",
+									"pm.environment.set(\"adopter_ID\", adopterId);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct adopter response\", function() {\r",
+									"    pm.expect(jsonData.data.name).to.eql(\"Drake James\");\r",
+									"    pm.expect(jsonData.data.age).to.eql(33);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"Drake123\",\r\n    \"email\": \"drake@drake.com\",\r\n    \"ssn\": \"100889-xxxx\",\r\n    \"name\": \"Drake James\",\r\n    \"age\": 33,\r\n    \"petPreferences\": {\r\n        \"species\": \"dog\",\r\n        \"size\": \"small\",\r\n        \"hours\": 3,\r\n        \"personality\": \"Calm\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/adopters/register",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adopters",
+								"register"
 							]
 						}
 					},
@@ -2212,13 +2742,13 @@
 									"var jsonData = pm.response.json();\r",
 									"var adoptionApplicationID = jsonData._id;\r",
 									"\r",
-									"pm.environment.set(\"adoptionApplicationID\", adoptionApplicationID);\r",
+									"pm.environment.set(\"adoptionApplication_ID\", adoptionApplicationID);\r",
 									"\r",
 									"pm.test(\"Correct status\", function() {\r",
 									"    pm.response.to.have.status(201);\r",
 									"});\r",
 									"\r",
-									"var adopter = pm.environment.get(\"adopterId\");\r",
+									"var adopter = pm.environment.get(\"adopter_ID\");\r",
 									"pm.test(\"Correct apllication response\", function() {\r",
 									"    pm.expect(jsonData.status).to.eql(0);\r",
 									"    pm.expect(jsonData.adopter).to.eql(adopter);\r",
@@ -2234,7 +2764,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"adopter\": \"{{adopterId}}\",\r\n    \"status\": 0\r\n}",
+							"raw": "{\r\n    \"adopter\": \"{{adopter_ID}}\",\r\n    \"status\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -2262,10 +2792,6 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"var jsonData = pm.response.json();\r",
-									"var animalsAdoptionCenterID = jsonData._id;\r",
-									"pm.environment.set(\"animalsAdoptionCenter_ID\", animalsAdoptionCenterID);\r",
-									"\r",
 									"pm.test(\"Correct status code\", function() {\r",
 									"    pm.response.to.have.status(200);\r",
 									"});\r",
@@ -2295,16 +2821,99 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{host}}/api/adoptionCenters/{{adoptionCenterID}}/adoptionApplications/{{adoptionApplicationID}}",
+							"raw": "{{host}}/api/adoptionCenters/{{adoptionCenter_ID}}/adoptionApplications/{{adoptionApplication_ID}}",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"adoptionCenters",
-								"{{adoptionCenterID}}",
+								"{{adoptionCenter_ID}}",
 								"adoptionApplications",
-								"{{adoptionApplicationID}}"
+								"{{adoptionApplication_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a specific adoption center Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"correct status code\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/api/adoptionCenters/{{adoptionCenter_ID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adoptionCenters",
+								"{{adoptionCenter_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete the new adopter Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adopters",
+								"{{adopter_ID}}"
 							]
 						}
 					},
