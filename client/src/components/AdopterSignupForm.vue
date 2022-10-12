@@ -3,7 +3,7 @@
     <b-container class="b-con">
       <b-row class="b-row">
         <b-col>
-          <b-form id="adopter" class="b-form" @submit.prevent="registerAdopter">
+          <b-form class="b-form" @submit.prevent="registerUser">
             <h6 class="msg-info">Adopter Sign up</h6>
             <b-form-group label="E-mail address">
               <b-form-input
@@ -58,7 +58,7 @@
               <b-form-input
                 class="form-control-label text-muted"
                 placeholder="Species"
-                v-model="register.species"
+                v-model="register.petPreferences.species"
               >
               </b-form-input>
             </b-form-group>
@@ -67,7 +67,7 @@
               <b-form-input
                 class="form-control-label text-muted"
                 placeholder="Size"
-                v-model="register.size"
+                v-model="register.petPreferences.size"
               >
               </b-form-input>
             </b-form-group>
@@ -78,7 +78,7 @@
                 type="number"
                 class="form-control-label text-muted"
                 placeholder="How many hours of company can you provide?"
-                v-model="register.hours"
+                v-model="register.petPreferences.hours"
               >
               </b-form-input>
             </b-form-group>
@@ -87,7 +87,7 @@
               <b-form-input
                 class="form-control-label text-muted"
                 placeholder="What personality would you like your pet to have?"
-                v-model="register.personality"
+                v-model="register.petPreferences.personality"
               >
               </b-form-input>
             </b-form-group>
@@ -127,10 +127,12 @@ export default {
         ssn: '',
         name: '',
         age: '',
-        species: '',
-        size: '',
-        hours: '',
-        personality: ''
+        petPreferences: {
+          species: '',
+          size: '',
+          hours: '',
+          personality: ''
+        }
       }
     }
   },
@@ -138,7 +140,7 @@ export default {
     goToHome() {
       this.$router.push('/')
     },
-    async registerAdopter() {
+    async registerUser() {
       try {
         const response = await Api.post('/adopters/register', this.register)
         console.log(response)

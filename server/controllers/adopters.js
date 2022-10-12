@@ -16,17 +16,7 @@ registerNewAdopter = async (req, res) => {
           message: "email already in use"
         });
       }
-      const adopter = new Adopter({
-        email: req.body.email,
-        password: req.body.password,
-        ssn: req.body.ssn,
-        name: req.body.name,
-        age: req.body.age,
-        species: req.body.species,
-        size: req.body.size,
-        hours: req.body.hours,
-        personality: req.body.personality        
-      });
+      const adopter = new Adopter(req.body);
       let data = await adopter.save();
       const token = await adopter.generateAuthToken(); // here it is calling the method that we created in the model
       res.status(201).json({ data, token });

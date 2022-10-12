@@ -10,10 +10,12 @@ var adopterSchema = new Schema({
     ssn: { type: String, required: true },
     name: { type: String, required: true },
     age: { type: Number },
-    species: { type: String },
-    size: { type: String },
-    hours: { type: Number, required: true },
-    personality: { type: String },
+    petPreferences: {
+      species: { type: String },
+      size: { type: String },
+      hours: { type: Number, required: true },
+      personality: { type: String }
+  },
     tokens: [
         {
             token: {
@@ -42,10 +44,8 @@ adopterSchema.pre("save", async function(next) {
     ssn: adopter.ssn, 
     name: adopter.name, 
     age: adopter.age, 
-    species: adopter.species, 
-    size: adopter.size, 
-    hours: adopter.hours, 
-    personality: adopter.hours },
+    petPreferences: adopter.petPreferences
+    },
     "secret");
     adopter.tokens = adopter.tokens.concat({ token });
     await adopter.save();
