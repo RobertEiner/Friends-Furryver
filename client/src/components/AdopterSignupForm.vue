@@ -143,7 +143,6 @@ export default {
     async registerUser() {
       try {
         const response = await Api.post('/adopters/register', this.register)
-        console.log(response)
         const token = response.data.token
         if (token) {
           localStorage.setItem('jwt', token)
