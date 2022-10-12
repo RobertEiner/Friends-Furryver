@@ -1,12 +1,6 @@
 <template>
   <b-container class="b-con">
     <b-row class="b-row">
-      <b-col md="6" sm="12">
-        <b-img
-          :src="require('../Assets/pexels-amal-santhosh-662417.jpg')"
-          fluid
-        ></b-img>
-      </b-col>
       <b-col @submit.prevent="onSubmit" v-if="animalCreated === false">
         <h1>{{ header }}</h1>
         <p v-if="emptyForm === true" class="empty-input">
@@ -157,18 +151,18 @@
           </div>
         </b-form>
       </b-col>
-      <!-- Attribution for image source-->
+      <!-- Attribution for image/icon source-->
       <!-- <a href="https://www.flaticon.com/free-icons/tick" title="tick icons">Tick icons created by Octopocto - Flaticon</a> -->
-      <b-col v-else>
+      <b-col v-else class="success-column">
         <b-img
           :src="require('../Assets/check-mark.png')"
           class="success-image"
         ></b-img>
-        <h1 v-if="this.formType === 'add-animal'">
+        <h3 v-if="this.formType === 'add-animal'">
           Animal created successsfully
-        </h1>
-        <h1 v-else>Animal updated successsfully</h1>
-        <b-button size="sm" variant="primary" @click="goToMainPage()"
+        </h3>
+        <h3 v-else>Animal updated successsfully</h3>
+        <b-button class="to-main-page-button" size="sm" variant="primary" @click="goToMainPage()"
           >Back to main page</b-button
         >
       </b-col>
@@ -359,8 +353,16 @@ h1 {
   color: rgb(255, 72, 72);
 }
 
+.success-column {
+  text-align: center;
+}
+
 .success-image {
   max-width: 15rem;
+}
+
+.to-main-page-button {
+  margin-top: 2%;
 }
 </style>
 
