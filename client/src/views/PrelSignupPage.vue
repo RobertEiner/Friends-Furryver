@@ -64,12 +64,14 @@
 </template>
 
 <script>
+import HomeLoginSignupStyleVue from '@/components/HomeLoginSignupStyle.vue'
 // @ is an alias to /src
 // import { Api } from '@/Api'
 
 export default {
   name: 'prel-signup-page',
   components: {
+    'home-login-signup-style': HomeLoginSignupStyleVue
   },
   methods: {
     goToAdopterSignup() {
