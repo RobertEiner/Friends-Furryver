@@ -73,7 +73,6 @@ export default {
         address: ''
       },
       error: ''
-
     }
   },
 
