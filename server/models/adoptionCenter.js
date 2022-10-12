@@ -55,5 +55,5 @@ adoptionCenterSchema.pre("save", async function(next) {
     return adoptionCenter;
   };
 
-  const AdoptionCenter = mongoose.model("adoptioncenters", adoptionCenterSchema);
+  const AdoptionCenter = mongoose.model("adoptionCenters", adoptionCenterSchema);
   module.exports = AdoptionCenter;  
