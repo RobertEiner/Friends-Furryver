@@ -87,7 +87,6 @@ export default {
       this.$router.push('/')
     },
     async registerAdoptionCenter() {
-      console.log(this.registerAdCenter)
       try {
         const response = await Api.post('/adoptionCenters/register', this.registerAdCenter)
         console.log(response)
