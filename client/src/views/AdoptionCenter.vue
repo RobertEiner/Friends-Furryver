@@ -147,7 +147,7 @@ export default {
 }
 
 .outer-container {
-  background-color: rgb(119, 200, 246);
+  background-color: rgb(64, 183, 227);
   min-height: 100vh;
 }
 
