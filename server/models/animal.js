@@ -11,7 +11,6 @@ var animalSchema = new Schema({
   age: { type: Number },
   hours: { type: Number, required: true },
   otherNeeds: { type: String },
-  animalImage: {type: String},
   adoptionCenter: { type: Schema.Types.ObjectId, ref: 'adoptionCenters'}
   
 });
