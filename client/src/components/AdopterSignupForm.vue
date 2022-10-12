@@ -3,7 +3,7 @@
     <b-container class="b-con">
       <b-row class="b-row">
         <b-col>
-          <b-form class="b-form" @submit.prevent="registerUser">
+          <b-form id="adopter" class="b-form" @submit.prevent="registerAdopter">
             <h6 class="msg-info">Adopter Sign up</h6>
             <b-form-group label="E-mail address">
               <b-form-input
@@ -18,7 +18,7 @@
             <b-form-group label="Password">
               <b-form-input
                 required
-                type='password'
+                type="password"
                 class="form-control-label text-muted"
                 placeholder="Please enter your password"
                 v-model="register.password"
@@ -138,7 +138,7 @@ export default {
     goToHome() {
       this.$router.push('/')
     },
-    async registerUser() {
+    async registerAdopter() {
       try {
         const response = await Api.post('/adopters/register', this.register)
         console.log(response)

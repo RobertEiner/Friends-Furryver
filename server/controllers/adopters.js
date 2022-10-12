@@ -53,7 +53,7 @@ registerNewAdopter = async (req, res) => {
   };
   router.post('/api/adopters/login', loginAdopter);
 
-//login auth
+//login auth for postman
 getUserDetails = async (req, res) => {
     await res.json(req.userData);
   };

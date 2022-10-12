@@ -4,7 +4,7 @@ module.exports = (req, res, next) => {
     const token = req.headers.authorization.replace("Bearer ", "");
     
     const decoded = jwt.verify(token, "secret");
-    req.adopterData = decoded;
+    req.userData = decoded;
 
     next();
   } catch (err) {

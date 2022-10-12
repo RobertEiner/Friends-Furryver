@@ -63,8 +63,9 @@
 <script>
 import { Api } from '@/Api'
 import swal from 'sweetalert'
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
-  name: 'login-form-adopter',
+  name: 'adopter-login-form',
   data() {
     return {
       header: 'Login Information',
@@ -85,7 +86,8 @@ export default {
         localStorage.setItem('jwt', token)
         if (token) {
           swal('Success', 'Login Successful', 'success')
-          this.$router.push(`/adopters/${response.data._id}`)
+          const adopter = VueJwtDecode.decode(token)
+          this.$router.push(`/adopters/${adopter._id}`)
         }
       } catch (err) {
         swal('Login unsuccessful', 'Invalid login details', 'error')
