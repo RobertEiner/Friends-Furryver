@@ -3,8 +3,8 @@
     <b-tab title="Active applications">
       <div v-if="activeApplications.length > 0">
         <span
-          v-for="handledApplication in activeApplications"
-          :key="handledApplication._id"
+          v-for="activeApplication in activeApplications"
+          :key="activeApplication._id"
         >
           <b-card
             class="active-card"
@@ -16,32 +16,30 @@
             style="max-width: 20rem;"
           >
             <b-list-group-item>
-              Adopter: {{ handledApplication.adopter.name }}<br />
-              User name: {{ handledApplication.adopter.username }}
+              Adopter: {{ activeApplication.adopter.name }}<br />
+              User name: {{ activeApplication.adopter.username }}
             </b-list-group-item>
 
             <b-list-group-item>
-              Species: {{ handledApplication.animal.species }}
+              Species: {{ activeApplication.animal.species }}
             </b-list-group-item>
             <b-list-group-item>
-              breed: {{ handledApplication.animal.breed }}
+              breed: {{ activeApplication.animal.breed }}
             </b-list-group-item>
             <b-list-group-item>
-              size: {{ handledApplication.animal.size }}
+              size: {{ activeApplication.animal.size }}
             </b-list-group-item>
             <b-list-group-item>
-              health status: {{ handledApplication.animal.healthStatus }}
+              health status: {{ activeApplication.animal.healthStatus }}
             </b-list-group-item>
 
-            <b-badge pill variant="warning"
-              >Status: pending </b-badge
-            >
+            <b-badge pill variant="warning">Status: pending </b-badge>
 
             <b-button
               id="accept-application-button"
               size="sm"
               variant="primary"
-              @click="$emit('accept-application', handledApplication._id)"
+              @click="acceptApplication(activeApplication._id)"
               >Accept application</b-button
             >
 
@@ -49,14 +47,19 @@
               id="decline-application-button"
               size="sm"
               variant="primary"
-              @click="$emit('del-application', handledApplication._id)"
+              @click="declineApplication(activeApplication._id)"
               >Decline application</b-button
             >
           </b-card>
         </span>
       </div>
       <div v-else>
-        <p class="no-active-applications">Currently no active applications</p>
+        <h5 class="no-active-applications">Currently no active applications</h5>
+        <b-img
+          class="no-active-applications-img"
+          :src="require('../Assets/pet-house.png')"
+          fluid
+        ></b-img>
       </div>
     </b-tab>
 
@@ -93,17 +96,21 @@
               health status: {{ handledApplication.animal.healthStatus }}
             </b-list-group-item>
 
-            <b-badge v-if="handledApplication.status === 1" pill variant="success" class="badge"
-              >Status: approved </b-badge
-            >
-             <b-badge v-else pill variant="danger" class="badge"
+            <b-badge
+              v-if="handledApplication.status === 1"
+              pill
+              variant="success"
+              class="badge"
+              >Status: approved
+            </b-badge>
+            <b-badge v-else pill variant="danger" class="badge"
               >Status: declined</b-badge
             >
             <b-button
               class="remove-application-button"
               size="sm"
               variant="primary"
-              @click="$emit('remove-application', handledApplication._id)"
+              @click="deleteApplication(handledApplication._id)"
               >Remove application</b-button
             >
           </b-card>
@@ -111,30 +118,36 @@
       </div>
 
       <div v-else>
-        <p class="no-processed-applications">
+        <h5 class="no-processed-applications">
           Currently no processed applications
-        </p>
+        </h5>
+        <b-img
+          class="no-processed-applications-img"
+          :src="require('../Assets/pet-house.png')"
+          fluid
+        ></b-img>
       </div>
     </b-tab>
   </b-tabs>
 </template>
 
 <script>
-// import { Api } from '@/Api'
+import { Api } from '@/Api'
 
 export default {
   name: 'applications-tab',
   components: {},
-  props: ['applications'],
+  // props: ['applications'],
   data() {
     return {
+      applications: [],
       activeApplications: [],
       handledApplications: [],
       status: ''
     }
   },
   created() {
-    this.sortApplications()
+    this.getAllApplications()
   },
   methods: {
     sortApplications() {
@@ -145,6 +158,63 @@ export default {
           this.handledApplications.push(this.applications[i])
         }
       }
+    },
+
+    // Get all applications of an adoption center
+    getAllApplications() {
+      Api.get(`/AdoptionCenters/${this.$route.params.id}/adoptionApplications`)
+        .then(response => {
+          console.log(response.data)
+          this.applications = response.data.Applications
+          this.sortApplications()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    // Accept an adoption application, which changes the status code to 1, which means accepted
+    acceptApplication(applicationId) {
+      Api.put(`/adoption-applications/${applicationId}`, { status: 1 })
+        .then(response => {
+          console.log(response.data)
+          this.applications = []
+          this.activeApplications = []
+          this.handledApplications = []
+          this.getAllApplications()
+          console.log(this.applications)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    // declines an adoption application, changing the status code to 2, which means declined
+    declineApplication(applicationId) {
+      Api.put(`/adoption-applications/${applicationId}`, { status: 2 })
+        .then(response => {
+          console.log(response)
+          this.applications = []
+          this.activeApplications = []
+          this.handledApplications = []
+          this.getAllApplications()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+
+    // Deletes an adoption application
+    deleteApplication(applicationId) {
+      Api.delete(`/adoption-applications/${applicationId}`)
+        .then(response => {
+          this.applications = []
+          this.activeApplications = []
+          this.handledApplications = []
+          this.getAllApplications()
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
@@ -183,12 +253,20 @@ export default {
 }
 
 .no-active-applications {
-  margin: 10%;
-  padding-bottom: 17%;
+  padding-bottom: 1%;
+}
+
+.no-active-applications-img {
+  max-width: 15rem;
+  margin-bottom: 2%;
 }
 
 .no-processed-applications {
-  margin: 10%;
-  padding-bottom: 20%;
+  padding-bottom: 1%;
+}
+
+.no-processed-applications-img {
+  max-width: 15rem;
+  margin-bottom: 2%;
 }
 </style>
