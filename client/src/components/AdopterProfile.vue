@@ -71,8 +71,7 @@
     <b-col class="mx-auto" sm="12" md="4" v-else-if="adopter">
       <h1 class="adoperName">Hi, {{ adopter.name }}!</h1>
       <div class="pet-preferences">
-        <b-card class="info-card" title="Your info">
-          <h5 class="adopterUsername">Username: {{ adopter.username }}</h5>
+        <b-card class="info-card" title="Your pet preferences">
           <h5>Species: {{ adopter.petPreferences.species }}</h5>
           <p></p>
           <h5>Size: {{ adopter.petPreferences.size }}</h5>
@@ -102,7 +101,6 @@ export default {
       changeInfo: false,
       form: {
         name: '',
-        userName: '',
         petPreferences: {
           species: '',
           size: '',

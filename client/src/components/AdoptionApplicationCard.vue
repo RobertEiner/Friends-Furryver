@@ -1,52 +1,80 @@
 <template>
   <div class="margin">
     <b-card
-      title="Animal"
-      img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image"
-      img-top
+      title="📃"
+      bg-variant="info"
       tag="article"
-      style="max-width: 20rem"
+      text-variant="white"
     >
-      <b-list-group>
-        <b-list-group-item>
-          Size: {{ adoptionApplication.animal.size }}
-        </b-list-group-item>
-        <b-list-group-item>
-          Species: {{ adoptionApplication.animal.species }}
-        </b-list-group-item>
-        <b-list-group-item>
-          Breed: {{ adoptionApplication.animal.breed }}
-        </b-list-group-item>
-        <b-list-group-item>
-          Personality: {{ adoptionApplication.animal.personality }}
-        </b-list-group-item>
-        <b-list-group-item
-          >Gender: {{ adoptionApplication.animal.gender }}</b-list-group-item
-        >
-        <b-list-group-item
-          >Age: {{ adoptionApplication.animal.age }}</b-list-group-item
-        >
-        <b-list-group-item
-          >Hours needed:
-          {{ adoptionApplication.animal.hours }}</b-list-group-item
-        >
-      </b-list-group>
+      <hr />
+      <b-card-text> Size: {{ adoptionApplication.animal.size }} </b-card-text>
+
+      <hr />
+      <b-card-text>
+        Species: {{ adoptionApplication.animal.species }}
+      </b-card-text>
+
+      <hr />
+      <b-card-text>
+        Personality: {{ adoptionApplication.animal.personality }}
+      </b-card-text>
+
+      <hr />
+      <b-card-text> Sex: {{ adoptionApplication.animal.gender }} </b-card-text>
+
+      <hr />
+      <b-card-text> Age: {{ adoptionApplication.animal.age }} </b-card-text>
+
+      <hr />
+      <b-card-text>
+        Health status: {{ adoptionApplication.animal.healthStatus }}
+      </b-card-text>
+
+      <hr />
+      <b-card-text>
+        Other needs: {{ adoptionApplication.animal.otherNeeds }}
+      </b-card-text>
+
+      <hr />
+      <b-card-text>
+        Hours needed: {{ adoptionApplication.animal.hours }}
+      </b-card-text>
+      <hr />
       <div>
-        <b-badge pill variant="warning"
-          >Status: {{ adoptionApplication.status }}</b-badge
+        <b-badge
+          class="status-badge"
+          pill
+          :status-color="adoptionApplication.status"
+          >Status:
+          {{ this.applicationStatus[adoptionApplication.status] }}</b-badge
         >
       </div>
-      <b-button @click="deleteApplication" variant="danger">Delete</b-button>
+      <b-button
+        class="delete-button"
+        @click="deleteApplication"
+        variant="danger"
+        >Delete</b-button
+      >
     </b-card>
   </div>
 </template>
 
 <script>
+// Attribution for source of emojis: https://emojipedia.org/
+
 import { Api } from '@/Api'
 export default {
   name: 'adoption-application-card',
   props: ['adoptionApplication'],
+  data() {
+    return {
+      applicationStatus: {
+        0: 'pending',
+        1: 'approved',
+        2: 'declined'
+      }
+    }
+  },
   methods: {
     deleteApplication() {
       Api.delete(`/adoption-applications/${this.adoptionApplication._id}`)
@@ -60,7 +88,24 @@ export default {
 .margin {
   padding: 3% 7%;
 }
-.applyButton {
+.b-card {
+  width: 17rem;
+}
+.delete-button {
   padding: 3%;
+  border: solid 0.1em;
+  border-color: black;
+}
+.status-badge {
+  margin: 3%;
+}
+.status-badge[status-color='0'] {
+  background-color: rgb(205, 170, 16);
+}
+.status-badge[status-color='1'] {
+  background-color: rgb(32, 144, 13);
+}
+.status-badge[status-color='2'] {
+  background-color: rgb(175, 48, 48);
 }
 </style>
