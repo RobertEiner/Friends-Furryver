@@ -2,10 +2,16 @@
   <div>
     <b-container fluid>
       <b-row align-h="center">
-        <b-colum sm :key="animal._id" v-for="animal in animals">
+        <b-col
+          sm="12"
+          md="6"
+          lg="4"
+          :key="animal._id"
+          v-for="animal in animals"
+        >
           <animal-card :animal="animal" @apply="removeAnimalCard">
           </animal-card>
-        </b-colum>
+        </b-col>
       </b-row>
     </b-container>
   </div>
@@ -21,13 +27,7 @@ export default {
     'animal-card': AnimalCard
   },
   mounted() {
-    Api.get(`/adopters/${this.$route.params.id}/animals`)
-      .then((response) => {
-        this.animals = response.data.Animals
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    this.updateList({})
   },
   data() {
     return {
@@ -35,11 +35,35 @@ export default {
     }
   },
   methods: {
+    updateList(filters) {
+      if (filters.selectedSpecies || filters.selectedSex || filters.selectedSize) {
+        Api.get(`/adopters/${this.$route.params.id}/animals`, {
+          params: {
+            species: filters.selectedSpecies,
+            gender: filters.selectedSex,
+            size: filters.selectedSize
+          }
+        })
+          .then((response) => {
+            this.animals = response.data.Animals
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      } else {
+        Api.get(`/adopters/${this.$route.params.id}/animals`)
+          .then((response) => {
+            this.animals = response.data.Animals
+          })
+          .catch((error) => {
+            console.log(error)
+          })
+      }
+    },
     removeAnimalCard(removedId) {
-      const index = this.animals.findIndex(
-        (animal) => animal._id === removedId
-      )
+      const index = this.animals.findIndex((animal) => animal._id === removedId)
       this.animals.splice(index, 1)
+      this.$emit('newAdoptionApplication')
     }
   }
 }

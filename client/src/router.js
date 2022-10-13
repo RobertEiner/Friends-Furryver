@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import AdopterLogin from './views/AdopterLogin.vue'
+import AdoptionCenterLogin from './views/AdoptionCenterLogin'
 import PrelSignupPage from './views/PrelSignupPage.vue'
 import AdopterSignup from './views/AdopterSignup.vue'
 import AdoptionCenterSignup from './views/AdoptionCenterSignup.vue'
@@ -31,6 +33,11 @@ export default new Router({
       component: AddAnimal
     },
     {
+      path: '/adoptionCenters/:id/adoptionApplications',
+      name: 'adoptionCenter-applications',
+      component: AdoptionCenter
+    },
+    {
       path: '/PrelSignupPage',
       name: '/prel-signup-page',
       component: PrelSignupPage
@@ -46,9 +53,35 @@ export default new Router({
       component: AdoptionCenterSignup
     },
     {
+      path: '/AdopterLogin',
+      name: '/adopter-login',
+      component: AdopterLogin
+    },
+    {
+      path: '/AdoptionCenterLogin',
+      name: '/adoption-center-login',
+      component: AdoptionCenterLogin
+    },
+    {
       path: '/adopters/:id',
       name: 'adopter',
-      component: AdopterAnimals
+      component: AdopterAnimals,
+      meta: {
+        requiresAuth: true
+      },
+      beforeEnter: (to, from, next) => {
+        if (to.matched.some(record => record.meta.requiresAuth)) {
+          if (localStorage.getItem('jwt') == null) {
+            next({
+              path: '/'
+            })
+          } else {
+            next()
+          }
+        } else {
+          next()
+        }
+      }
     },
     {
       path: '/adoptionCenters/:id/updateAnimal/:animalId',

@@ -24,8 +24,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .outermost-div {
     background-color: rgb(119, 200, 246);
+    min-height: 100vh;
   }
 </style>
