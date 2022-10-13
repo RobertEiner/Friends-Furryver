@@ -60,6 +60,8 @@
 </template>
 
 <script>
+// Attribution for source of emojis: https://emojipedia.org/
+
 import { Api } from '@/Api'
 export default {
   name: 'adoption-application-card',

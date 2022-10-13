@@ -45,6 +45,7 @@ export default {
   data() {
     return {
       animalEmojis: {
+        // Attribution for source of emojis: https://emojipedia.org/
         dog: '🐕‍🦺',
         cat: '🐈',
         bird: '🐦',
