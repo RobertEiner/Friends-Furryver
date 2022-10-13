@@ -101,7 +101,6 @@ export default {
       changeInfo: false,
       form: {
         name: '',
-        userName: '',
         petPreferences: {
           species: '',
           size: '',
