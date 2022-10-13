@@ -1,7 +1,6 @@
 <template>
   <div>
     <body>
-      <home-login-signup-style></home-login-signup-style>
       <div class="container px-4 py-5 mx-auto">
         <div class="card card0">
           <div class="d-flex flex-lg-row flex-column-reverse">
@@ -39,18 +38,17 @@
     </body>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
 // @ is an alias to /src
 // import { Api } from '@/Api'
 import AdoptionCenterSignupForm from '@/components/AdoptionCenterSignupForm.vue'
-import HomeLoginSignupStyle from '@/components/HomeLoginSignupStyle.vue'
 
 export default {
   name: 'adopterSignup',
   components: {
-    'adoption-center-signup-form': AdoptionCenterSignupForm,
-    'home-login-signup-style': HomeLoginSignupStyle
+    'adoption-center-signup-form': AdoptionCenterSignupForm
   },
   methods: {}
 }

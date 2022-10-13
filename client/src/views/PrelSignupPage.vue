@@ -1,7 +1,6 @@
 <template>
   <div>
     <body>
-      <home-login-signup-style></home-login-signup-style>
       <div class="container px-4 py-5 mx-auto">
         <div class="card card0">
           <div class="d-flex flex-lg-row flex-column-reverse">
@@ -64,17 +63,12 @@
     </body>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
-import HomeLoginSignupStyleVue from '@/components/HomeLoginSignupStyle.vue'
-// @ is an alias to /src
-// import { Api } from '@/Api'
-
 export default {
   name: 'prel-signup-page',
-  components: {
-    'home-login-signup-style': HomeLoginSignupStyleVue
-  },
+  components: {},
   methods: {
     goToAdopterSignup() {
       this.$router.push('/AdopterSignup')

@@ -3,8 +3,12 @@
     <b-container class="b-con">
       <b-row class="b-row">
         <b-col>
-          <b-form id="adoptionCenter" class="b-form" @submit.prevent="registerAdoptionCenter">
-            <h6 class="msg-info">Adopter Sign up</h6>
+          <b-form
+            id="adoptionCenter"
+            class="b-form"
+            @submit.prevent="registerAdoptionCenter"
+          >
+            <h6 class="msg-info">Adoption center sign up</h6>
             <b-form-group label="E-mail address">
               <b-form-input
                 required
@@ -64,6 +68,7 @@
     </b-container>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
 import { Api } from '@/Api'
@@ -88,7 +93,10 @@ export default {
     },
     async registerAdoptionCenter() {
       try {
-        const response = await Api.post('/adoptionCenters/register', this.registerAdCenter)
+        const response = await Api.post(
+          '/adoptionCenters/register',
+          this.registerAdCenter
+        )
         console.log(response)
         const token = response.data.token
         if (token) {

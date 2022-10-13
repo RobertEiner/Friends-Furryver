@@ -1,6 +1,5 @@
 <template>
   <div>
-    <home-login-signup-style></home-login-signup-style>
     <body>
       <div class="container px-4 py-5 mx-auto">
         <div class="card card0">
@@ -66,17 +65,15 @@
     </body>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
 // @ is an alias to /src
 // import { Api } from '@/Api'
-import HomeLoginSignupStyle from '@/components/HomeLoginSignupStyle.vue'
 
 export default {
   name: 'home',
-  components: {
-    'home-login-signup-style': HomeLoginSignupStyle
-  },
+  components: {},
   methods: {
     goToAdopterLogin() {
       this.$router.push('/AdopterLogin')
