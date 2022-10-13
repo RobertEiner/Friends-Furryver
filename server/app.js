@@ -4,13 +4,13 @@ var morgan = require('morgan');
 var path = require('path');
 var cors = require('cors');
 var history = require('connect-history-api-fallback');
+var bodyParser = require("body-parser")
 
 
 var adoptersController = require('./controllers/adopters.js');
 var adoptionCenterController = require('./controllers/adoptionCenters.js');
 var adoptionApplicationController = require('./controllers/adoptionApplications.js');
 var animalsController = require('./controllers/animals');
-
 
 // Variables
 var mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/animalAdoptionDB';
@@ -35,6 +35,10 @@ app.use(morgan('dev'));
 // Enable cross-origin resource sharing for frontend must be registered before api
 app.options('*', cors());
 app.use(cors());
+
+//configure body parser
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Import routes
 app.get('/api', function(req, res) {

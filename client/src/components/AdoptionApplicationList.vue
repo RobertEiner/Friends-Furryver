@@ -34,7 +34,6 @@ export default {
       Api.get(`/adopters/${this.$route.params.id}/adoption-applications`)
         .then((response) => {
           this.adoptionApplications = response.data.AdoptionApplications
-          console.log(this.adoptionApplications[0].animal)
         })
         .catch((error) => {
           console.log(error)

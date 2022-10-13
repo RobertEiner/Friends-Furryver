@@ -1,19 +1,53 @@
 var express = require('express');
 var router = express.Router();
-var Adopter = require('../models/adopter');
 var AdoptionApplication = require('../models/adoptionApplication');
 const animal = require('../models/animal');
 var Animal = require('../models/animal')
+var Adopter = require('../models/adopter');
+var auth = require('../config/auth');
 
+//create an adopter
+registerNewAdopter = async (req, res) => {
+    try {
+     let isAdopter = await Adopter.find({ email: req.body.email });
+     console.log(isAdopter);
+      if (isAdopter.length >= 1) {
+        return res.status(400).json({
+          message: "email already in use"
+        });
+      }
+      const adopter = new Adopter(req.body);
+      let data = await adopter.save();
+      const token = await adopter.generateAuthToken(); // here it is calling the method that we created in the model
+      res.status(201).json({ data, token });
+    } catch (err) {
+      res.status(400).json({ err: err });
+    }
+  }
+ router.post('/api/adopters/register', registerNewAdopter);
 
-//crete an adopter
-router.post('/api/adopters', function (req, res, next) {
-    var adopter = new Adopter(req.body);
-    adopter.save(function (err, adopter) {
-        if (err) { return next(err); }
-        res.status(201).json(adopter);
-    });
-});
+ //login as adopter
+ loginAdopter = async (req, res) => {
+    try {
+      const email = req.body.email;
+      const password = req.body.password;
+      const adopter = await Adopter.findByCredentials(email, password);
+      if (!adopter) {
+        return res.status(401).json({ error: "Login failed! Check authentication credentials" });
+      }
+      const token = await adopter.generateAuthToken();
+      res.status(201).json({ adopter, token });
+    } catch (err) {
+      res.status(400).json({ err: err });
+    }
+  };
+  router.post('/api/adopters/login', loginAdopter);
+
+//login auth for postman
+getUserDetails = async (req, res) => {
+    await res.json(req.userData);
+  };
+router.get('/api/adopters/me', auth, getUserDetails);
 
 //get all adopters
 router.get('/api/adopters', function (req, res, next) {
