@@ -180,29 +180,29 @@ export default {
   data() {
     return {
       alternativesSpecies: [
-        { text: 'Dog', value: 'Dog' },
-        { value: 'Cat', text: 'Cat' },
-        { value: 'Bird', text: 'Bird' },
-        { value: 'Rabbit', text: 'Rabbit' }
+        { value: 'dog', text: 'Dog' },
+        { value: 'cat', text: 'Cat' },
+        { value: 'bird', text: 'Bird' },
+        { value: 'rabbit', text: 'Rabbit' }
       ],
       alternativesGender: [
-        { value: 'Female', text: 'Female' },
-        { value: 'Male', text: 'Male' }
+        { value: 'female', text: 'Female' },
+        { value: 'male', text: 'Male' }
       ],
       alternativesSizes: [
-        { value: 'Small', text: 'Small' },
-        { value: 'Medium', text: 'Medium' },
-        { value: 'Big', text: 'Big' }
+        { value: 'small', text: 'Small' },
+        { value: 'medium', text: 'Medium' },
+        { value: 'big', text: 'Big' }
       ],
       alternativesHealthStatus: [
-        { value: 'Excellent health', text: 'Excellent health' },
-        { value: 'Healthy', text: 'Healthy' },
-        { value: 'Poor health', text: 'Poor health' }
+        { value: 'excellent health', text: 'Excellent health' },
+        { value: 'healthy', text: 'Healthy' },
+        { value: 'poor health', text: 'Poor health' }
       ],
       alternativesPersonality: [
-        { value: 'Energetic', text: 'Energetic' },
-        { value: 'Playful', text: 'Playful' },
-        { value: 'Calm', text: 'Calm' }
+        { value: 'energetic', text: 'Energetic' },
+        { value: 'playful', text: 'Playful' },
+        { value: 'calm', text: 'Calm' }
       ],
       alternativesAge: [
         { value: '1', text: '1' },

@@ -1,31 +1,34 @@
 <template>
   <b-container>
-    <b-row>
-      <b-col v-if="animals.length > 0">
+    <b-row v-if="animals.length > 0">
+      <b-col sm="12" md="6" lg="4" v-for="animal in animals" :key="animal._id">
         <b-card-group>
-          <span v-for="animal in animals" :key="animal._id">
+          <span>
             <b-card
               class="animal-card"
               :title="animalEmojis[animal.species]"
               tag="article"
               bg-variant="info"
               text-variant="white"
+              style="width: 17rem"
             >
               <hr />
-              <p>Species: {{ animal.species }}</p>
+              <b-card-text>Species: {{ animal.species }}</b-card-text>
+              <hr />
+              <b-card-text>Size: {{ animal.size }}</b-card-text>
+              <hr />
+              <b-card-text
+                >Health status: {{ animal.healthStatus }}</b-card-text
+              >
+              <hr />
+              <b-card-text>Personality: {{ animal.personality }}</b-card-text>
               <hr />
 
-              <p>Size: {{ animal.size }}</p>
+              <p>Sex: {{ animal.gender }}</p>
               <hr />
-              <p>Health status: {{ animal.healthStatus }}</p>
+              <b-card-text>Age: {{ animal.age }}</b-card-text>
               <hr />
-              <p>Personality: {{ animal.personality }}</p>
-              <hr />
-              <p>Gender: {{ animal.gender }}</p>
-              <hr />
-              <p>Age: {{ animal.age }}</p>
-              <hr />
-              <p>Hours needed: {{ animal.hours }}</p>
+              <b-card-text>Hours: {{ animal.hours }}</b-card-text>
               <hr />
 
               <b-button
@@ -44,7 +47,9 @@
           </span>
         </b-card-group>
       </b-col>
-      <b-col v-else sm="12">
+    </b-row>
+    <b-row v-else>
+      <b-col sm="12">
         <div>
           <h5 class="no-animals-title">
             Currently, there are no animals in your adoption center
@@ -66,11 +71,12 @@ export default {
   props: ['animals'],
   data() {
     return {
+      // Attribution for source of emojis: https://emojipedia.org/
       animalEmojis: {
         dog: '🐕‍🦺',
-        Cat: '🐈',
-        Bird: '🐦',
-        Rabbit: '🐇'
+        cat: '🐈',
+        bird: '🐦',
+        rabbit: '🐇'
       }
     }
   },
@@ -81,7 +87,6 @@ export default {
         `/adoptionCenters/${this.$route.params.id}/updateAnimal/${animalId}`
       )
     }
-
   }
 }
 </script>
@@ -94,17 +99,21 @@ export default {
 }
 
 .delete-animal-button {
-  margin: auto;
+  margin: 3% auto;
   font-size: 1em;
   display: block;
-  background-color: rgb(158, 56, 56);
+  background-color: rgb(152, 62, 62);
+  border: solid 0.08em;
+  border-color: black;
 }
 
 .update-animal-button {
   margin: 2% auto;
   font-size: 1em;
   display: block;
-  background-color: rgb(46, 112, 179);
+  background-color: rgb(86, 155, 73);
+   border: solid 0.08em;
+  border-color: black;
 }
 
 .no-animals-title {
