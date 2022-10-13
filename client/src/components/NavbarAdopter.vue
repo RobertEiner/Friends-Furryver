@@ -166,5 +166,6 @@ body {
 
 .inner-div {
   background-color: aliceblue;
+  min-height: 100vh;
 }
 </style>
