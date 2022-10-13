@@ -1,7 +1,7 @@
 <template>
   <div class="margin">
     <b-card
-      :title="animalEmojis[adoptionApplication.animal.species]"
+      title="📃"
       bg-variant="info"
       tag="article"
       text-variant="white"
@@ -66,12 +66,6 @@ export default {
   props: ['adoptionApplication'],
   data() {
     return {
-      animalEmojis: {
-        dog: '🐕‍🦺',
-        cat: '🐈',
-        bird: '🐦',
-        rabbit: '🐇'
-      },
       applicationStatus: {
         0: 'pending',
         1: 'approved',
