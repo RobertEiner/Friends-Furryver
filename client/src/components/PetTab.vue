@@ -6,7 +6,7 @@
           <span v-for="animal in animals" :key="animal._id">
             <b-card
               class="animal-card"
-              title="Animal 🐕‍🦺 "
+              :title="animalEmojis[animal.species]"
               tag="article"
               bg-variant="info"
               text-variant="white"
@@ -67,10 +67,10 @@ export default {
   data() {
     return {
       animalEmojis: {
-        dog: false,
-        cat: false,
-        bird: false,
-        rabbit: false
+        dog: '🐕‍🦺',
+        Cat: '🐈',
+        Bird: '🐦',
+        Rabbit: '🐇'
       }
     }
   },
@@ -81,6 +81,7 @@ export default {
         `/adoptionCenters/${this.$route.params.id}/updateAnimal/${animalId}`
       )
     }
+
   }
 }
 </script>
