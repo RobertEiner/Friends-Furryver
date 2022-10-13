@@ -10,7 +10,7 @@
               tag="article"
               bg-variant="info"
               text-variant="white"
-              style="width: 17rem"
+
             >
               <hr />
               <b-card-text>Species: {{ animal.species }}</b-card-text>
@@ -29,6 +29,8 @@
               <b-card-text>Age: {{ animal.age }}</b-card-text>
               <hr />
               <b-card-text>Hours: {{ animal.hours }}</b-card-text>
+              <hr />
+              <b-card-text>Other needs: {{ animal.otherNeeds }}</b-card-text>
               <hr />
 
               <b-button
@@ -95,7 +97,7 @@ export default {
 .animal-card {
   margin: 2%;
   display: inline-block;
-  background-color: aquamarine;
+  width: 17rem;
 }
 
 .delete-animal-button {
@@ -118,9 +120,12 @@ export default {
 
 .no-animals-title {
   padding-bottom: 1%;
+  font-family: 'Pacifico', cursive;
 }
 
 .no-animals-img {
   max-width: 15rem;
 }
+
+ @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>
