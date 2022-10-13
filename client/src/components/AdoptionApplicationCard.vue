@@ -4,7 +4,6 @@
       :title="animalEmojis[adoptionApplication.animal.species]"
       bg-variant="info"
       tag="article"
-      style="width: 20rem"
       text-variant="white"
     >
       <hr />
@@ -27,7 +26,14 @@
       <b-card-text> Age: {{ adoptionApplication.animal.age }} </b-card-text>
 
       <hr />
-      <b-card-text> Other needs: {{ adoptionApplication.animal.otherNeeds }} </b-card-text>
+      <b-card-text>
+        Health status: {{ adoptionApplication.animal.healthStatus }}
+      </b-card-text>
+
+      <hr />
+      <b-card-text>
+        Other needs: {{ adoptionApplication.animal.otherNeeds }}
+      </b-card-text>
 
       <hr />
       <b-card-text>
@@ -85,6 +91,9 @@ export default {
 <style scoped>
 .margin {
   padding: 3% 7%;
+}
+.b-card {
+  width: 17rem;
 }
 .delete-button {
   padding: 3%;

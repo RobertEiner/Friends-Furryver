@@ -4,7 +4,6 @@
       :title="animalEmojis[animal.species]"
       bg-variant="info"
       tag="article"
-      style="width: 20rem"
       text-variant="white"
     >
       <hr />
@@ -23,15 +22,16 @@
       <b-card-text> Age: {{ animal.age }} </b-card-text>
 
       <hr />
+      <b-card-text> Health status: {{ animal.healthStatus }} </b-card-text>
+
+      <hr />
       <b-card-text> Other needs: {{ animal.otherNeeds }} </b-card-text>
 
       <hr />
       <b-card-text> Hours needed: {{ animal.hours }} </b-card-text>
       <hr />
 
-      <b-button @click="apply" class="applyButton"
-        >Apply</b-button
-      >
+      <b-button @click="apply" class="applyButton">Apply</b-button>
     </b-card>
   </div>
 </template>
@@ -71,6 +71,9 @@ export default {
 <style scoped>
 .animal-card {
   padding: 3% 7%;
+}
+.b-card {
+  width: 17rem;
 }
 .applyButton {
   padding: 3%;
