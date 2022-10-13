@@ -13,6 +13,7 @@
               Automatic Filter
             </b-form-checkbox>
           </div>
+
           <div class="regularFilters">
             <b-button v-b-toggle.collapse-1 variant="primary">Filter</b-button>
             <b-collapse id="collapse-1" class="mt-2">
@@ -24,6 +25,7 @@
                   @change="updateAnimalList"
                 ></b-form-checkbox-group>
               </b-form-group>
+
               <b-form-group label="sex:">
                 <b-form-checkbox-group
                   id="sex-filter"
@@ -32,6 +34,7 @@
                   @change="updateAnimalList"
                 ></b-form-checkbox-group>
               </b-form-group>
+
               <b-form-group label="size:">
                 <b-form-checkbox-group
                   id="size-filter"
@@ -54,7 +57,10 @@
           />
         </b-tab>
         <b-tab :title="tabThree">
-          <adopter-profile :adopter="adopter" />
+          <adopter-profile
+            :adopter="adopter"
+            @adopterProfileUpdated="getAdopter"
+          />
         </b-tab>
       </b-tabs>
     </div>
@@ -146,16 +152,20 @@ export default {
 </script>
 
 <style scoped>
+html,
+body {
+  height: 100%;
+}
+
 .outer-div {
   padding: 3% 7%;
   background-color: rgb(119, 200, 246);
+  position: relative;
+  min-height: 100vh;
 }
 
 .inner-div {
   background-color: aliceblue;
-}
-
-.navbar-brand {
-  background-color: royalblue;
+  min-height: 100vh;
 }
 </style>

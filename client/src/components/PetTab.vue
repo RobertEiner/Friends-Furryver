@@ -1,67 +1,92 @@
 <template>
+  <b-container>
+    <b-row v-if="animals.length > 0">
+      <b-col sm="12" md="6" lg="4" v-for="animal in animals" :key="animal._id">
+        <b-card-group>
+          <span>
+            <b-card
+              class="animal-card"
+              :title="animalEmojis[animal.species]"
+              tag="article"
+              bg-variant="info"
+              text-variant="white"
 
-    <b-container>
-      <b-row>
-        <b-col>
-          <b-card
-          class="animal-card"
-            title="Animal"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
-            tag="article"
-            style="max-width: 20rem;"
-          >
-
-            <b-list-group-item>
-              Species: {{ animal.species }}
-            </b-list-group-item>
-            <b-list-group-item> Breed: {{ animal.breed }} </b-list-group-item>
-
-            <b-list-group-item> Size: {{ animal.size }} </b-list-group-item>
-
-            <b-list-group-item>
-              Health status: {{ animal.healthStatus }}
-            </b-list-group-item>
-            <b-list-group-item>
-              Personality: {{ animal.personality }}
-            </b-list-group-item>
-            <b-list-group-item>Gender: {{ animal.gender }}</b-list-group-item>
-            <b-list-group-item>Age: {{ animal.age }}</b-list-group-item>
-            <b-list-group-item
-              >Hours needed: {{ animal.hours }}</b-list-group-item
             >
+              <hr />
+              <b-card-text>Species: {{ animal.species }}</b-card-text>
+              <hr />
+              <b-card-text>Size: {{ animal.size }}</b-card-text>
+              <hr />
+              <b-card-text
+                >Health status: {{ animal.healthStatus }}</b-card-text
+              >
+              <hr />
+              <b-card-text>Personality: {{ animal.personality }}</b-card-text>
+              <hr />
 
-            <b-button
-              class="update-animal-button"
-              size="sm"
-              v-on:click="goToUpdateAnimal"
-              variant="primary"
-              >Update animal</b-button
-            >
-            <b-button
-              class="delete-animal-button"
-              size="sm"
-              v-on:click="$emit('del-animal', animal._id)"
-              variant="primary"
-              >Delete animal</b-button
-            >
-          </b-card>
-        </b-col>
-      </b-row>
-    </b-container>
+              <p>Sex: {{ animal.gender }}</p>
+              <hr />
+              <b-card-text>Age: {{ animal.age }}</b-card-text>
+              <hr />
+              <b-card-text>Hours: {{ animal.hours }}</b-card-text>
+              <hr />
+              <b-card-text>Other needs: {{ animal.otherNeeds }}</b-card-text>
+              <hr />
 
+              <b-button
+                class="update-animal-button"
+                size="sm"
+                @click="goToUpdateAnimal(animal._id)"
+                >Update animal</b-button
+              >
+              <b-button
+                class="delete-animal-button"
+                size="sm"
+                @click="$emit('del-animal', animal._id)"
+                >Delete animal</b-button
+              >
+            </b-card>
+          </span>
+        </b-card-group>
+      </b-col>
+    </b-row>
+    <b-row v-else>
+      <b-col sm="12">
+        <div>
+          <h5 class="no-animals-title">
+            Currently, there are no animals in your adoption center
+          </h5>
+          <b-img
+            class="no-animals-img"
+            :src="require('../Assets/pet-house.png')"
+            fluid
+          ></b-img>
+        </div>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 export default {
   name: 'pets-tab',
-  props: ['animal'],
+  props: ['animals'],
+  data() {
+    return {
+      // Attribution for source of emojis: https://emojipedia.org/
+      animalEmojis: {
+        dog: '🐕‍🦺',
+        cat: '🐈',
+        bird: '🐦',
+        rabbit: '🐇'
+      }
+    }
+  },
 
   methods: {
-    goToUpdateAnimal() {
+    goToUpdateAnimal(animalId) {
       this.$router.push(
-        `/adoptionCenters/${this.$route.params.id}/updateAnimal/${this.animal._id}`
+        `/adoptionCenters/${this.$route.params.id}/updateAnimal/${animalId}`
       )
     }
   }
@@ -70,19 +95,37 @@ export default {
 
 <style scoped>
 .animal-card {
-  margin: 3% 2%;
+  margin: 2%;
+  display: inline-block;
+  width: 17rem;
 }
 
 .delete-animal-button {
-  margin: auto;
+  margin: 3% auto;
   font-size: 1em;
   display: block;
-  background-color: red;
+  background-color: rgb(152, 62, 62);
+  border: solid 0.08em;
+  border-color: black;
 }
 
 .update-animal-button {
   margin: 2% auto;
   font-size: 1em;
   display: block;
+  background-color: rgb(86, 155, 73);
+   border: solid 0.08em;
+  border-color: black;
 }
+
+.no-animals-title {
+  padding-bottom: 1%;
+  font-family: 'Pacifico', cursive;
+}
+
+.no-animals-img {
+  max-width: 15rem;
+}
+
+ @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>

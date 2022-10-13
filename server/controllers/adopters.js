@@ -81,6 +81,26 @@ router.put('/api/adopters/:id', function(req, res, next) {
     });
 });
 
+//update some of the adopter's attributes
+router.patch('/api/adopters/:id', function(req, res, next){
+    var id = req.params.id;
+    Adopter.findById(id, function(err, adopter) {
+        if(err) { return next(err); }
+        if(adopter === null) {
+            return res.status(404).json({'Message': 'adopter not found'})
+        }
+        adopter.name = (req.body.name || adopter.name);
+        adopter.username = (req.body.name || adopter.username);
+        adopter.petPreferences.species = (req.body.petPreferences.species ||  adopter.petPreferences.species);
+        adopter.petPreferences.size = (req.body.petPreferences.size ||  adopter.petPreferences.size);
+        adopter.petPreferences.hours = (req.body.petPreferences.hours ||  adopter.petPreferences.hours);
+        adopter.petPreferences.personality = (req.body.petPreferences.personality ||  adopter.petPreferences.personality);
+
+        adopter.save();
+        res.json(adopter)
+    });
+});
+
 //get all adoption applications for a specific user
 router.get('/api/adopters/:id/adoption-applications', function(req, res, next) {
     var adopterId = req.params.id;

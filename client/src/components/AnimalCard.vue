@@ -1,27 +1,37 @@
 <template>
-  <div class="margin">
+  <div class="animal-card">
     <b-card
-      title="Animal"
-      img-src="https://picsum.photos/600/300/?image=25"
-      img-alt="Image"
-      img-top
+      :title="animalEmojis[animal.species]"
+      bg-variant="info"
       tag="article"
-      style="max-width: 20rem"
+      text-variant="white"
     >
-      <b-list-group>
-        <b-list-group-item> Size: {{ animal.size }} </b-list-group-item>
-        <b-list-group-item> Species: {{ animal.species }} </b-list-group-item>
-        <b-list-group-item> Breed: {{ animal.breed }} </b-list-group-item>
-        <b-list-group-item>
-          Personality: {{ animal.personality }}
-        </b-list-group-item>
-        <b-list-group-item>Gender: {{ animal.gender }}</b-list-group-item>
-        <b-list-group-item>Age: {{ animal.age }}</b-list-group-item>
-        <b-list-group-item>Hours needed: {{ animal.hours }}</b-list-group-item>
-      </b-list-group>
-      <b-button @click="apply" variant="success" class="applyButton"
-        >Apply</b-button
-      >
+      <hr />
+      <b-card-text> Size: {{ animal.size }} </b-card-text>
+
+      <hr />
+      <b-card-text> Species: {{ animal.species }} </b-card-text>
+
+      <hr />
+      <b-card-text> Personality: {{ animal.personality }} </b-card-text>
+
+      <hr />
+      <b-card-text> Sex: {{ animal.gender }} </b-card-text>
+
+      <hr />
+      <b-card-text> Age: {{ animal.age }} </b-card-text>
+
+      <hr />
+      <b-card-text> Health status: {{ animal.healthStatus }} </b-card-text>
+
+      <hr />
+      <b-card-text> Other needs: {{ animal.otherNeeds }} </b-card-text>
+
+      <hr />
+      <b-card-text> Hours needed: {{ animal.hours }} </b-card-text>
+      <hr />
+
+      <b-button @click="apply" class="applyButton">Apply</b-button>
     </b-card>
   </div>
 </template>
@@ -32,6 +42,17 @@ import { Api } from '@/Api'
 export default {
   name: 'animal-card',
   props: ['animal'],
+  data() {
+    return {
+      animalEmojis: {
+        // Attribution for source of emojis: https://emojipedia.org/
+        dog: '🐕‍🦺',
+        cat: '🐈',
+        bird: '🐦',
+        rabbit: '🐇'
+      }
+    }
+  },
   methods: {
     apply() {
       console.log('applied')
@@ -49,10 +70,16 @@ export default {
 </script>
 
 <style scoped>
-.margin {
+.animal-card {
   padding: 3% 7%;
+}
+.b-card {
+  width: 17rem;
 }
 .applyButton {
   padding: 3%;
+  background-color: rgb(32, 144, 13);
+  border: solid 0.1em;
+  border-color: black;
 }
 </style>

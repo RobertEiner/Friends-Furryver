@@ -2,6 +2,9 @@
   <div>
     <b-container fluid>
       <b-row align-h="center">
+        <div v-if="!adoptionApplications.length">
+          <h5>You don't have applications yet</h5>
+        </div>
         <b-col
           sm="12"
           md="6"

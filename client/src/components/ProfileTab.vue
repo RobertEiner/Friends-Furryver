@@ -2,26 +2,33 @@
   <div class="outer-div">
     <b-container>
       <b-row>
-        <b-col>
+        <b-col sm="12" md="6" >
           <b-img
             class="dog-img"
-            :src="require('../Assets/dog-close-up.jpg')"
+            :src="require('../Assets/pet-house.png')"
             rounded="top"
             fluid-grow
           ></b-img>
         </b-col>
 
-        <b-col v-if="pageState === form">
+        <b-col v-if="pageState === form" sm="12" md="6" >
           <b-card class="form-card">
             <h3>Fill in the form below</h3>
-            <p v-if="error != ''" class="invalid-input"> Please fill in atleast one field</p>
+            <p v-if="error != ''" class="invalid-input">
+              Please fill in atleast one field
+            </p>
             <b-form class="adoptionCenter-form">
               <label for="">Name:</label>
-              <b-form-input placeholder="Enter name" class="name-input" v-model="form.name">
+              <b-form-input
+                placeholder="Enter name"
+                class="name-input"
+                v-model="form.name"
+              >
               </b-form-input>
 
               <label class="adress-label" for="">Address:</label>
-              <b-form-input placeholder="Enter address" v-model="form.address"> </b-form-input>
+              <b-form-input placeholder="Enter address" v-model="form.address">
+              </b-form-input>
 
               <b-button
                 class="submit-button"
@@ -36,7 +43,7 @@
 
         <b-col v-else>
           <b-card class="info-card">
-            <h4>Adoption Center information</h4>
+            <h3>Adoption Center information</h3>
             <h5>Name:</h5>
             <p>{{ adoptionCenter.name }}</p>
             <h5>Address:</h5>
@@ -52,8 +59,7 @@
 </template>
 
 <script>
-
-import { Api } from '@/Api'
+// import { Api } from '@/Api'
 
 export default {
   name: 'profile-tab',
@@ -61,7 +67,6 @@ export default {
 
   data() {
     return {
-      adoptionCenterPassedDown: this.adoptionCenter,
       pageState: '',
       form: {
         name: '',
@@ -91,31 +96,31 @@ export default {
     },
     updateAdoptionCenter() {
       const formData = this.form
-      Api.patch(`/adoptionCenters/${this.$route.params.id}`, formData)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      this.$emit('update-adoptionCenter', formData)
     }
   }
-
 }
 </script>
 
 <style scoped>
+
+h3 {
+  font-family: 'Pacifico', cursive;
+}
+
 .outer-div {
   margin-bottom: 0;
 }
 .info-card {
   margin-top: 30%;
-  background-color: rgb(216, 238, 251);
+  background-color: rgb(58, 172, 213);
+  color: white;
 }
 
 .form-card {
   margin-top: 10%;
-  background-color: rgb(216, 238, 251);
+  background-color: rgb(58, 172, 213);
+  color: white;
 }
 .adoptionCenter-form {
   text-align: left;
@@ -139,5 +144,8 @@ export default {
 
 .dog-img {
   margin-top: 10%;
+  max-width: 20rem;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>

@@ -75,17 +75,16 @@ router.get('/api/AdoptionCenters/:id', function (req, res, next) {
 // Get all applications of a specific adoption center
 router.get('/api/AdoptionCenters/:id/adoptionApplications', function (req, res, next) {
     var id = req.params.id;
-    AdoptionCenter.findById(id, function(err, adoptionCenter) {
-        if (err) { return next(err); }
-        if (adoptionCenter === null) {
-            return res.status(404).json({"message": "Adoption center not found"});
-        }
-        AdoptionApplication.find({adoptionCenter: id}, function(err, applications) {
-            if(err) { next(err); }
+
+        AdoptionApplication.find({adoptionCenter: id})
+        .populate('adopter')
+        .populate('animal')
+        .exec(function(err, applications)  {
+            if(err) {return next(err); }
             res.status(200).json({'Applications': applications})
         })
     });
-});
+
 
 
 //get animals of a specific adoption center
@@ -148,9 +147,6 @@ router.delete('/api/AdoptionCenters/:id', function(req, res, next) {
         }
         Animal.deleteMany({"adoptionCenter": id}, function(err, animal){
             if (err) { return next(err) }
-        });
-        AdoptionApplication.deleteMany({"adoptionCenter": id}, function(error) {
-            if(err) {return next(err)}
         });
         res.json(adoptionCenter);
     });
