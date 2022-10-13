@@ -22,9 +22,12 @@ export default {
 <style scoped>
     .navbar {
         background-color: rgb(58, 172, 213);
+        font-family: 'Pacifico', cursive;
     }
 
     .dog-img-navbar {
       max-width: 2rem;
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>

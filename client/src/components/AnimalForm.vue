@@ -318,6 +318,7 @@ export default {
 <style scoped>
 h1 {
   display: block;
+  font-family: 'Pacifico', cursive;
 }
 .b-row {
   text-align: left;
@@ -327,6 +328,7 @@ h1 {
   display: flex;
   justify-content: center;
   margin-top: 2%;
+  color: white;
 }
 
 .add-button {
@@ -364,6 +366,8 @@ h1 {
 .to-main-page-button {
   margin-top: 2%;
 }
+
+ @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>
 
 <!--Reference for inspiration when creating this form https://bootstrap-vue.org/docs/components/form-->
