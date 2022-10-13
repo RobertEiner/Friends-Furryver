@@ -89,3 +89,4 @@ export default {
 </script>
 
 <!-- Based on template from https://bbbootstrap.com/snippets/login-form-information-text-67856111 -->
+<!-- Login and signup with authentication done based on the tutorial from https://codesource.io/setting-up-vue-authentication-using-expressjs-mongodb-and-jwt/ -->
