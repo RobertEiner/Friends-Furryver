@@ -8,32 +8,49 @@
         >
           <b-card
             class="active-card"
-            title="Application"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
+            :title="applicationEmoji"
+            bg-variant="info"
+            text-variant="white"
             tag="article"
-            style="max-width: 20rem;"
+            style="max-width: 17rem;"
           >
-            <b-list-group-item>
-              Adopter: {{ activeApplication.adopter.name }}<br />
-              User name: {{ activeApplication.adopter.username }}
-            </b-list-group-item>
+            <hr />
+            <b-card-text
+              >Adopter: {{ activeApplication.adopter.name }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Species: {{ activeApplication.animal.species }}</b-card-text
+            >
+            <hr />
+            <b-card-text>
+              Size: {{ activeApplication.animal.size }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Health status:
+              {{ activeApplication.animal.healthStatus }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Personality:
+              {{ activeApplication.animal.personality }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Sex: {{ activeApplication.animal.gender }}</b-card-text
+            >
+            <hr />
+            <b-card-text>Age: {{ activeApplication.animal.age }}</b-card-text>
+            <hr />
+            <b-card-text
+              >Hours needed: {{ activeApplication.animal.hours }}</b-card-text
+            >
+            <hr />
 
-            <b-list-group-item>
-              Species: {{ activeApplication.animal.species }}
-            </b-list-group-item>
-            <b-list-group-item>
-              breed: {{ activeApplication.animal.breed }}
-            </b-list-group-item>
-            <b-list-group-item>
-              size: {{ activeApplication.animal.size }}
-            </b-list-group-item>
-            <b-list-group-item>
-              health status: {{ activeApplication.animal.healthStatus }}
-            </b-list-group-item>
-
-            <b-badge pill variant="warning">Status: pending </b-badge>
+            <b-badge :status="activeApplication.status" class="badge" pill
+              >Status: {{ applicationStatus[activeApplication.status] }}
+            </b-badge>
 
             <b-button
               id="accept-application-button"
@@ -71,41 +88,50 @@
         >
           <b-card
             class="handled-card"
-            title="Application"
-            img-src="https://picsum.photos/600/300/?image=25"
-            img-alt="Image"
-            img-top
+            :title="applicationEmoji"
+            bg-variant="info"
+            text-variant="white"
             tag="article"
-            style="max-width: 20rem;"
+            style="max-width: 17rem;"
           >
-            <b-list-group-item>
-              Adopter: {{ handledApplication.adopter.name }}<br />
-              User name: {{ handledApplication.adopter.username }}
-            </b-list-group-item>
-
-            <b-list-group-item>
-              Species: {{ handledApplication.animal.species }}
-            </b-list-group-item>
-            <b-list-group-item>
-              breed: {{ handledApplication.animal.breed }}
-            </b-list-group-item>
-            <b-list-group-item>
-              size: {{ handledApplication.animal.size }}
-            </b-list-group-item>
-            <b-list-group-item>
-              health status: {{ handledApplication.animal.healthStatus }}
-            </b-list-group-item>
-
-            <b-badge
-              v-if="handledApplication.status === 1"
-              pill
-              variant="success"
-              class="badge"
-              >Status: approved
-            </b-badge>
-            <b-badge v-else pill variant="danger" class="badge"
-              >Status: declined</b-badge
+            <hr />
+            <b-card-text
+              >Adopter: {{ handledApplication.adopter.name }}</b-card-text
             >
+            <hr />
+            <b-card-text
+              >Species: {{ handledApplication.animal.species }}</b-card-text
+            >
+            <hr />
+            <b-card-text>
+              Size: {{ handledApplication.animal.size }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Health status:
+              {{ handledApplication.animal.healthStatus }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Personality:
+              {{ handledApplication.animal.personality }}</b-card-text
+            >
+            <hr />
+            <b-card-text
+              >Sex: {{ handledApplication.animal.gender }}</b-card-text
+            >
+            <hr />
+            <b-card-text>Age: {{ handledApplication.animal.age }}</b-card-text>
+            <hr />
+            <b-card-text
+              >Hours needed: {{ handledApplication.animal.hours }}</b-card-text
+            >
+            <hr />
+
+            <b-badge :status="handledApplication.status" pill class="badge"
+              >Status: {{ applicationStatus[handledApplication.status] }}
+            </b-badge>
+
             <b-button
               class="remove-application-button"
               size="sm"
@@ -143,7 +169,14 @@ export default {
       applications: [],
       activeApplications: [],
       handledApplications: [],
-      status: ''
+      status: '',
+      // Attribution for source of emojis: https://emojipedia.org/
+      applicationEmoji: '📃',
+      applicationStatus: {
+        0: 'pending',
+        1: 'accepted',
+        2: 'declined'
+      }
     }
   },
   created() {
@@ -223,7 +256,7 @@ export default {
 <style scoped>
 .remove-application-button {
   margin: 2% auto;
-  background-color: red;
+  background-color: rgb(152, 62, 62);
   display: block;
 }
 
@@ -242,9 +275,20 @@ export default {
   margin: 2%;
 }
 
-.badge {
+.badge[status='0'] {
   display: inline-block;
   margin-top: 5%;
+  background-color: rgb(205, 170, 16);
+}
+.badge[status='1'] {
+  display: inline-block;
+  margin-top: 5%;
+  background-color: rgb(32, 144, 13);
+}
+.badge[status='2'] {
+  display: inline-block;
+  margin-top: 5%;
+  background-color: rgb(175, 48, 48);
 }
 
 .handled-card {
@@ -254,6 +298,7 @@ export default {
 
 .no-active-applications {
   padding-bottom: 1%;
+  font-family: 'Pacifico', cursive;
 }
 
 .no-active-applications-img {
@@ -263,10 +308,13 @@ export default {
 
 .no-processed-applications {
   padding-bottom: 1%;
+  font-family: 'Pacifico', cursive;
 }
 
 .no-processed-applications-img {
   max-width: 15rem;
   margin-bottom: 2%;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>
