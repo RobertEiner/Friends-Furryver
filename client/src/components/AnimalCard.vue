@@ -23,6 +23,9 @@
       <b-card-text> Age: {{ animal.age }} </b-card-text>
 
       <hr />
+      <b-card-text> Other needs: {{ animal.otherNeeds }} </b-card-text>
+
+      <hr />
       <b-card-text> Hours needed: {{ animal.hours }} </b-card-text>
       <hr />
 
