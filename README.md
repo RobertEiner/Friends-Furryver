@@ -1,3 +1,5 @@
+### This project was built on the below template provided by Gothenburg University
+
 # Backend and Frontend Template
 
 Latest version: https://git.ita.chalmers.se/courses/dit341/group-00-web (public Github [mirror](https://github.com/dit341/group-00-web))
@@ -57,7 +59,8 @@ npm run serve
 
 Open the `server` and `client` in separate VSCode workspaces or open the combined [backend-frontend.code-workspace](./backend-frontend.code-workspace). Otherwise, workspace-specific settings don't work properly.
 
-## System Definition (MS0)
+## The following is a brief description of the project
+### System Definition (MS0)
 
 ### Purpose
 
@@ -72,7 +75,6 @@ The purpose of this system is to facilitate the process of pet adoption. It serv
   - name
   - age
   - gender
-  - personality
   - pet preferences
 
 * **Log In Page:**
@@ -81,15 +83,7 @@ The purpose of this system is to facilitate the process of pet adoption. It serv
 
 * **Adopter Home Page:**
 
-   The first screen that the user sees when going to the site or logging in. From here you can navigate to show matches page, account page and more.   
-
-* **Show Matches Page:**
-
-   Shows a scroll-view with results of the matching animals for the potential adopter. Information about the animal is also displayed.  
-
-* **Manage Account Page:**
-
-   Change profile information such as password, username, pet preferences etc.
+   The first screen that the user sees when going to the site or logging in. From here you can see which animals are available to apply for, active applications and profile information.    
 
 * **Adoption Center Register Page:**
 
@@ -97,19 +91,11 @@ The purpose of this system is to facilitate the process of pet adoption. It serv
 
 * **Adoption Center Home Page:**
 
-   Display options such as manage application, register pet, manage pets, active applications.
+   Display options such as manage application, add animal, manage animals, manage applications.
 
-* **Adoption Center Contracts Page:**
+* **Adoption Center Add/update Animal Page:**
 
-   Display signed and yet to be signed contracts.
-
-* **Adoption Center Register Pet Page:**
-
-   Display a form which will register the pet’s information
-
-* **Adoption Center Manage Pets Page:**
-
-   Display all pets registered by this adoption center and enable editing their information.
+   Display a form which will register the animal’s information. This page will also let the user change an already registered animal's information.
 
 
 
