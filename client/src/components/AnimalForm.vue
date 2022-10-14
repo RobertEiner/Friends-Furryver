@@ -202,7 +202,9 @@ export default {
       alternativesPersonality: [
         { value: 'energetic', text: 'Energetic' },
         { value: 'playful', text: 'Playful' },
-        { value: 'calm', text: 'Calm' }
+        { value: 'calm', text: 'Calm' },
+        { value: 'lazy', text: 'Lazy' }
+
       ],
       alternativesAge: [
         { value: '1', text: '1' },
