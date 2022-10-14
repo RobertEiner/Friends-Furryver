@@ -4,6 +4,9 @@ const Animal = require('../models/animal');
 const multer = require('multer');
 const AdoptionApplication = require('../models/adoptionApplication');
 
+
+// Code related to multer and image uploads are left for a potential future 
+// implementation of uploading images to animals 
 const Storage = multer.diskStorage({
     destination: function(req, file, cb) {
         cb(null, './imageUploads/');
