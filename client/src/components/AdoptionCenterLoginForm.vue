@@ -83,7 +83,6 @@ export default {
         }
       } catch (err) {
         swal('Login unsuccessful', 'Invalid login details', 'error')
-        console.log(err.response)
       }
     }
   }

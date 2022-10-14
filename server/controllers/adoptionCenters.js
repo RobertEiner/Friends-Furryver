@@ -32,13 +32,14 @@ loginAdoptionCenter = async (req, res) => {
       const email = req.body.email;
       const password = req.body.password;
       const adoptionCenter = await AdoptionCenter.findByCredentials(email, password);
-      if (!adoptionCenter) {
-        return res.status(401).json({ error: "Login failed! Check authentication credentials" });
-      }
       const token = await adoptionCenter.generateAuthToken();
       res.status(201).json({ adoptionCenter, token });
     } catch (err) {
-      res.status(400).json({ err: err });
+        if (err.message === "Invalid login details") {
+            res.status(401).json(err);
+        } else {
+            res.status(400).json(err);
+        }
     }
   };
   router.post('/api/adoptionCenters/login')
