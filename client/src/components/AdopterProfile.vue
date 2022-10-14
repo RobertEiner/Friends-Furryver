@@ -58,7 +58,7 @@
             <b-form-select
               id="input-5"
               v-model="form.petPreferences.personality"
-              :options="['fun', 'calm', 'active']"
+              :options="['energetic', 'playful', 'calm', 'lazy']"
               value="null"
             ></b-form-select>
           </b-form-group>
