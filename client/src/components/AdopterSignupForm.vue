@@ -4,7 +4,7 @@
       <b-row class="b-row">
         <b-col>
           <b-form class="b-form" @submit.prevent="registerUser">
-            <h6 class="msg-info">Adopter Sign up</h6>
+            <h6 class="msg-info">Adopter sign up</h6>
             <b-form-group label="E-mail address">
               <b-form-input
                 required
@@ -111,6 +111,7 @@
     </b-container>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
 import { Api } from '@/Api'

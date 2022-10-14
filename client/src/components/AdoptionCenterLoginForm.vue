@@ -51,6 +51,7 @@
     </b-container>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
 import { Api } from '@/Api'
