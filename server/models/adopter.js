@@ -56,11 +56,11 @@ adopterSchema.pre("save", async function(next) {
   adopterSchema.statics.findByCredentials = async (email, password) => {
     const adopter = await Adopter.findOne({ email });
     if (!adopter) {
-      throw new Error({ error: "Invalid login details" });
+      throw new Error("Invalid login details");
     }
     const isPasswordMatch = await bcrypt.compare(password, adopter.password);
     if (!isPasswordMatch) {
-      throw new Error({ error: "Invalid login details" });
+      throw new Error("Invalid login details");
     }
     return adopter;
   };

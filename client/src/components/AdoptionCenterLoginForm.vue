@@ -51,6 +51,7 @@
     </b-container>
   </div>
 </template>
+<style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
 import { Api } from '@/Api'
@@ -83,7 +84,6 @@ export default {
         }
       } catch (err) {
         swal('Login unsuccessful', 'Invalid login details', 'error')
-        console.log(err.response)
       }
     }
   }

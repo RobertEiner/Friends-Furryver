@@ -7,10 +7,10 @@
       text-variant="white"
     >
       <hr />
-      <b-card-text> Size: {{ animal.size }} </b-card-text>
+      <b-card-text> Species: {{ animal.species }} </b-card-text>
 
       <hr />
-      <b-card-text> Species: {{ animal.species }} </b-card-text>
+      <b-card-text> Size: {{ animal.size }} </b-card-text>
 
       <hr />
       <b-card-text> Personality: {{ animal.personality }} </b-card-text>

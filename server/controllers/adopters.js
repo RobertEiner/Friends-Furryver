@@ -32,13 +32,14 @@ registerNewAdopter = async (req, res) => {
       const email = req.body.email;
       const password = req.body.password;
       const adopter = await Adopter.findByCredentials(email, password);
-      if (!adopter) {
-        return res.status(401).json({ error: "Login failed! Check authentication credentials" });
-      }
       const token = await adopter.generateAuthToken();
       res.status(201).json({ adopter, token });
     } catch (err) {
-      res.status(400).json({ err: err });
+        if (err.message === "Invalid login details") {
+            res.status(401).json(err);
+        } else {
+            res.status(400).json(err);
+        }
     }
   };
   router.post('/api/adopters/login', loginAdopter);
@@ -61,10 +62,10 @@ router.get('/api/adopters', function (req, res, next) {
 router.get('/api/adopters/:id', function (req, res, next) {
     var id = req.params.id;
     Adopter.findById(id, function (err, adopter) {
-        if (err) { return next(err); }
         if (adopter === null) {
             return res.status(404).json({ 'message': 'Adopter not found' })
         }
+        if (err) { return next(err); }
         res.json(adopter);
     });
 });

@@ -8,34 +8,43 @@ import AdopterSignup from './views/AdopterSignup.vue'
 import AdoptionCenterSignup from './views/AdoptionCenterSignup.vue'
 import AdoptionCenter from './views/AdoptionCenter.vue'
 import AddAnimal from './views/AddAnimal.vue'
-import AdopterAnimals from './views/AdopterAnimals.vue'
+import Adopter from './views/Adopter.vue'
 import UpdateAnimal from './views/UpdateAnimal.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '',
       name: 'home',
       component: Home
     },
     {
       path: '/adoptionCenters/:id',
       name: 'adoption-center',
-      component: AdoptionCenter
+      component: AdoptionCenter,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/adoptionCenters/:id/addAnimal',
       name: 'add-animal',
-      component: AddAnimal
+      component: AddAnimal,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/adoptionCenters/:id/adoptionApplications',
       name: 'adoptionCenter-applications',
-      component: AdoptionCenter
+      component: AdoptionCenter,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/PrelSignupPage',
@@ -65,28 +74,28 @@ export default new Router({
     {
       path: '/adopters/:id',
       name: 'adopter',
-      component: AdopterAnimals,
+      component: Adopter,
       meta: {
         requiresAuth: true
-      },
-      beforeEnter: (to, from, next) => {
-        if (to.matched.some(record => record.meta.requiresAuth)) {
-          if (localStorage.getItem('jwt') == null) {
-            next({
-              path: '/'
-            })
-          } else {
-            next()
-          }
-        } else {
-          next()
-        }
       }
     },
     {
       path: '/adoptionCenters/:id/updateAnimal/:animalId',
       name: 'update-animal',
-      component: UpdateAnimal
+      component: UpdateAnimal,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && localStorage.getItem('jwt') === null) {
+    next('')
+  } else {
+    next()
+  }
+})
+
+export default router

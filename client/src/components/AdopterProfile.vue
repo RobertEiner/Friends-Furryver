@@ -58,12 +58,12 @@
             <b-form-select
               id="input-5"
               v-model="form.petPreferences.personality"
-              :options="['fun', 'calm', 'active']"
+              :options="['energetic', 'playful', 'calm', 'lazy']"
               value="null"
             ></b-form-select>
           </b-form-group>
-          <b-button type="submit">submit</b-button>
-          <b-button class="cancel-update-button" @click="updateteChangeInfo">cancel</b-button>
+          <b-button align class="submit-update-form-button" type="submit">submit</b-button>
+          <b-button variant="danger" class="cancel-update-button" @click="updateteChangeInfo">cancel</b-button>
         </b-form>
       </b-card>
     </b-col>
@@ -135,8 +135,23 @@ export default {
   margin-top: 10%;
   background-color: rgb(216, 238, 251);
 }
-
+.submit-update-form-button{
+  padding: 3%;
+  background-color: rgb(33, 158, 231);
+  border: solid 0.1em;
+  border-color: black;
+  margin: 10%;
+}
+.cancel-update-button{
+  padding: 3%;
+  border: solid 0.1em;
+  border-color: black;
+  margin: 10%;
+}
 .update-button {
+  padding: 3%;
+  border: solid 0.1em;
+  border-color: black;
   margin: 10%;
 }
 </style>

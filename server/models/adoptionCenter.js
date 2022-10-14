@@ -46,11 +46,11 @@ adoptionCenterSchema.pre("save", async function(next) {
   adoptionCenterSchema.statics.findByCredentials = async (email, password) => {
     const adoptionCenter = await AdoptionCenter.findOne({ email });
     if (!adoptionCenter) {
-      throw new Error({ error: "Invalid login details" });
+      throw new Error("Invalid login details");
     }
     const isPasswordMatch = await bcrypt.compare(password, adoptionCenter.password);
     if (!isPasswordMatch) {
-      throw new Error({ error: "Invalid login details" });
+      throw new Error("Invalid login details");
     }
     return adoptionCenter;
   };

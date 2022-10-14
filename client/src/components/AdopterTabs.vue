@@ -87,8 +87,6 @@ export default {
       this.$refs.adoptionApplicationList.updateList()
     },
     updateAnimalList() {
-      console.log(this.filters.selectedSpecies)
-      console.log(this.filters.selectedSex)
       this.$refs.animalList.updateList(this.filters)
     },
     getAdopter() {
@@ -158,7 +156,6 @@ body {
 }
 
 .outer-div {
-  padding: 3% 7%;
   background-color: rgb(119, 200, 246);
   position: relative;
   min-height: 100vh;

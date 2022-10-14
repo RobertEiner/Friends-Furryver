@@ -1,7 +1,7 @@
 <template>
   <b-container>
     <b-row v-if="animals.length > 0">
-      <b-col sm="12" md="6" lg="4" v-for="animal in animals" :key="animal._id">
+      <b-col sm="12" md="6"  v-for="animal in animals" :key="animal._id">
         <b-card-group>
           <span>
             <b-card
