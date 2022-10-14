@@ -53,17 +53,15 @@
             </b-badge>
 
             <b-button
-              id="accept-application-button"
+              class="accept-application-button"
               size="sm"
-              variant="primary"
               @click="acceptApplication(activeApplication._id)"
               >Accept application</b-button
             >
 
             <b-button
-              id="decline-application-button"
+              class="decline-application-button"
               size="sm"
-              variant="primary"
               @click="declineApplication(activeApplication._id)"
               >Decline application</b-button
             >
@@ -135,7 +133,6 @@
             <b-button
               class="remove-application-button"
               size="sm"
-              variant="primary"
               @click="deleteApplication(handledApplication._id)"
               >Remove application</b-button
             >
@@ -260,14 +257,14 @@ export default {
   display: block;
 }
 
-#accept-application-button {
+.accept-application-button {
   margin: 2% auto;
-
+  background-color: rgb(86, 155, 73);
   display: block;
 }
 
-#decline-application-button {
-  background-color: red;
+.decline-application-button {
+  background-color: rgb(152, 62, 62);
 }
 
 .active-card {
