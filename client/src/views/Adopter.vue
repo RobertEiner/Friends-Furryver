@@ -1,6 +1,7 @@
 <template>
   <div>
-    <navbar-adopter
+    <navbar />
+    <adopter-tabs
       firstTab="Animals"
       secondTab="Applications"
       thirdTab="Profile"
@@ -9,12 +10,14 @@
 </template>
 
 <script>
-import NavbarAdopter from '@/components/NavbarAdopter.vue'
+import AdopterTabs from '@/components/AdopterTabs.vue'
+import Navbar from '../components/Navbar.vue'
 
 export default {
   name: 'adopter',
   components: {
-    'navbar-adopter': NavbarAdopter
+    navbar: Navbar,
+    'adopter-tabs': AdopterTabs
   },
   data() {
     return {

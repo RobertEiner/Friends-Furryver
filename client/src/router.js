@@ -8,7 +8,7 @@ import AdopterSignup from './views/AdopterSignup.vue'
 import AdoptionCenterSignup from './views/AdoptionCenterSignup.vue'
 import AdoptionCenter from './views/AdoptionCenter.vue'
 import AddAnimal from './views/AddAnimal.vue'
-import AdopterAnimals from './views/AdopterAnimals.vue'
+import Adopter from './views/Adopter.vue'
 import UpdateAnimal from './views/UpdateAnimal.vue'
 
 Vue.use(Router)
@@ -65,7 +65,7 @@ export default new Router({
     {
       path: '/adopters/:id',
       name: 'adopter',
-      component: AdopterAnimals,
+      component: Adopter,
       meta: {
         requiresAuth: true
       },

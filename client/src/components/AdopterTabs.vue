@@ -158,7 +158,6 @@ body {
 }
 
 .outer-div {
-  padding: 3% 7%;
   background-color: rgb(119, 200, 246);
   position: relative;
   min-height: 100vh;
