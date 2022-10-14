@@ -98,7 +98,7 @@
             </b-form-select>
           </b-form-group>
 
-          <b-form-group v-if="this.formType === 'add-animal'" label="Hours">
+          <b-form-group v-if="this.formType === 'add-animal'" label="Hours of physical activity needed per day">
             <p v-if="invalidFormInput === true" class="invalid-input">
               Please choose a species
             </p>
@@ -217,12 +217,12 @@ export default {
         { value: '8', text: '8' }
       ],
       alternativesHours: [
-        { value: '1', text: '1' },
-        { value: '2', text: '2' },
-        { value: '3', text: '3' },
-        { value: '4', text: '4' },
-        { value: '5', text: '5' },
-        { value: '6', text: '6' }
+        { value: '1', text: '1 hour' },
+        { value: '2', text: '2 hours' },
+        { value: '3', text: '3 hours' },
+        { value: '4', text: '4 hours' },
+        { value: '5', text: '5 hours' },
+        { value: '6', text: '6 hours' }
       ],
       header: 'Animal information',
       form: {
