@@ -112,13 +112,13 @@ h3 {
   margin-bottom: 0;
 }
 .info-card {
-  margin-top: 30%;
+  margin-top: 15%;
   background-color: rgb(58, 172, 213);
   color: white;
 }
 
 .form-card {
-  margin-top: 10%;
+  margin-top: 24%;
   background-color: rgb(58, 172, 213);
   color: white;
 }
@@ -145,6 +145,16 @@ h3 {
 .dog-img {
   margin-top: 10%;
   max-width: 20rem;
+}
+
+@media (min-width: 992px) {
+  .info-card {
+    margin-top: 22%;
+}
+ .form-card {
+  margin-top: 19%;
+
+}
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
