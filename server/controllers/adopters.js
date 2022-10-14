@@ -62,10 +62,10 @@ router.get('/api/adopters', function (req, res, next) {
 router.get('/api/adopters/:id', function (req, res, next) {
     var id = req.params.id;
     Adopter.findById(id, function (err, adopter) {
-        if (err) { return next(err); }
         if (adopter === null) {
             return res.status(404).json({ 'message': 'Adopter not found' })
         }
+        if (err) { return next(err); }
         res.json(adopter);
     });
 });

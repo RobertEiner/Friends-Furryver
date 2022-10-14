@@ -100,7 +100,6 @@ export default {
         }
       } catch (err) {
         if (err) {
-          console.log(err)
           swal('Error', err.message, 'error')
         } else {
           swal('Error', err.data.err.message, 'error')

@@ -87,8 +87,6 @@ export default {
       this.$refs.adoptionApplicationList.updateList()
     },
     updateAnimalList() {
-      console.log(this.filters.selectedSpecies)
-      console.log(this.filters.selectedSex)
       this.$refs.animalList.updateList(this.filters)
     },
     getAdopter() {
