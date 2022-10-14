@@ -170,3 +170,10 @@ a:hover {
     margin-bottom: 50px !important;
   }
 }
+
+@media (max-width: 991px) {
+  .card2 {
+    display: none;
+  }
+  
+  }
