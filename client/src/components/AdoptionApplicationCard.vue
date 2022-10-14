@@ -1,18 +1,13 @@
 <template>
   <div class="margin">
-    <b-card
-      title="📃"
-      bg-variant="info"
-      tag="article"
-      text-variant="white"
-    >
-      <hr />
-      <b-card-text> Size: {{ adoptionApplication.animal.size }} </b-card-text>
-
+    <b-card title="📃" bg-variant="info" tag="article" text-variant="white">
       <hr />
       <b-card-text>
         Species: {{ adoptionApplication.animal.species }}
       </b-card-text>
+
+      <hr />
+      <b-card-text> Size: {{ adoptionApplication.animal.size }} </b-card-text>
 
       <hr />
       <b-card-text>
