@@ -86,11 +86,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    { path: '/:pathMatch(.*)*', name: 'NotFound' }
   ]
 })
 
 router.beforeEach((to, from, next) => {
+  if (to.name === 'NotFound') {
+    next('')
+  }
   if (to.meta.requiresAuth && localStorage.getItem('jwt') === null) {
     next('')
   } else {
