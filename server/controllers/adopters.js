@@ -118,7 +118,6 @@ router.get('/api/adopters/:id/animals', function(req, res, next) {
     var adopterId = req.params.id;
     var adopterApplications;
     var alreadyAppliedAnimalsId;
-    console.log(req.query)
     AdoptionApplication.find({adopter: adopterId}, (err, adoptionApplications) => {
         if (err) {return next(err)}
         adopterApplications = adoptionApplications
