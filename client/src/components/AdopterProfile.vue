@@ -117,7 +117,6 @@ export default {
       const formData = this.form
       Api.patch(`/adopters/${this.$route.params.id}`, formData)
         .then((response) => {
-          console.log(response)
           this.$emit('adopterProfileUpdated')
           this.updateteChangeInfo()
         })
