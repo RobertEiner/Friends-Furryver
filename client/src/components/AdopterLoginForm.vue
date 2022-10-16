@@ -47,12 +47,6 @@
               </b-button>
             </div>
 
-            <div class="row justify-content-center my-2">
-              <a href="#">
-                <small class="text-muted">Forgot Password? </small>
-              </a>
-            </div>
-
             <div class="bottom text-center mb-5">
               <p href="#" class="sm-text mx-auto mb-3">
                 Don't have an account?
