@@ -26,11 +26,11 @@
                 ></b-form-checkbox-group>
               </b-form-group>
 
-              <b-form-group label="sex:">
+              <b-form-group label="personality:">
                 <b-form-checkbox-group
-                  id="sex-filter"
-                  v-model="filters.selectedSex"
-                  :options="sexOptions"
+                  id="size-filter"
+                  v-model="filters.selectedPersonality"
+                  :options="personalityOptions"
                   @change="updateAnimalList"
                 ></b-form-checkbox-group>
               </b-form-group>
@@ -102,13 +102,13 @@ export default {
       if (this.automaticFilterChecked) {
         this.filters.selectedSpecies = [this.adopter.petPreferences.species]
         this.filters.selectedSize = [this.adopter.petPreferences.size]
-        this.filters.selectedSex = []
+        this.filters.selectedPersonality = [this.adopter.petPreferences.personality]
         this.updateAnimalList(this.filters)
       } else {
         this.filters = {
           selectedSpecies: [],
-          selectedSex: [],
-          selectedSize: []
+          selectedSize: [],
+          selectedPersonality: []
         }
         this.updateAnimalList(this.filters)
       }
@@ -129,9 +129,11 @@ export default {
         { text: 'Rabbit', value: 'rabbit' },
         { text: 'Bird', value: 'bird' }
       ],
-      sexOptions: [
-        { text: 'Male', value: 'male' },
-        { text: 'Female', value: 'female' }
+      personalityOptions: [
+        { text: 'Lazy', value: 'lazy' },
+        { text: 'Calm', value: 'calm' },
+        { text: 'Energetic', value: 'energetic' },
+        { text: 'Playful', value: 'playful' }
       ],
       sizeOptions: [
         { text: 'Small', value: 'small' },
@@ -140,7 +142,7 @@ export default {
       ],
       filters: {
         selectedSpecies: [],
-        selectedSex: [],
+        selectedPersonality: [],
         selectedSize: []
       },
       automaticFilterChecked: false
