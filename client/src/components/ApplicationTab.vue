@@ -53,14 +53,14 @@
             </b-badge>
 
             <b-button
-              class="accept-application-button"
+              id="accept-application-button"
               size="sm"
               @click="acceptApplication(activeApplication._id)"
               >Accept application</b-button
             >
 
             <b-button
-              class="decline-application-button"
+              id="decline-application-button"
               size="sm"
               @click="declineApplication(activeApplication._id)"
               >Decline application</b-button
@@ -131,7 +131,7 @@
             </b-badge>
 
             <b-button
-              class="remove-application-button"
+              id="remove-application-button"
               size="sm"
               @click="deleteApplication(handledApplication._id)"
               >Remove application</b-button
@@ -159,8 +159,7 @@ import { Api } from '@/Api'
 
 export default {
   name: 'applications-tab',
-  components: {},
-  // props: ['applications'],
+
   data() {
     return {
       applications: [],
@@ -194,7 +193,9 @@ export default {
     getAllApplications() {
       Api.get(`/AdoptionCenters/${this.$route.params.id}/adoptionApplications`)
         .then(response => {
-          console.log(response.data)
+          this.applications = []
+          this.activeApplications = []
+          this.handledApplications = []
           this.applications = response.data.Applications
           this.sortApplications()
         })
@@ -206,12 +207,7 @@ export default {
     acceptApplication(applicationId) {
       Api.put(`/adoption-applications/${applicationId}`, { status: 1 })
         .then(response => {
-          console.log(response.data)
-          this.applications = []
-          this.activeApplications = []
-          this.handledApplications = []
           this.getAllApplications()
-          console.log(this.applications)
         })
         .catch(error => {
           console.log(error)
@@ -222,10 +218,6 @@ export default {
     declineApplication(applicationId) {
       Api.put(`/adoption-applications/${applicationId}`, { status: 2 })
         .then(response => {
-          console.log(response)
-          this.applications = []
-          this.activeApplications = []
-          this.handledApplications = []
           this.getAllApplications()
         })
         .catch(error => {
@@ -237,9 +229,6 @@ export default {
     deleteApplication(applicationId) {
       Api.delete(`/adoption-applications/${applicationId}`)
         .then(response => {
-          this.applications = []
-          this.activeApplications = []
-          this.handledApplications = []
           this.getAllApplications()
         })
         .catch(error => {
@@ -251,20 +240,32 @@ export default {
 </script>
 
 <style scoped>
-.remove-application-button {
+#remove-application-button {
   margin: 2% auto;
   background-color: rgb(152, 62, 62);
   display: block;
 }
 
-.accept-application-button {
+#remove-application-button:hover {
+  background-color: rgb(73, 46, 46);
+}
+
+#accept-application-button {
   margin: 2% auto;
   background-color: rgb(86, 155, 73);
   display: block;
 }
 
-.decline-application-button {
+#accept-application-button:hover {
+  background-color: rgb(55, 92, 48) ;
+}
+
+#decline-application-button {
   background-color: rgb(152, 62, 62);
+}
+
+#decline-application-button:hover {
+  background-color: rgb(73, 46, 46);
 }
 
 .active-card {
