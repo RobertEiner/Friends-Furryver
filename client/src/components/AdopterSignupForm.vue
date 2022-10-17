@@ -67,7 +67,7 @@
                 class="form-control-label text-muted"
                 placeholder="Please enter your full name"
                 v-model="register.name"
-                v-validate="{ required: true, min: 4, alpha: true }"
+                v-validate="{ required: true, min: 4, alpha_spaces: true }"
                 :state="validateState('name')"
                 aria-describedby="name-live-feedback"
                 data-vv-as="name"
