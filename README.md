@@ -111,4 +111,4 @@ The purpose of this system is to facilitate the process of pet adoption. It serv
 
 ## Teaser (MS3)
 
-**...**
+![Teaser](./images/teaser.jpg)
