@@ -68,7 +68,6 @@ router.get('/api/animals', function(req, res, next) {
 router.get('/api/animals/:animalId/adoptionCenters', function(req, res, next) {
     var animalId = req.params.animalId;
     Animal.findById({_id: animalId})
-    //'adoptionCenter' here is the name of the property (from animal schema) we want to populate the animal with.
     .populate('adoptionCenter')
     .exec(function(err, animal) {
         if(err) {return next(err);} 
