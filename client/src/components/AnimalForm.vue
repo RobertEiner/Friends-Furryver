@@ -100,26 +100,26 @@
 
           <b-form-group
             v-if="this.formType === 'add-animal'"
-            label="Hours of physical activity needed per day"
+            label="Select hours of company needed"
           >
             <p v-if="invalidFormInput === true" class="invalid-input">
-              Please choose a species
+              Please choose amount of hours needed
             </p>
             <b-form-select
               size="sm"
-              placeholder="Physical activity needed"
+              placeholder="Hours of company needed per day"
               v-model="form.hours"
               :options="alternativesHours"
             >
               <template #first>
                 <option value="" disabled selected
-                  >Select hours of physical activity needed</option
+                  >Select hours of company needed</option
                 >
               </template>
             </b-form-select>
           </b-form-group>
 
-          <b-form-group v-else label="Hours">
+          <b-form-group v-else label="Select hours of company needed">
             <b-form-select
               size="sm"
               placeholder="Physical activity needed"
@@ -128,7 +128,7 @@
             >
               <template #first>
                 <option value="" disabled selected
-                  >Select hours of physical activity needed</option
+                  >Select hours of company needed per day</option
                 >
               </template>
             </b-form-select>
