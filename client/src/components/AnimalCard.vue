@@ -55,8 +55,6 @@ export default {
   },
   methods: {
     apply() {
-      console.log('applied')
-      console.log(this.$route.params.id)
       Api.post('/adoption-applications', {
         status: 0,
         adoptionCenter: this.animal.adoptionCenter,

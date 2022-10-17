@@ -686,7 +686,54 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"age\": 65,\r\n    \"name\": \"Carl Carlsson\"\r\n\r\n\r\n}",
+							"raw": "{\r\n    \"age\": 65,\r\n    \"name\": \"Carl Carlsson\",\r\n    \"petPreferences\": {\r\n        \"size\": \"big\",\r\n        \"hours\": 3,\r\n        \"species\": \"dog\",\r\n        \"personlity\": \"calm\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/adopters/{{adopter_ID}}",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"adopters",
+								"{{adopter_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update adopter Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Correct status\", function() {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Correct data\", function() {\r",
+									"    var adopter = pm.response.json();\r",
+									"    pm.expect(adopter.age).to.eql(65);\r",
+									"    pm.expect(adopter.name).to.eql(\"Carl Carlsson\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": 65,\r\n    \"name\": \"Carl Carlsson\",\r\n    \"petPreferences\": {\r\n        \"size\": \"medium\"\r\n    }\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

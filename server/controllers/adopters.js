@@ -92,10 +92,12 @@ router.patch('/api/adopters/:id', function(req, res, next){
         }
         adopter.name = (req.body.name || adopter.name);
         adopter.username = (req.body.name || adopter.username);
-        adopter.petPreferences.species = (req.body.petPreferences.species ||  adopter.petPreferences.species);
-        adopter.petPreferences.size = (req.body.petPreferences.size ||  adopter.petPreferences.size);
-        adopter.petPreferences.hours = (req.body.petPreferences.hours ||  adopter.petPreferences.hours);
-        adopter.petPreferences.personality = (req.body.petPreferences.personality ||  adopter.petPreferences.personality);
+        if (req.body.petPreferences) {
+            adopter.petPreferences.species = (req.body.petPreferences.species ||  adopter.petPreferences.species);
+            adopter.petPreferences.size = (req.body.petPreferences.size ||  adopter.petPreferences.size);
+            adopter.petPreferences.hours = (req.body.petPreferences.hours ||  adopter.petPreferences.hours);
+            adopter.petPreferences.personality = (req.body.petPreferences.personality ||  adopter.petPreferences.personality);
+        }
 
         adopter.save();
         res.json(adopter)
@@ -116,7 +118,6 @@ router.get('/api/adopters/:id/animals', function(req, res, next) {
     var adopterId = req.params.id;
     var adopterApplications;
     var alreadyAppliedAnimalsId;
-    console.log(req.query)
     AdoptionApplication.find({adopter: adopterId}, (err, adoptionApplications) => {
         if (err) {return next(err)}
         adopterApplications = adoptionApplications
@@ -124,6 +125,7 @@ router.get('/api/adopters/:id/animals', function(req, res, next) {
 
         if (Object.keys(req.query).length === 0) {
             Animal.find({_id: {$nin: alreadyAppliedAnimalsId}}, (err, animals) => {
+                if (err) { return next(err) }
                 res.json({"Animals": animals})
             })
         } else {
