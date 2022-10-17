@@ -46,8 +46,6 @@
 <style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
-// @ is an alias to /src
-// import { Api } from '@/Api'
 import AdopterSignupForm from '@/components/AdopterSignupForm.vue'
 
 export default {
