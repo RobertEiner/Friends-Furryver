@@ -98,7 +98,10 @@
             </b-form-select>
           </b-form-group>
 
-          <b-form-group v-if="this.formType === 'add-animal'" label="Hours of physical activity needed per day">
+          <b-form-group
+            v-if="this.formType === 'add-animal'"
+            label="Hours of physical activity needed per day"
+          >
             <p v-if="invalidFormInput === true" class="invalid-input">
               Please choose a species
             </p>
@@ -129,6 +132,15 @@
                 >
               </template>
             </b-form-select>
+          </b-form-group>
+
+          <b-form-group label="Specify other needs of the animal">
+            <b-form-input
+              size="sm"
+              placeholder="Leave blank if there are no other needs"
+              v-model="form.otherNeeds"
+            >
+            </b-form-input>
           </b-form-group>
 
           <div v-if="this.formType === 'add-animal'">
@@ -162,7 +174,11 @@
           Animal created successsfully
         </h3>
         <h3 v-else>Animal updated successsfully</h3>
-        <b-button class="to-main-page-button" size="sm" variant="primary" @click="goToMainPage()"
+        <b-button
+          class="to-main-page-button"
+          size="sm"
+          variant="primary"
+          @click="goToMainPage()"
           >Back to main page</b-button
         >
       </b-col>
@@ -204,7 +220,6 @@ export default {
         { value: 'playful', text: 'Playful' },
         { value: 'calm', text: 'Calm' },
         { value: 'lazy', text: 'Lazy' }
-
       ],
       alternativesAge: [
         { value: '1', text: '1' },
@@ -232,7 +247,8 @@ export default {
         personality: '',
         gender: '',
         age: '',
-        hours: ''
+        hours: '',
+        otherNeeds: ''
       },
       animalCreated: false,
       emptyForm: false,
@@ -365,7 +381,7 @@ h1 {
   margin-top: 2%;
 }
 
- @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>
 
 <!--Reference for inspiration when creating this form https://bootstrap-vue.org/docs/components/form-->
