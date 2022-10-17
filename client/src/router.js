@@ -11,6 +11,8 @@ import AddAnimal from './views/AddAnimal.vue'
 import Adopter from './views/Adopter.vue'
 import UpdateAnimal from './views/UpdateAnimal.vue'
 
+import VueJwtDecode from 'vue-jwt-decode'
+
 Vue.use(Router)
 
 const router = new Router({
@@ -86,13 +88,24 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    { path: '/:pathMatch(.*)*', name: 'NotFound' }
   ]
 })
 
 router.beforeEach((to, from, next) => {
+  if (to.name === 'NotFound') {
+    next('')
+  }
   if (to.meta.requiresAuth && localStorage.getItem('jwt') === null) {
     next('')
+  } else if (to.meta.requiresAuth && localStorage.getItem('jwt')) {
+    const relation = VueJwtDecode.decode(localStorage.getItem('jwt'))
+    if (relation._id !== to.params.id) {
+      next('')
+    } else {
+      next()
+    }
   } else {
     next()
   }

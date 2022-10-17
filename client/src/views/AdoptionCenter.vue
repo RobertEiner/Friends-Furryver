@@ -8,12 +8,7 @@
             <b-tab title="Pets" active>
               <div>
                 <div>
-                  <span class="animals-span">
-                    <pets-tab
-                      :animals="animals"
-                      @del-animal="deleteAnimal"
-                    />
-                  </span>
+                  <pets-tab :animals="animals" @del-animal="deleteAnimal" />
                 </div>
 
                 <b-button
@@ -28,17 +23,16 @@
 
             <b-tab title="Applications">
               <div>
-                <applications-tab
-                class="application-tab"
-                  :key="applicationsKey"
-
-                ></applications-tab>
-
+                <applications-tab class="application-tab"></applications-tab>
               </div>
             </b-tab>
             <div>
               <b-tab class="profile-tab" title="Profile">
-                <profile-tab :key="profileKey" :adoptionCenter="adoptionCenter" @update-adoptionCenter="updateAdoptionCenter"></profile-tab>
+                <profile-tab
+                  :key="profileKey"
+                  :adoptionCenter="adoptionCenter"
+                  @update-adoptionCenter="updateAdoptionCenter"
+                ></profile-tab>
               </b-tab>
             </div>
           </b-tabs>
@@ -73,7 +67,6 @@ export default {
     return {
       animals: [],
       adoptionCenter: {},
-      applicationsKey: 0,
       profileKey: 0
     }
   },
@@ -84,13 +77,11 @@ export default {
     },
     goToAddAnimal() {
       this.$router.push(`/adoptionCenters/${this.$route.params.id}/addAnimal`)
-      console.log(this.animals.length)
     },
     // Delete an animal from the adoption center
     deleteAnimal(id) {
       Api.delete(`/animals/${id}`)
         .then(response => {
-          console.log(response.data)
           const index = this.animals.findIndex(animal => animal._id === id)
           this.animals.splice(index, 1)
         })
@@ -103,7 +94,6 @@ export default {
     getAllAnimals() {
       Api.get(`/adoptionCenters/${this.$route.params.id}/animals`)
         .then(response => {
-          console.log(response.data)
           this.animals = response.data.Animals
         })
         .catch(error => {
@@ -116,9 +106,6 @@ export default {
       Api.get(`/AdoptionCenters/${this.$route.params.id}`)
         .then(response => {
           this.adoptionCenter = response.data
-
-          console.log(response.data)
-          console.log(this.adoptionCenter)
         })
         .catch(error => {
           console.log(error)
@@ -129,7 +116,6 @@ export default {
     updateAdoptionCenter(formData) {
       Api.patch(`/adoptionCenters/${this.$route.params.id}`, formData)
         .then(response => {
-          console.log(response)
           this.reRenderInfoComponent()
         })
         .catch(error => {

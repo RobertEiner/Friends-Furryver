@@ -149,7 +149,7 @@ h3 {
 
 @media (min-width: 992px) {
   .info-card {
-    margin-top: 22%;
+    margin-top: 19%;
 }
  .form-card {
   margin-top: 19%;

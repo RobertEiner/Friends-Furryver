@@ -98,25 +98,28 @@
             </b-form-select>
           </b-form-group>
 
-          <b-form-group v-if="this.formType === 'add-animal'" label="Hours of physical activity needed per day">
+          <b-form-group
+            v-if="this.formType === 'add-animal'"
+            label="Select hours of company needed"
+          >
             <p v-if="invalidFormInput === true" class="invalid-input">
-              Please choose a species
+              Please choose amount of hours needed
             </p>
             <b-form-select
               size="sm"
-              placeholder="Physical activity needed"
+              placeholder="Hours of company needed per day"
               v-model="form.hours"
               :options="alternativesHours"
             >
               <template #first>
                 <option value="" disabled selected
-                  >Select hours of physical activity needed</option
+                  >Select hours of company needed</option
                 >
               </template>
             </b-form-select>
           </b-form-group>
 
-          <b-form-group v-else label="Hours">
+          <b-form-group v-else label="Select hours of company needed">
             <b-form-select
               size="sm"
               placeholder="Physical activity needed"
@@ -125,10 +128,19 @@
             >
               <template #first>
                 <option value="" disabled selected
-                  >Select hours of physical activity needed</option
+                  >Select hours of company needed per day</option
                 >
               </template>
             </b-form-select>
+          </b-form-group>
+
+          <b-form-group label="Specify other needs of the animal">
+            <b-form-input
+              size="sm"
+              placeholder="Leave blank if there are no other needs"
+              v-model="form.otherNeeds"
+            >
+            </b-form-input>
           </b-form-group>
 
           <div v-if="this.formType === 'add-animal'">
@@ -162,7 +174,11 @@
           Animal created successsfully
         </h3>
         <h3 v-else>Animal updated successsfully</h3>
-        <b-button class="to-main-page-button" size="sm" variant="primary" @click="goToMainPage()"
+        <b-button
+          class="to-main-page-button"
+          size="sm"
+          variant="primary"
+          @click="goToMainPage()"
           >Back to main page</b-button
         >
       </b-col>
@@ -204,7 +220,6 @@ export default {
         { value: 'playful', text: 'Playful' },
         { value: 'calm', text: 'Calm' },
         { value: 'lazy', text: 'Lazy' }
-
       ],
       alternativesAge: [
         { value: '1', text: '1' },
@@ -232,7 +247,8 @@ export default {
         personality: '',
         gender: '',
         age: '',
-        hours: ''
+        hours: '',
+        otherNeeds: ''
       },
       animalCreated: false,
       emptyForm: false,
@@ -267,7 +283,6 @@ export default {
       )
         .then(response => {
           console.log(response.data)
-          console.log('HA')
         })
         .catch(error => {
           console.log(error)
@@ -279,7 +294,6 @@ export default {
       Api.patch(`/animals/${this.$route.params.animalId}`, animalFormData)
         .then(response => {
           console.log(response.data)
-          console.log('HA')
         })
         .catch(error => {
           console.log(error)
@@ -291,7 +305,6 @@ export default {
         const addFormHasEnoughInput = this.checkIfInputInAddForm()
         if (addFormHasEnoughInput === false) {
           this.invalidFormInput = true
-          console.log('add error')
         } else {
           this.addAnimal()
           this.showCreationMessage()
@@ -300,7 +313,6 @@ export default {
         const updateFormHasInput = this.checkIfInputInUpdateForm()
         if (updateFormHasInput === false) {
           this.emptyForm = true
-          console.log('errororororor')
         } else {
           this.updateAnimal()
           this.showCreationMessage()
@@ -369,7 +381,7 @@ h1 {
   margin-top: 2%;
 }
 
- @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
 </style>
 
 <!--Reference for inspiration when creating this form https://bootstrap-vue.org/docs/components/form-->
