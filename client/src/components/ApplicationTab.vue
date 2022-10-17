@@ -12,7 +12,6 @@
             bg-variant="info"
             text-variant="white"
             tag="article"
-            style="max-width: 17rem;"
           >
             <hr />
             <b-card-text
@@ -90,7 +89,6 @@
             bg-variant="info"
             text-variant="white"
             tag="article"
-            style="max-width: 17rem;"
           >
             <hr />
             <b-card-text
@@ -257,7 +255,7 @@ export default {
 }
 
 #accept-application-button:hover {
-  background-color: rgb(55, 92, 48) ;
+  background-color: rgb(55, 92, 48);
 }
 
 #decline-application-button {
@@ -271,6 +269,7 @@ export default {
 .active-card {
   display: inline-block;
   margin: 2%;
+  width: 17rem;
 }
 
 .badge[status='0'] {
@@ -292,6 +291,7 @@ export default {
 .handled-card {
   display: inline-block;
   margin: 1%;
+  width: 17rem;
 }
 
 .no-active-applications {
@@ -312,6 +312,16 @@ export default {
 .no-processed-applications-img {
   max-width: 15rem;
   margin-bottom: 2%;
+}
+
+@media (max-width: 315px) {
+  .active-card {
+    width: 12rem;
+  }
+
+  .handled-card {
+    width: 12rem;
+  }
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
