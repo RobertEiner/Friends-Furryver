@@ -18,18 +18,23 @@
               </div>
             </div>
             <div class="card card2">
-              <div class="row mx-2">
-                <h3 class="text-black justify-content-center pt-5 pb-5">
-                  We are more than just a company
+              <div class="row mx-auto">
+                <h3 class="mx-auto text-black pt-5 pb-5 pl-3 pr-3">
+                  No pet deserves to be alone.
                 </h3>
               </div>
-              <div class="row mx-auto mb-5">
-                <small class="text-black">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </small>
+              <div class="row mx-auto pl-3 pr-3">
+                <p class="text-description"
+                  >
+                  Are you an animal lover? Would you like to make a new friend? Or maybe you are an
+                  adoption center looking for a platform to advertise your furry tenants to possible adopters?
+                  You're just in the right place.
+
+              </p>
+              </div>
+              <div class="row mb-5 mt-5"></div>
+              <div class="row auto">
+                <img src="../Assets/adopter.png" class ="responsive my-auto">
               </div>
             </div>
           </div>
@@ -41,8 +46,6 @@
 <style scoped src="@/Assets/HomeLoginSignupStyle.css"></style>
 
 <script>
-// @ is an alias to /src
-// import { Api } from '@/Api'
 import AdopterSignupForm from '@/components/AdopterSignupForm.vue'
 
 export default {

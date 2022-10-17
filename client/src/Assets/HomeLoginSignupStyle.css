@@ -5,7 +5,7 @@ body {
   color: #000;
   overflow-x: hidden;
   height: 100%;
-  background-image: linear-gradient(to right, #d500f9, #ffd54f);
+  background-image: linear-gradient(to right, #4fc4ef, #3aacd5);
   background-repeat: no-repeat;
   min-height: 100vh;
 }
@@ -29,7 +29,7 @@ textarea:focus {
   -moz-box-shadow: none !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
-  border: 1px solid #d500f9 !important;
+  border: 1px solid #4fc4ef !important;
   outline-width: 0;
   font-weight: 400;
 }
@@ -47,19 +47,30 @@ button:focus {
 }
 
 .card1 {
-  width: 70%;
+  width: 60%;
   padding: 40px 30px 10px 30px;
 }
 
 .card2 {
-  width: 30%;
+  width: 40%;
   overflow-y: hidden !important;
   overflow-x: hidden !important;
-  background-color: #f8f8f8;
+  /* background-color: #ffffff;
   background-image: url('../Assets/pets_big.png');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center; */
+}
+
+.text-description{
+  font-size: 20px;
+  text-align: justify;
+}
+
+.responsive {
+  max-width: 90%;
+  min-height: 100%;
+  max-height: 130%;
 }
 
 #logo {
@@ -99,7 +110,7 @@ button:focus {
 .btn-color {
   border-radius: 50px;
   color: #fff;
-  background-image: linear-gradient(to right, #ffd54f, #d500f9);
+  background-image: linear-gradient(to right, #4fc4ef, #3aacd5);
   padding: 15px;
   cursor: pointer;
   border: none !important;
@@ -108,21 +119,21 @@ button:focus {
 
 .btn-color:hover {
   color: #fff;
-  background-image: linear-gradient(to right, #d500f9, #ffd54f);
+  background-image: linear-gradient(to right, #3aacd5, #4fc4ef);
 }
 
 .btn-white {
   border-radius: 50px;
-  color: #d500f9;
+  color: #4fc4ef;
   background-color: #fff;
   padding: 8px 40px;
   cursor: pointer;
-  border: 2px solid #d500f9 !important;
+  border: 2px solid #4fc4ef !important;
 }
 
 .btn-white:hover {
   color: #fff;
-  background-image: linear-gradient(to right, #ffd54f, #d500f9);
+  background-image: linear-gradient(to right, #4fc4ef, #3aacd5);
 }
 
 a {
