@@ -267,7 +267,6 @@ export default {
       )
         .then(response => {
           console.log(response.data)
-          console.log('HA')
         })
         .catch(error => {
           console.log(error)
@@ -279,7 +278,6 @@ export default {
       Api.patch(`/animals/${this.$route.params.animalId}`, animalFormData)
         .then(response => {
           console.log(response.data)
-          console.log('HA')
         })
         .catch(error => {
           console.log(error)
@@ -291,7 +289,6 @@ export default {
         const addFormHasEnoughInput = this.checkIfInputInAddForm()
         if (addFormHasEnoughInput === false) {
           this.invalidFormInput = true
-          console.log('add error')
         } else {
           this.addAnimal()
           this.showCreationMessage()
@@ -300,7 +297,6 @@ export default {
         const updateFormHasInput = this.checkIfInputInUpdateForm()
         if (updateFormHasInput === false) {
           this.emptyForm = true
-          console.log('errororororor')
         } else {
           this.updateAnimal()
           this.showCreationMessage()
