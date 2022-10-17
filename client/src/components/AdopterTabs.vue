@@ -28,7 +28,7 @@
 
               <b-form-group label="personality:">
                 <b-form-checkbox-group
-                  id="size-filter"
+                  id="personality-filter"
                   v-model="filters.selectedPersonality"
                   :options="personalityOptions"
                   @change="updateAnimalList"
