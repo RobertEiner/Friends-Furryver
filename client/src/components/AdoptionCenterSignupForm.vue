@@ -161,11 +161,7 @@ export default {
             swal('Error', 'Something Went Wrong', 'error')
           }
         } catch (err) {
-          if (err) {
-            swal('Error', err.message, 'error')
-          } else {
-            swal('Error', err.data.err.message, 'error')
-          }
+          swal('Error', 'Email already in use', 'error')
         }
       })
     }

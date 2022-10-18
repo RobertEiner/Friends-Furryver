@@ -13,7 +13,7 @@ registerNewAdopter = async (req, res) => {
      console.log(isAdopter);
       if (isAdopter.length >= 1) {
         return res.status(400).json({
-          message: "email already in use"
+          'message': 'email already in use'
         });
       }
       const adopter = new Adopter(req.body);
@@ -21,7 +21,7 @@ registerNewAdopter = async (req, res) => {
       const token = await adopter.generateAuthToken(); // here it is calling the method that we created in the model
       res.status(201).json({ data, token });
     } catch (err) {
-      res.status(400).json({ err: err });
+      res.status(400).json({ err: "Something went wrong" });
     }
   }
  router.post('/api/adopters/register', registerNewAdopter);
