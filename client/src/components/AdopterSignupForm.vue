@@ -262,12 +262,7 @@ export default {
             swal('Error', 'Something Went Wrong', 'error')
           }
         } catch (err) {
-          if (err) {
-            console.log(err)
-            swal('Error', err.data.message, 'error')
-          } else {
-            swal('Error', err.data.err.message, 'error')
-          }
+          swal('Error', ' Email already in use', 'error')
         }
       })
     }
