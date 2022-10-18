@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row v-if="animals.length > 0">
+    <b-row v-if="animals.length > 0" align-h="center">
       <b-col sm="12" md="6" lg="4" v-for="animal in animals" :key="animal._id">
         <span>
           <b-card
