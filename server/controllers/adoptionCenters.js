@@ -146,7 +146,11 @@ router.delete('/api/AdoptionCenters/:id', function(req, res, next) {
         if (adoptionCenter === null) {
             return res.status(404).json({"message" : "Adoption center not found"});
         }
+        // casdade deletion to animals and adoption applications
         Animal.deleteMany({"adoptionCenter": id}, function(err, animal){
+            if (err) { return next(err) }
+        });
+        AdoptionApplication.deleteMany({"adoptionCenter": id}, function(err, adoptionApplication){
             if (err) { return next(err) }
         });
         res.json(adoptionCenter);
