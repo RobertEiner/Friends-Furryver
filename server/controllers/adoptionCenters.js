@@ -149,6 +149,9 @@ router.delete('/api/AdoptionCenters/:id', function(req, res, next) {
         Animal.deleteMany({"adoptionCenter": id}, function(err, animal){
             if (err) { return next(err) }
         });
+        AdoptionApplication.deleteMany({"adoptionCenter": id}, function(err, adoptionApplication){
+            if (err) { return next(err) }
+        });
         res.json(adoptionCenter);
     });
 });
