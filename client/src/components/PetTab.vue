@@ -104,6 +104,10 @@ export default {
   border-color: black;
 }
 
+.delete-animal-button:hover {
+  background-color: rgb(73, 46, 46)
+}
+
 .update-animal-button {
   margin: 2% auto;
   font-size: 1em;
@@ -111,6 +115,10 @@ export default {
   background-color: rgb(86, 155, 73);
   border: solid 0.08em;
   border-color: black;
+}
+
+.update-animal-button:hover {
+  background-color: rgb(55, 92, 48);
 }
 
 .no-animals-title {
